@@ -1,0 +1,66 @@
+﻿STRING 1
+{
+Konosuba
+}
+
+STRING 2
+{
+1-4
+}
+
+STRING 3
+{
+Город новичков
+}
+
+STRING 4
+{
+Bergi
+}
+
+STRING 5
+{
+Player 1
+}
+
+STRING 6
+{
+Force 1
+}
+
+STRING 7
+// Units: H000 (Аква), Name (Name)
+{
+Аква
+}
+
+STRING 8
+// Units: H000 (Аква), Propernames (Proper Names)
+{
+Аква
+}
+
+STRING 9
+// Units: H001 (Мегумин), Name (Name)
+{
+Мегумин
+}
+
+STRING 10
+// Units: H001 (Мегумин), Propernames (Proper Names)
+{
+Мегумин
+}
+
+STRING 11
+// Units: H002 (Даркнесс), Name (Name)
+{
+Даркнесс
+}
+
+STRING 12
+// Units: H002 (Даркнесс), Propernames (Proper Names)
+{
+Даркнесс
+}
+
