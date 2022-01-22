@@ -64,3 +64,25 @@ STRING 12
 Даркнесс
 }
 
+STRING 13
+// Units: H003 (Казума), Name (Name)
+{
+Казума
+}
+
+STRING 14
+// Units: H003 (Казума), Propernames (Proper Names)
+{
+Казума
+}
+
+STRING 15
+{
+ 
+}
+
+STRING 16
+{
+ 
+}
+

@@ -96,6 +96,7 @@ function InitHEROTable()
             --
 
         }
+
         --InitInputHandler(HERO[i])
         --CreatePeonForPlayer(HERO[i])
 

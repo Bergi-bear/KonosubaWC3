@@ -1,0 +1,6 @@
+[Errors]
+Nothidden=TRIGSTR_015
+
+[FrameDef]
+SELECTTARGET=TRIGSTR_016
+

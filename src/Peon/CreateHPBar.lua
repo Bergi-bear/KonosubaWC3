@@ -3,11 +3,11 @@
 --- Created by Bergi.
 --- DateTime: 21.12.2021 15:10
 ---
-function CreateHPBar(data)
+function CreateHPBar(hero,x,y)
     local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
-    local x, y = -0.08, 0.588
-    local hero = data.UnitHero
+    --BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
+    --x, y = -0.08, 0.588
+    --local hero = data.UnitHero
 
 
     --BlzFrameSetAlpha(into, 128)
@@ -15,20 +15,20 @@ function CreateHPBar(data)
     local chargesBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
     BlzFrameSetTexture(chargesBox, "Replaceabletextures\\Teamcolor\\Teamcolor06.blp", 0, true) --HPElement
     BlzFrameSetSize(chargesBox, GNext, GNext)
-    BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x + 0.004, y)
+    BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x , y)
     BlzFrameSetAlpha(chargesBox, 128)
 
     local into = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    BlzFrameSetTexture(into, "into", 0, true)
-    BlzFrameSetSize(into, GNext * 5, GNext)
-    BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, x, y)
-    BlzFrameSetAlpha(into, 128)
-    BlzFrameSetFocus(into,true)
+    --BlzFrameSetTexture(into, "into", 0, true)
+    --BlzFrameSetSize(into, GNext * 3, GNext)
+    --BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, x, y)
+    --BlzFrameSetAlpha(into, 128)
+    --BlzFrameSetFocus(into,true)
 
     local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, into, FRAMEPOINT_LEFT, 0.002, 0)
+    BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.002, 0)
     local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, into, FRAMEPOINT_RIGHT, -0.002, 0)
+    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, chargesBox, FRAMEPOINT_RIGHT, -0.002, 0)
 
 
     --
@@ -51,7 +51,7 @@ function CreateHPBar(data)
             --BlzFrameSetVisible(into, GetLocalPlayer() == GetOwningPlayer(hero))
             BlzFrameSetText(textCurrent, R2I(GetUnitState(hero, UNIT_STATE_LIFE)))
             BlzFrameSetText(textMax, R2I(BlzGetUnitMaxHP(hero)))
-            BlzFrameSetSize(chargesBox, 4.82 * hp * GNext / 100, GNext * 0.5)
+            BlzFrameSetSize(chargesBox, 2 * hp * GNext / 100, GNext * 0.25)
             BlzFrameSetAlpha(chargesBox, 128)
         end
     end)

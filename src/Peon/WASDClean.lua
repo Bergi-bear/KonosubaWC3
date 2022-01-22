@@ -4,7 +4,6 @@ TIMER_PERIOD64 = 1 / 64
 HERO = {}
 HeroID = FourCC("O000")
 
-
 function InitAnimations(hero, data)
 
 
@@ -21,13 +20,13 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 4 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 5 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 3 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == FourCC("Ewar") then
-        -- смотрящая в ночь
-        data.AnimDurationWalk = 0.733 --длительность анимации движения, полный круг
-        data.IndexAnimationWalk = 2 -- индекс анимации движения
-        data.ResetDuration = 2.667 -- время сброса для анимации stand, длительность анимации stand
+    elseif GetUnitTypeId(data.UnitHero) == KazumaID then
+        -- Казума
+        data.AnimDurationWalk = 0.6 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 1 -- индекс анимации движения
+        data.ResetDuration = 1.9 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 6 -- анимация сплеш удара
-        data.IndexAnimationSpace = 2 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 5 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 4 --анимация удара в рывке
         data.IndexAnimationThrow = 7 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 5 --индекс анимации атаки в серии
@@ -185,7 +184,7 @@ function InitWASD(hero)
                 SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
                 SetCameraTargetControllerNoZForPlayer(GetOwningPlayer(hero), hero, 10, 10, true) -- не дергается
                 --print(GetCameraField(CAMERA_FIELD_ZOFFSET))
-                local z=GetUnitZ(hero)
+                local z = GetUnitZ(hero)
 
                 SetCameraField(CAMERA_FIELD_ZOFFSET, z, 0.1)
 
@@ -669,18 +668,17 @@ function CreateWASDActions()
                     --CreateAndForceBullet(data.UnitHero, data.DirectionMove, 5, "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl", x, y, 5, 350, 350)
                 end
 
-
                 if true then
-                    local nx,ny=MoveXY(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero),dist,data.DirectionMove)
-                    local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero))
+                    local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, data.DirectionMove)
+                    local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero))
                     --print(PerepadZ)
-                    if not IsTerrainPathable(nx,ny,PATHING_TYPE_WALKABILITY) and PerepadZ<-1 then
-                       -- print("проверка проходимости конечной точки")
+                    if not IsTerrainPathable(nx, ny, PATHING_TYPE_WALKABILITY) and PerepadZ < -1 then
+                        -- print("проверка проходимости конечной точки")
                         --DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt", nx, ny))
-                        if not Chk2Way(GetUnitX(data.UnitHero),GetUnitY(data.UnitHero),nx,ny) then
-                            Blink2Point(data, nx,ny)
+                        if not Chk2Way(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), nx, ny) then
+                            Blink2Point(data, nx, ny)
                         else
-                           -- print("прыжок вниз?")
+                            -- print("прыжок вниз?")
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 25, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else
@@ -863,7 +861,6 @@ function BlockMouse(data)
             if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then
                 if not data.Desync and not FirstGoto then
                     print(GetPlayerName(Player(data.pid)) .. L(" Внимание! вы должны использовать классическую схему управления", "Attention!! you must use the classic control scheme"))
-
                     data.Desync = true
                 end
             else
@@ -872,6 +869,7 @@ function BlockMouse(data)
             end
             --gkm=gkm+1
             --print(gkm)
+            --print("STOP")
             BlzPauseUnitEx(data.UnitHero, true)
             IssueImmediateOrder(data.UnitHero, "stop")
             BlzPauseUnitEx(data.UnitHero, false)
@@ -894,8 +892,24 @@ function LockAnimAnimation(data)
 end
 
 function StopUnitMoving(data)
-    data.ReleaseW=false
-    data.ReleaseA=false
-    data.ReleaseS=false
-    data.ReleaseD=false
+    data.ReleaseW = false
+    data.ReleaseA = false
+    data.ReleaseS = false
+    data.ReleaseD = false
+end
+
+function PlayUnitAnimationFromChat()
+    local this = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(this, Player(0), "", true)
+    TriggerRegisterPlayerChatEvent(this, Player(1), "", true)
+    TriggerAddAction(this, function()
+        local s = S2I(GetEventPlayerChatString())
+        local data = HERO[GetPlayerId(GetTriggerPlayer())]
+        if GetEventPlayerChatString() == "w" then
+            --CreateForUnitWayToPoint(mainHero,CQX,CQY)
+            return
+        end
+          SetUnitAnimationByIndex(data.UnitHero, s)
+        print(GetUnitName(data.UnitHero) .. " " .. s)
+    end)
 end

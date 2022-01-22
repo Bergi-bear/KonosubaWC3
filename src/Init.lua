@@ -18,7 +18,10 @@ do
             FogModifierStart(CreateFogModifierRect(Player(0), FOG_OF_WAR_VISIBLE, bj_mapInitialPlayableArea, true, false))
 
             perebor = CreateGroup()
+
             InitHEROTable()
+            CreateKonosubaHeroes()
+            CreateSelectActions()
             InitMenu()
             --InitMouseMoveTrigger()
             --InitMouseClickEvent()
@@ -30,11 +33,12 @@ do
             --PlayList()
             CreateEActions()
             CreateTabActions()
+            PlayUnitAnimationFromChat()
             --wGeometry = wGeometryInit()
             --ShapeInit()
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
-            CreateToskBoard()
+            --CreateTaskBoard()
             print(">>>")
         end)
     end

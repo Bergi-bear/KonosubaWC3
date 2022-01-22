@@ -9,7 +9,7 @@ function InitMenu()
     ReturnFPS()
     MenuFrame()
     CreateAndStartClock()
-    DrawSelectionPortrait(true)
+    --DrawSelectionPortrait(true)
 end
 function ReturnFPS()
     local fps = BlzGetFrameByName("ResourceBarFrame", 0)
