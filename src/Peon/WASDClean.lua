@@ -25,27 +25,27 @@ function InitAnimations(hero, data)
         data.AnimDurationWalk = 0.6 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 1 -- индекс анимации движения
         data.ResetDuration = 1.9 -- время сброса для анимации stand, длительность анимации stand
-        data.IndexAnimationQ = 6 -- анимация сплеш удара
+        data.IndexAnimationQ = 4 -- анимация сплеш удара
         data.IndexAnimationSpace = 5 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 4 --анимация удара в рывке
-        data.IndexAnimationThrow = 7 -- индекс анимациии броска чего либо
-        data.IndexAnimationAttack1 = 5 --индекс анимации атаки в серии
-        data.IndexAnimationAttack2 = 5 --индекс анимации атаки в серии
-        data.IndexAnimationAttack3 = 6 --индекс анимации  атаки в серии
-        data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == FourCC("Obla") then
-        -- Мастер клинка
-        data.AnimDurationWalk = 0.733 --длительность анимации движения, полный круг
-        data.IndexAnimationWalk = 6 -- индекс анимации движения
-        data.ResetDuration = 1.8 -- время сброса для анимации stand, длительность анимации stand
-        data.IndexAnimationQ = 3 -- анимация сплеш удара
-        data.IndexAnimationSpace = 6 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
-        data.IndexAnimationAttackInDash = 9 --анимация удара в рывке
-        data.IndexAnimationThrow = 8 -- индекс анимациии броска чего либо
-        data.IndexAnimationAttack1 = 2 --индекс анимации атаки в серии
+        data.IndexAnimationThrow = 4 -- индекс анимациии броска чего либо
+        data.IndexAnimationAttack1 = 3 --индекс анимации атаки в серии
         data.IndexAnimationAttack2 = 8 --индекс анимации атаки в серии
-        data.IndexAnimationAttack3 = 3 --индекс анимации  атаки в серии
-        data.IndexAnimationSpin = 13 -- индекс анимации для удара во вращении
+        data.IndexAnimationAttack3 = 4 --индекс анимации  атаки в серии
+        data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
+    elseif GetUnitTypeId(data.UnitHero) == DarknessID then
+        -- Даркнесс
+        data.AnimDurationWalk = 0.6 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 1 -- индекс анимации движения
+        data.ResetDuration = 1.9 -- время сброса для анимации stand, длительность анимации stand
+        data.IndexAnimationQ = 4 -- анимация сплеш удара
+        data.IndexAnimationSpace = 18 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationAttackInDash = 4 --анимация удара в рывке
+        data.IndexAnimationThrow = 4 -- индекс анимациии броска чего либо
+        data.IndexAnimationAttack1 = 6 --индекс анимации атаки в серии
+        data.IndexAnimationAttack2 = 7 --индекс анимации атаки в серии
+        data.IndexAnimationAttack3 = 8 --индекс анимации  атаки в серии
+        data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
     elseif GetUnitTypeId(data.UnitHero) == FourCC("Udre") then
         -- Повелитель ужаса
         data.AnimDurationWalk = 1 --длительность анимации движения, полный круг
@@ -143,7 +143,7 @@ function InitWASD(hero)
             --print("юнит идёт со статичным курсором")
 
             data.fakeX, data.fakeY = MoveXY(hx, hy, data.DistMouse, data.AngleMouse)
-            InputUpdate(data, data.fakeX, data.fakeY)
+            --InputUpdate(data, data.fakeX, data.fakeY)
         else
             data.DistMouse = DistanceBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid])
             data.AngleMouse = AngleBetweenXY(hx, hy, GetPlayerMouseX[data.pid], GetPlayerMouseY[data.pid]) / bj_DEGTORAD
@@ -350,7 +350,7 @@ function InitWASD(hero)
                     end
                     if animWalk == 0 and not stator then
                         -- and not data.ReleaseRMB
-                        --print("сброс анимации")
+                        --print("сброс анимации walk")
                         SetUnitAnimationByIndex(hero, data.IndexAnimationWalk)
                         --local r={SoundStep1,SoundStep2,SoundStep3,SoundStep4}
                         data.animStand = 3
@@ -668,7 +668,7 @@ function CreateWASDActions()
                     --CreateAndForceBullet(data.UnitHero, data.DirectionMove, 5, "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl", x, y, 5, 350, 350)
                 end
 
-                if true then
+                if  GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
                     local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, data.DirectionMove)
                     local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero))
                     --print(PerepadZ)
@@ -679,6 +679,7 @@ function CreateWASDActions()
                             Blink2Point(data, nx, ny)
                         else
                             -- print("прыжок вниз?")
+
                             UnitAddForceSimple(data.UnitHero, data.DirectionMove, 25, dist, "ignore") --САМ рывок при нажатии пробела
                         end
                     else

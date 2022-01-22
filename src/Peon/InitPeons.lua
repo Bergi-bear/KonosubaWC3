@@ -22,7 +22,7 @@ function CreatePeonForPlayer(data)
         --CreateHPBar(data)
         --CreateMANABar(data)
 
-        --InitExpSystem(data)
+        InitExpSystem(data)
         --CreateEXPBar(data)
 
         CreateStatPanel(data)

@@ -21,26 +21,7 @@ function OnPostDamage()
     --print(GetUnitName(target))
 
 
-    for i = 1, #SlimeID do
-        if GetUnitAbilityLevel(target, FourCC("Awan")) > 0 then
-            UnitRemoveAbility(target, FourCC("Awan"))
-            UnitRemoveAbility(target, FourCC("Abun"))
-            IssueTargetOrder(target, "attack", caster)
-        end
-        if GetUnitTypeId(target) == SlimeID[i] and damage > 50 then
-            if UnitAlive(target) then
-                normal_sound(SlimeSound[2], GetUnitXY(target))
-                --print("получил")
-            else
-                print("смертельный урон")
-            end
-        end
-        if GetUnitTypeId(caster) == SlimeID[i] then
 
-            normal_sound(SlimeSound[1], GetUnitXY(caster))
-            --print("нанёс")
-        end
-    end
     if GetUnitTypeId(target) == FourCC("n005")  and damage > 50 then
         normal_sound("MP3\\RO\\Spore\\Hit", GetUnitXY(target))
         --print("писк грибочка")

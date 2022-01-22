@@ -19,7 +19,7 @@ function InitMouseMoveTrigger()
         if BlzGetTriggerPlayerMouseX() ~= 0 then
             GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
             GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
-            InputUpdate(HERO[id],GetPlayerMouseX[id],GetPlayerMouseY[id])
+            --InputUpdate(HERO[id],GetPlayerMouseX[id],GetPlayerMouseY[id])
             --print("апдейт в движении мыши")
             if HERO[id].LMBIsPressed then
                 --CreateTMPEffect(BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())

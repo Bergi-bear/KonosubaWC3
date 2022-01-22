@@ -4,7 +4,7 @@
 --- DateTime: 01.12.2021 17:52
 ---
 function InitMouseClickEvent()
-
+    --- LMB
     local TrigPressLMB = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         TriggerRegisterPlayerEvent(TrigPressLMB, Player(i), EVENT_PLAYER_MOUSE_DOWN)
@@ -14,7 +14,7 @@ function InitMouseClickEvent()
             --print("клик левой")
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = true
-            data.inputEffectNumber = GetRandomInt(1, 8)
+
         end
     end)
 
@@ -26,8 +26,27 @@ function InitMouseClickEvent()
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = false
-            ShapeDetectorClear(data)
-            ClearPoints(data)
+            local pid = data.pid
+
+            GetPlayerMouseX[pid] = BlzGetTriggerPlayerMouseX()
+            GetPlayerMouseY[pid] = BlzGetTriggerPlayerMouseY()
+
+            if BlzGetTriggerPlayerMouseX() >= 511 and BlzGetTriggerPlayerMouseX() <= 513 then
+                GetPlayerMouseX[pid], GetPlayerMouseY[pid] = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 500, GetUnitFacing(data.UnitHero))
+            end
+            if UnitAlive(data.UnitHero) then
+
+                if not data.SpaceForce then
+                    if GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
+                        AttackMelee(data)
+
+                    end
+
+                end
+
+            end
+
+
         end
     end)
     ---------------------- RMB
@@ -41,7 +60,7 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = true
             local id = GetPlayerId(GetTriggerPlayer())
-            if not data.LastCastName == "wave" then
+            if not GetUnitTypeId(data.UnitHero)==KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
@@ -60,16 +79,17 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = false
             local id = GetPlayerId(GetTriggerPlayer())
-            if not data.LastCastName == "wave" then
+            if  GetUnitTypeId(data.UnitHero)~=KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
+                SpellCastByName(data, "wave")
             end
 
-            SpellCastByName(data, data.LastCastName)
-            ClearPoints(data)
+
+            --ClearPoints(data)
         end
     end)
 end

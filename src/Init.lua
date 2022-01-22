@@ -24,7 +24,7 @@ do
             CreateSelectActions()
             InitMenu()
             --InitMouseMoveTrigger()
-            --InitMouseClickEvent()
+            InitMouseClickEvent()
             CreateWASDActions()
 
             --InitGameSlimes()

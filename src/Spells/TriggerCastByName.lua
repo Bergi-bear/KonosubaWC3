@@ -109,5 +109,5 @@ function SpellCastByName(data, name)
         SummonInfernal(data, x, y, 250, 30)
     end
 
-    TriggerCastByName(data, name)
+    --TriggerCastByName(data, name)
 end

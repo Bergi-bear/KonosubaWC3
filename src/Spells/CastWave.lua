@@ -10,6 +10,9 @@ function CastWave(caster, x, y, x2, y2)
     --local eff = AddSpecialEffect("Abilities\\Spells\\Other\\CrushingWave\\CrushingWaveMissile.mdl", x, y)
     local angle = AngleBetweenXY(x, y, x2, y2) / bj_DEGTORAD
     local d = DistanceBetweenXY(x, y, x2, y2)
+    if d<=200 then
+        return false
+    end
     local speed = d * TIMER_PERIOD64
     --print(speed,d)
     local curDist = 0
@@ -21,8 +24,9 @@ function CastWave(caster, x, y, x2, y2)
         newVector = VectorSum(newVector, vector:yawPitchOffset(speed, angle * (math.pi / 180), 0.0))
         x, y = newVector.x, newVector.y
         BlzSetSpecialEffectPosition(eff, x, y, z)
+        --BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
         BlzSetSpecialEffectYaw(eff, math.rad(angle))
-        BlzPlaySpecialEffect(eff, ANIM_TYPE_BIRTH)
+
         local is, enemy = UnitDamageArea(caster, 5, x, y, 200)
         if is and enemy then
             -- print("попадание волной")
