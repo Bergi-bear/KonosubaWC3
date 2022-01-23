@@ -914,3 +914,9 @@ function PlayUnitAnimationFromChat()
         print(GetUnitName(data.UnitHero) .. " " .. s)
     end)
 end
+
+function ControlGameCam()
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+            CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
+    end)
+end

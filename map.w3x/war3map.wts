@@ -86,3 +86,33 @@ STRING 16
  
 }
 
+STRING 17
+// Destructibles: B000 (Дерево, можно сломать), Name (Name)
+{
+Дерево, можно сломать
+}
+
+STRING 18
+// Doodads: D000 (Дорога1), Name (Name)
+{
+Дорога1
+}
+
+STRING 19
+// Doodads: D001 (Дорога2), Name (Name)
+{
+Дорога2
+}
+
+STRING 20
+// Doodads: D002 (Дорога3), Name (Name)
+{
+Дорога3
+}
+
+STRING 21
+// Doodads: D003 (Дорога4), Name (Name)
+{
+Дорога4
+}
+
