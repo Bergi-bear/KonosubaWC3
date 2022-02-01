@@ -62,7 +62,7 @@ function UnitDamageArea(u, damage, x, y, range, flag)
                 --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
                 local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 60, GetUnitFacing(u) - 180)
                 local speed = 20
-                local dist = 300
+                local dist = 150
 
                 if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 90, range) then
                     UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)

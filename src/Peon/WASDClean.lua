@@ -25,7 +25,7 @@ function InitAnimations(hero, data)
         data.AnimDurationWalk = 0.6 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 1 -- индекс анимации движения
         data.ResetDuration = 1.9 -- время сброса для анимации stand, длительность анимации stand
-        data.IndexAnimationQ = 4 -- анимация сплеш удара
+        data.IndexAnimationQ = 9 -- анимация сплеш удара - прыжка
         data.IndexAnimationSpace = 5 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 4 --анимация удара в рывке
         data.IndexAnimationThrow = 4 -- индекс анимациии броска чего либо
@@ -84,14 +84,14 @@ function InitWASD(hero)
                 SelectUnitForPlayerSingle(hero, GetOwningPlayer(hero))
             end
 
-            ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "Q")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "W")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "E")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "R")
+            --ForceUIKeyBJ(GetOwningPlayer(hero), "R")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
-            ForceUIKeyBJ(GetOwningPlayer(hero), "F")
+           -- ForceUIKeyBJ(GetOwningPlayer(hero), "F")
             ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
             ForceUIKeyBJ(GetOwningPlayer(hero), "X")
             ForceUIKeyBJ(GetOwningPlayer(hero), "C")
@@ -743,7 +743,7 @@ function CreateWASDActions()
         data.ReleaseSPACE = false
     end)
     -----------------------------------------------------------------OSKEY_Q
-    --[[
+
     local TrigPressQ = CreateTrigger()
     for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
         BlzTriggerRegisterPlayerKeyEvent(TrigPressQ, Player(i), OSKEY_Q, 0, true)
@@ -812,11 +812,11 @@ function CreateWASDActions()
                             --задержка перед ударом
                             DestroyTimer(GetExpiredTimer())
                             --StartFrameCD(data.SpellQCDTime * balance, data.cdFrameHandleQ)
-                            SpellSlashQ(data)
-                            --print("активация Q")
+                            --SpellSlashQ(data)
+                            print("активация Q")
                             if data.DoubleClap then
                                 TimerStart(CreateTimer(), 0.35, false, function()
-                                    SpellSlashQ(data)
+                                    --SpellSlashQ(data)
                                     DestroyTimer(GetExpiredTimer())
                                 end)
                             end
@@ -839,7 +839,7 @@ function CreateWASDActions()
         local data = HERO[pid]
         --data.ReleaseQ = false
     end)
-]]
+
 end
 ---MouseX,MouseY=0,0
 function BlockMouse(data)
