@@ -10,7 +10,7 @@ function AttackMelee(data)
         if not data.isAttacking then
             --print("пытаемся атаковать, запускаем кд атаки и прерываем движение")
             --print("a "..GetUnitName(mainHero))
-            local cdAttack = 0.6
+            local cdAttack = 0.4
             local indexAnim = data.IndexAnimationAttack1 --анимации атаки
             local pid = GetPlayerId(GetOwningPlayer(data.UnitHero))
             data.isAttacking = true
@@ -49,7 +49,7 @@ function AttackMelee(data)
             if data.AttackCount == 1 then
                 -- первый обычный удар
                 indexAnim = data.IndexAnimationAttack1
-                normal_sound("Sound\\PeonSound\\cut\\Abl", GetUnitXY(data.UnitHero))
+                normal_sound("abilities\\weapons\\bristlebackmissile\\bristlebackmissilelaunch"..1, GetUnitXY(data.UnitHero))
                 TimerStart(CreateTimer(), 0.2, false, function()
                     DestroyTimer(GetExpiredTimer())
                     local eff = AddSpecialEffect(effectModel, GetUnitXY(data.UnitHero))
@@ -66,9 +66,9 @@ function AttackMelee(data)
 
                 if r == 1 then
                     indexAnim = data.IndexAnimationAttack1
-                    cdAttack = 0.6
+                    cdAttack = 0.4
                     UnitAddForceSimple(data.UnitHero, GetUnitFacing(data.UnitHero), 10, 60)
-                    normal_sound("Sound\\PeonSound\\cut\\Bey", GetUnitXY(data.UnitHero))
+                    normal_sound("abilities\\weapons\\bristlebackmissile\\bristlebackmissilelaunch"..2, GetUnitXY(data.UnitHero))
                     TimerStart(CreateTimer(), 0.3, false, function()
                         DestroyTimer(GetExpiredTimer())
                         local eff = AddSpecialEffect(effectModel, GetUnitXY(data.UnitHero))
@@ -80,8 +80,8 @@ function AttackMelee(data)
                     end)
                 else
                     indexAnim = data.IndexAnimationAttack2
-                    cdAttack = 0.6
-                    normal_sound("Sound\\PeonSound\\cut\\SaysNo", GetUnitXY(data.UnitHero))
+                    cdAttack = 0.4
+                    normal_sound("abilities\\weapons\\bristlebackmissile\\bristlebackmissilelaunch"..3, GetUnitXY(data.UnitHero))
                     TimerStart(CreateTimer(), 0.2, false, function()
                         DestroyTimer(GetExpiredTimer())
                         local eff = AddSpecialEffect(effectModel, GetUnitXY(data.UnitHero))
@@ -146,7 +146,10 @@ function AttackMelee(data)
                 SetUnitAnimationByIndex(data.UnitHero, indexAnim)
             end
 
-            TimerStart(CreateTimer(), cdAttack, false, function()
+
+
+
+            TimerStart(CreateTimer(), cdAttack/2, false, function()
                 DestroyTimer(GetExpiredTimer())
                 -- кд атаки тут для всех ударов
                 local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 100, GetUnitFacing(data.UnitHero))
@@ -160,54 +163,7 @@ function AttackMelee(data)
                     end
                     local is, enemy, k = UnitDamageArea(data.UnitHero, damage, nx, ny, 100, flag)
                     --print("урон есть?")
-                    if enemy then
-                        ------------УдарМидаса--------------
-                        --GoldenTouch(data, enemy)
-                        ------------------------------------
-                        if data.AutoQCDFH then
-                            if data.AutoQCurrentCD <= 0 then
-                                local cd = data.AutoQCD
-                                data.AutoQCurrentCD = cd
-                                StartFrameCD(cd, data.AutoQCDFH)
-                                SpellSlashQ(data)
-                                TimerStart(CreateTimer(), cd, false, function()
-                                    data.AutoQCurrentCD = 0
-                                    DestroyTimer(GetExpiredTimer())
-                                end)
-                            end
-                        end
 
-                        --ConditionCastLight(data)
-                        if data.CursedStrike then
-                            local amount = (BlzGetUnitMaxHP(data.UnitHero) / 100) * 2
-                            HealUnit(data.UnitHero, amount)
-                        end
-
-                        if data.ChaosSpinOnAttackCDFH then
-
-                            if data.ChaosSpinOnAttackCurrentCD <= 0 then
-                                --print("условия выполнены")
-                                --print("Вращение при ударе")
-                                data.ChaosSpinOnAttackCurrentCD = data.ChaosSpinOnAttackCD
-                                StartAndReleaseSpin(data, 1)
-                                StartFrameCD(data.ChaosSpinOnAttackCD, data.ChaosSpinOnAttackCDFH)
-                                TimerStart(CreateTimer(), data.ChaosSpinOnAttackCD, false, function()
-                                    DestroyTimer(GetExpiredTimer())
-                                    data.ChaosSpinOnAttackCurrentCD = 0
-                                end)
-                            end
-
-
-                        end
-
-                    else
-                        if data.CursedStrike then
-                            local amount = (BlzGetUnitMaxHP(data.UnitHero) / 100) * 2
-                            if GetUnitState(data.UnitHero, UNIT_STATE_LIFE) + 1 > amount then
-                                UnitDamageTarget(data.UnitHero, data.UnitHero, amount, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
-                            end
-                        end
-                    end
 
                     if is then
                         data.ParryPerAttack = true
