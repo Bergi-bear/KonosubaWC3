@@ -6,7 +6,7 @@
 function EffectFromUnit2Unit(eff, effModel, hero, enemy, flag)
     local x, y = GetUnitXY(enemy)
     local xEnd, yEnd = GetUnitXY(hero)
-    local z = 80
+    local z = GetTerrainZ(x,y)+40
     if not eff then
         eff = AddSpecialEffect(effModel, x, y)
     end
@@ -32,8 +32,8 @@ function EffectFromUnit2Unit(eff, effModel, hero, enemy, flag)
                     gain = 1
                 end
                 UnitAddGold(hero, R2I(gain))
-            elseif flag == "eating" then
-                --print("скушал яблочко")
+            elseif flag == "add exp" then
+                SetUnitUserData(hero,GetUnitUserData(hero)+10)
             end
             --print("долетел")
         end

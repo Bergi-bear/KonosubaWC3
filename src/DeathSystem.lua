@@ -29,7 +29,10 @@ function InitDeathEvent()
                     --print(GetUnitName(killer),GetUnitName(u))
                     local exp = BlzGetUnitMaxHP(u) / 10
                     --AddExp(GetUnitData(killer), exp)
-                    EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
+                    --EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
+                    --print("создать сферу?")
+                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, 0)
+                    UnitAddAbility(new,FourCC("Avul"))
                 end
             else
                 --print("нет героя")
@@ -38,17 +41,7 @@ function InitDeathEvent()
 
 
             if GetUnitTypeId(u) == FourCC("n005") then
-                --грибочек
 
-                normal_sound("MP3\\RO\\Spore\\Death", xu, yu, 50)
-                TimerStart(CreateTimer(), 15, false, function()
-                    local x, y = GetRandomReal(GetRectMinX(gg_rct_Bound03), GetRectMaxX(gg_rct_Bound03)), GetRandomReal(GetRectMinY(gg_rct_Bound03), GetRectMaxY(gg_rct_Bound03))
-                    --print(x,y)
-                    local new = CreateUnit(Player(10), FourCC("n005"), x, y, 0)
-                    SporeAddMoveEvent(new)
-                end)
-
-                --CreateItemPrefabPool(GetUnitData(killer), xu, yu, "Spore Card", "Spore", "Spore Hat","Mycelium")
             end
         end
     end)

@@ -144,6 +144,8 @@ end
 function CreateHudForHero(hero, x, y)
     CreateHeroPortrait(hero, x - GNext, y)
     CreateHPBar(hero, x, y)
+    CreateEXPBar(hero, x, y- GNext/4)
+    InitRegistryEvent(hero)
 end
 
 function CreateHeroPortrait(hero, x, y)

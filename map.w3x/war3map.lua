@@ -1,61 +1,81 @@
 gg_rct_R1 = nil
+gg_rct_Region_001 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Stage1 = nil
+gg_trg_Bound1 = nil
 function InitGlobals()
 end
 
+function CreateUnitsForPlayer0()
+local p = Player(0)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 235.356, FourCC("e000"))
+end
+
 function CreateUnitsForPlayer10()
-    local p = Player(10)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
+local p = Player(10)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer10()
+CreateUnitsForPlayer0()
+CreateUnitsForPlayer10()
 end
 
 function CreateAllUnits()
-    CreatePlayerBuildings()
-    CreatePlayerUnits()
+CreatePlayerBuildings()
+CreatePlayerUnits()
 end
 
 function CreateRegions()
-    local we
-    gg_rct_R1 = Rect(-544.0, 1280.0, -160.0, 2496.0)
+local we
+
+gg_rct_R1 = Rect(-544.0, 1408.0, -160.0, 2624.0)
+gg_rct_Region_001 = Rect(-1728.0, 4832.0, -640.0, 6944.0)
 end
 
 function CreateCameras()
-    gg_cam_Camera_001 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 89.3, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 319.5, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 1024.5, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
+gg_cam_Camera_001 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 90.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 3000.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -1056,7 +1076,10 @@ function InitDeathEvent()
                     --print(GetUnitName(killer),GetUnitName(u))
                     local exp = BlzGetUnitMaxHP(u) / 10
                     --AddExp(GetUnitData(killer), exp)
-                    EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
+                    --EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
+                    --print("создать сферу?")
+                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, 0)
+                    UnitAddAbility(new,FourCC("Avul"))
                 end
             else
                 --print("нет героя")
@@ -1065,17 +1088,7 @@ function InitDeathEvent()
 
 
             if GetUnitTypeId(u) == FourCC("n005") then
-                --грибочек
 
-                normal_sound("MP3\\RO\\Spore\\Death", xu, yu, 50)
-                TimerStart(CreateTimer(), 15, false, function()
-                    local x, y = GetRandomReal(GetRectMinX(gg_rct_Bound03), GetRectMaxX(gg_rct_Bound03)), GetRandomReal(GetRectMinY(gg_rct_Bound03), GetRectMaxY(gg_rct_Bound03))
-                    --print(x,y)
-                    local new = CreateUnit(Player(10), FourCC("n005"), x, y, 0)
-                    SporeAddMoveEvent(new)
-                end)
-
-                --CreateItemPrefabPool(GetUnitData(killer), xu, yu, "Spore Card", "Spore", "Spore Hat","Mycelium")
             end
         end
     end)
@@ -1156,11 +1169,11 @@ function AddExp(data, exp)
     data.curExp = data.curExp + exp
     if data.curExp >= ExpTable[data.curHeroLvl + 1] then
         --print("повышение уровня")
-        --SuspendHeroXP(data.UnitHero, false)
+        SuspendHeroXP(data.UnitHero, false)
         data.curHeroLvl = data.curHeroLvl + 1
         SetHeroLevel(data.UnitHero, data.curHeroLvl, true)
         BlzFrameSetText(data.FHHeroLvl,"Level "..data.curHeroLvl)
-        --SuspendHeroXP(data.UnitHero, true)
+        SuspendHeroXP(data.UnitHero, true)
     end
 end
 
@@ -1290,6 +1303,8 @@ do
             --SetDayNightModels("Environment\\DNC\\DNCAshenvale\\DNCAshenvaleTerrain\\DNCAshenvaleTerrain.mdl", "Environment\\DNC\\DNCAshenvale\\DNCAshenvaleUnit\\DNCAshenvaleUnit.mdl")
             --SetDayNightModels("", "")
             --CreateTaskBoard()
+            InitEnterPoints()
+            StartSpawnMachine()
             print(">>>")
         end)
     end
@@ -2409,7 +2424,7 @@ function UnitDamageArea(u, damage, x, y, range, flag)
                 --local data = HERO[GetPlayerId(GetOwningPlayer(u))]
                 local xb, yb = MoveXY(GetUnitX(u), GetUnitY(u), 60, GetUnitFacing(u) - 180)
                 local speed = 20
-                local dist = 300
+                local dist = 150
 
                 if IsPointInSector(GetUnitX(e), GetUnitY(e), xb, yb, GetUnitFacing(u), 90, range) then
                     UnitAddForceSimple(e, AngleBetweenUnits(u, e), speed, dist, nil, u)
@@ -2780,7 +2795,7 @@ end
 ---
 ---
 function InitMenu()
-    HideEverything()
+    HideEverythingNew()
     ReturnFPS()
     MenuFrame()
     CreateAndStartClock()
@@ -2806,11 +2821,31 @@ function HideEverything()
     --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
     BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, -0, 8)
     BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
-    for i = 1, 11 do
+    for i = 0, 11 do
         BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
     end
     BlzHideOriginFrames(true)--скрыть всё
     BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI",0),5), 0.001) --рамка мёртвой зоны отключение
+end
+function HideEverythingNew()
+    --print("скрытие панели?")
+    --BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
+    BlzFrameSetAbsPoint(BlzGetFrameByName("ConsoleUIBackdrop", 0), FRAMEPOINT_TOPRIGHT, 0, 0) --ЭТО ЧЕРНАЯ ПАНЕЛЬ!
+    --BlzFrameSetSize(BlzGetFrameByName("CommandButton_" .. 0, 0), 0, 0)-- M в позиции 0,0
+    --BlzFrameClearAllPoints(BlzGetFrameByName("CommandButton_" .. 0, 0))
+
+    --BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. 0, 0),FRAMEPOINT_CENTER,0,-0.1)
+    for i = 0, 11 do
+        -- BlzFrameSetVisible(BlzGetFrameByName("CommandButton_"..i, 0), false) --отключить
+        --local fh=BlzGetFrameByName("CommandButton_" .. i,0)
+
+        -- print(i,BlzFrameGetText(BlzGetFrameByName("CommandButton_" .. i,0)))
+        --print("GetChield",i,BlzFrameGetChildrenCount(fh))
+        BlzFrameClearAllPoints(BlzGetFrameByName("CommandButton_" .. i, 0))
+        BlzFrameSetAbsPoint(BlzGetFrameByName("CommandButton_" .. i, 0), FRAMEPOINT_CENTER, 0, -0.1)
+    end
+    BlzHideOriginFrames(true)--скрыть всё
+    BlzFrameSetScale(BlzFrameGetChild(BlzGetFrameByName("ConsoleUI", 0), 5), 0.001) --рамка мёртвой зоны отключение
 end
 
 function MenuFrame()
@@ -3312,7 +3347,7 @@ end
 function EffectFromUnit2Unit(eff, effModel, hero, enemy, flag)
     local x, y = GetUnitXY(enemy)
     local xEnd, yEnd = GetUnitXY(hero)
-    local z = 80
+    local z = GetTerrainZ(x,y)+40
     if not eff then
         eff = AddSpecialEffect(effModel, x, y)
     end
@@ -3338,8 +3373,8 @@ function EffectFromUnit2Unit(eff, effModel, hero, enemy, flag)
                     gain = 1
                 end
                 UnitAddGold(hero, R2I(gain))
-            elseif flag == "eating" then
-                --print("скушал яблочко")
+            elseif flag == "add exp" then
+                SetUnitUserData(hero,GetUnitUserData(hero)+10)
             end
             --print("долетел")
         end
@@ -4310,6 +4345,8 @@ end
 function CreateHudForHero(hero, x, y)
     CreateHeroPortrait(hero, x - GNext, y)
     CreateHPBar(hero, x, y)
+    CreateEXPBar(hero, x, y- GNext/4)
+    InitRegistryEvent(hero)
 end
 
 function CreateHeroPortrait(hero, x, y)
@@ -4447,6 +4484,31 @@ function CreateSelectActions()
         data.ReleaseF4 = false
     end)
 end
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 17.02.2023 22:14
+---
+function InitRegistryEvent(hero)
+    local enterTrig = CreateTrigger()
+    TriggerRegisterUnitInRange(enterTrig, hero, 200, nil)
+    TriggerAddAction(enterTrig, function()
+        if not IsUnitHidden(hero) then
+            local entering=GetTriggerUnit()
+
+
+            if GetUnitTypeId(entering) == FourCC("e000") then
+                --print(GetUnitName(entering))
+
+                EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", hero, entering,"add exp")
+                KillUnit(entering)
+            end
+        end
+    end)
+
+end
+
 
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -5089,38 +5151,20 @@ end
 ---
 function CreateHPBar(hero,x,y)
     local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-    --BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
-    --x, y = -0.08, 0.588
-    --local hero = data.UnitHero
-
-
-    --BlzFrameSetAlpha(into, 128)
-
     local chargesBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
     BlzFrameSetTexture(chargesBox, "Replaceabletextures\\Teamcolor\\Teamcolor06.blp", 0, true) --HPElement
     BlzFrameSetSize(chargesBox, GNext, GNext)
     BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x , y)
     BlzFrameSetAlpha(chargesBox, 128)
-
     local into = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
-    --BlzFrameSetTexture(into, "into", 0, true)
-    --BlzFrameSetSize(into, GNext * 3, GNext)
-    --BlzFrameSetAbsPoint(into, FRAMEPOINT_LEFT, x, y)
-    --BlzFrameSetAlpha(into, 128)
-    --BlzFrameSetFocus(into,true)
-
     local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
     BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.002, 0)
     local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
     BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, chargesBox, FRAMEPOINT_RIGHT, -0.002, 0)
-
-
-    --
     BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(into, BlzGetFrameByName("ConsoleUIBackdrop", 0))
-
     TimerStart(CreateTimer(), 0.05, true, function()
         local hp = 0
         hp = GetUnitLifePercent(hero)
@@ -5194,12 +5238,55 @@ function CreateMANABar(data)
     end)
 end
 
-function CreateEXPBar(data)
+
+function CreateEXPBar(hero, x, y)
+    local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    local chargesBox = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
+    BlzFrameSetTexture(chargesBox, "Replaceabletextures\\Teamcolor\\Teamcolor03.blp", 0, true) --HPElement
+    BlzFrameSetSize(chargesBox, GNext, GNext)
+    BlzFrameSetAbsPoint(chargesBox, FRAMEPOINT_LEFT, x , y)
+    BlzFrameSetAlpha(chargesBox, 128)
+    local into = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BoxBarParent, '', 0)
+    --local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
+    --BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.002, 0)
+    local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
+    --BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, chargesBox, FRAMEPOINT_RIGHT, -0.002, 0)
+    BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    --BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    BlzFrameSetParent(into, BlzGetFrameByName("ConsoleUIBackdrop", 0))
+    SetUnitUserData(hero,0)
+    TimerStart(CreateTimer(), 0.05, true, function()
+        local hp = 0
+        hp = GetUnitUserData(hero)
+        if hp>=90+10*GetHeroLevel(hero) then
+            print("Левел АП")
+            SuspendHeroXP(hero, false)
+            SetHeroLevel(hero,GetHeroLevel(hero)+1,true)
+            SuspendHeroXP(hero, true)
+            SetUnitUserData(hero,1)
+            hp=0
+        end
+        if not UnitAlive(hero) then
+            hp = 0
+            --print("Юнит мерт, сводим бар до нуля",hp)
+            BlzFrameSetSize(into, 0, 0)
+            --BlzFrameSetVisible(into, false)
+            --BlzFrameSetText(textCurrent, hp)
+            BlzFrameSetText(textMax, 100)
+        else
+            --BlzFrameSetVisible(into, GetLocalPlayer() == GetOwningPlayer(hero))
+            --BlzFrameSetText(textCurrent, GetUnitUserData(hero))
+            BlzFrameSetText(textMax, R2I(100))
+            BlzFrameSetSize(chargesBox, 2 * hp * GNext / 100, GNext * 0.25)
+            BlzFrameSetAlpha(chargesBox, 128)
+        end
+    end)
+end
+
+function CreateEXPBarOLd1(hero, x, y)
     local BoxBarParent = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetVisible(BoxBarParent, GetLocalPlayer() == Player(data.pid))
-    local x, y = -0.08, 0.588 - GNext
-    local hero = data.UnitHero
-
 
     --BlzFrameSetAlpha(into, 128)
 
@@ -6212,7 +6299,7 @@ end
 
 function ControlGameCam()
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-            CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
+           -- CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
     end)
 end
 ---
@@ -7353,6 +7440,7 @@ function FindFirstEnemy(unit, range)
     end
     return result
 end
+CountUnitsInGroup()
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -7455,65 +7543,114 @@ end
 function CreateEnterPoint(EnterRect)
 
 end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 17.02.2023 20:59
+---
+function GetRandomSpawnXY(r)
+    if not r then
+        r = GetRandomInt(1, #RXY)
+    end
+    return RXY[r].x, RXY[r].y
+end
+RXY = {}
+function InitEnterPoints()
+    local _, _, t = FindUnitOfType(FourCC("h004"))
+    for i = 1, #t do
+        --print(i)
+        ShowUnit(t[i], false)
+        UnitAddAbility(t[i], FourCC("Aloc"))
+        RXY[i]={}
+        RXY[i].x, RXY[i].y = GetUnitXY(t[i])
+        --print(GetRandomSpawnXY(i))
+    end
+end
+
+CurrentWave=1
+function StartSpawnMachine()
+    local t = {
+        FourCC("n005"),
+    }
+    TimerStart(CreateTimer(), 2, true, function()
+        local x,y=GetRandomSpawnXY()
+        local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
+        IssueTargetOrder(new,"attack",GetRandomEnemy())
+    end)
+end
+function GetRandomEnemy()
+    return HERO[0].UnitHero
+end
 --CUSTOM_CODE
 function Trig_Stage1_Conditions()
-    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-        return false
-    end
-    return true
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
 end
 
 function Trig_Stage1_Actions()
-        BlockZone(gg_rct_R1)
+    BlockZone(gg_rct_R1)
 end
 
 function InitTrig_Stage1()
-    gg_trg_Stage1 = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
-    TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
-    TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
+gg_trg_Stage1 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
+TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
+TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
+end
+
+function Trig_Bound1_Actions()
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
+end
+
+function InitTrig_Bound1()
+gg_trg_Bound1 = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_Bound1, 0.50)
+TriggerAddAction(gg_trg_Bound1, Trig_Bound1_Actions)
 end
 
 function InitCustomTriggers()
-    InitTrig_Stage1()
+InitTrig_Stage1()
+InitTrig_Bound1()
 end
 
 function InitCustomPlayerSlots()
-    SetPlayerStartLocation(Player(0), 0)
-    SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-    SetPlayerRaceSelectable(Player(0), true)
-    SetPlayerController(Player(0), MAP_CONTROL_USER)
+SetPlayerStartLocation(Player(0), 0)
+SetPlayerColor(Player(0), ConvertPlayerColor(0))
+SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+SetPlayerRaceSelectable(Player(0), true)
+SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-    SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-    SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-    NewSoundEnvironment("Default")
-    SetAmbientDaySound("CityScapeDay")
-    SetAmbientNightSound("CityScapeNight")
-    SetMapMusic("Music", true, 0)
-    CreateRegions()
-    CreateCameras()
-    CreateAllUnits()
-    InitBlizzard()
-    InitGlobals()
-    InitCustomTriggers()
+SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+NewSoundEnvironment("Default")
+SetAmbientDaySound("CityScapeDay")
+SetAmbientNightSound("CityScapeNight")
+SetMapMusic("Music", true, 0)
+CreateRegions()
+CreateCameras()
+CreateAllUnits()
+InitBlizzard()
+InitGlobals()
+InitCustomTriggers()
 end
 
 function config()
-    SetMapName("TRIGSTR_001")
-    SetMapDescription("TRIGSTR_003")
-    SetPlayers(1)
-    SetTeams(1)
-    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -1024.0, 1920.0)
-    InitCustomPlayerSlots()
-    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-    InitGenericPlayerSlots()
+SetMapName("TRIGSTR_001")
+SetMapDescription("TRIGSTR_003")
+SetPlayers(1)
+SetTeams(1)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+DefineStartLocation(0, -1216.0, 5952.0)
+InitCustomPlayerSlots()
+SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+InitGenericPlayerSlots()
 end
 

@@ -48,3 +48,4 @@ function FindFirstEnemy(unit, range)
     end
     return result
 end
+CountUnitsInGroup()

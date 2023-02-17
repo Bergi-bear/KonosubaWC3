@@ -50,11 +50,11 @@ function AddExp(data, exp)
     data.curExp = data.curExp + exp
     if data.curExp >= ExpTable[data.curHeroLvl + 1] then
         --print("повышение уровня")
-        --SuspendHeroXP(data.UnitHero, false)
+        SuspendHeroXP(data.UnitHero, false)
         data.curHeroLvl = data.curHeroLvl + 1
         SetHeroLevel(data.UnitHero, data.curHeroLvl, true)
         BlzFrameSetText(data.FHHeroLvl,"Level "..data.curHeroLvl)
-        --SuspendHeroXP(data.UnitHero, true)
+        SuspendHeroXP(data.UnitHero, true)
     end
 end
 
