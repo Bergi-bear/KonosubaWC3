@@ -60,7 +60,7 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack3 = 10 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 5 -- индекс анимации для удара во вращении
     else
-        print("Данного героя нет в таблице анимаций")
+        --print("Данного героя нет в таблице анимаций")
     end
 end
 

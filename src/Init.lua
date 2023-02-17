@@ -42,6 +42,9 @@ do
             --CreateTaskBoard()
             InitEnterPoints()
             StartSpawnMachine()
+
+            InitTalonBDForDarkNess()
+            CreateDialogTalon(HeroDarkness)
             print(">>>")
         end)
     end
