@@ -7,82 +7,85 @@ function InitGlobals()
 end
 
 function CreateUnitsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h004"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 166.629, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2593.8, 5133.4, 312.900, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2502.4, 5144.2, 259.110, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2634.5, 4968.9, 36.514, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2514.0, 5056.4, 204.263, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2515.8, 4938.7, 91.992, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2612.8, 5103.9, 331.677, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2579.0, 5040.7, 12.420, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2448.9, 4986.7, 136.568, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2386.3, 5155.6, 166.629, FourCC("e000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2411.0, 5111.2, 136.568, FourCC("e000"))
+local p = Player(0)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 166.629, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2593.8, 5133.4, 312.900, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2502.4, 5144.2, 259.110, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2634.5, 4968.9, 36.514, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2514.0, 5056.4, 204.263, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2515.8, 4938.7, 91.992, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2612.8, 5103.9, 331.677, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2579.0, 5040.7, 12.420, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2448.9, 4986.7, 136.568, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2386.3, 5155.6, 166.629, FourCC("e000"))
+u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2411.0, 5111.2, 136.568, FourCC("e000"))
 end
 
 function CreateUnitsForPlayer10()
-    local p = Player(10)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
+local p = Player(10)
+local u
+local unitID
+local t
+local life
+
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
+u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer0()
-    CreateUnitsForPlayer10()
+CreateUnitsForPlayer0()
+CreateUnitsForPlayer10()
 end
 
 function CreateAllUnits()
-    CreatePlayerBuildings()
-    CreatePlayerUnits()
+CreatePlayerBuildings()
+CreatePlayerUnits()
 end
 
 function CreateRegions()
-    local we
-    gg_rct_R1 = Rect(-544.0, 1408.0, -160.0, 2624.0)
-    gg_rct_Region_001 = Rect(-1728.0, 4832.0, -640.0, 6944.0)
+local we
+
+gg_rct_R1 = Rect(-544.0, 1408.0, -160.0, 2624.0)
+gg_rct_Region_001 = Rect(-1728.0, 4832.0, -640.0, 6944.0)
 end
 
 function CreateCameras()
-    gg_cam_Camera_001 = CreateCameraSetup()
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 90.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 3000.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-    CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
+gg_cam_Camera_001 = CreateCameraSetup()
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 90.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 3000.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -874,6 +877,15 @@ function OnPostDamage()
 
         if target == HeroDarkness then
             -- print("даркнесс")
+            if data.LionMaskPorog then
+                data.LionMaskPorog=data.LionMaskPorog-damage
+                if data.LionMaskPorog<=0 then
+                    data.LionMaskPorog=300
+                    --print("маска льва")
+                    LionMaskBlast(data)
+                end
+            end
+
             if data.ReverseDamage then
                 --print("реверс урона?")
                 HealUnit(target, damage)
@@ -4384,7 +4396,7 @@ function CreateOSKEY_3Actions()
             if DialogTalonActive then
                 DialogTalonActive=false
                 --print("нажал OSKEY_3",TalonInSlot[3].name)
-                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[2].talon)
+                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[3].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end
@@ -4928,7 +4940,7 @@ function InitTalonBDForKazuma()
             icon = "DDSICO\\SharkStrike",
             description = "Раз в DS сек. появляется акула и полностью пожирает вражеского юнита",
             level = 0,
-            DS = { 20, 15, 10 },
+            DS = { 5, 15, 10 },
             pos = 3,
         },
         [4] = {
@@ -4961,7 +4973,8 @@ function LearnTalonByName(name,talon)
     if name=="Кровавый меч" then
         data.HasBloodBlade=talon.DS[talon.level]
     elseif name=="Маска льва" then
-        data.LionMask=true
+        data.LionMaskPorog=300
+        data.LionMaskDamage=talon.DS[talon.level]
     elseif name=="Разбитое сердце" then
         data.BrokenHeartReturnDamage=talon.DS[talon.level]
     elseif name=="Натуральное питание" then
@@ -4974,6 +4987,12 @@ function LearnTalonByName(name,talon)
     elseif name=="Ледяной болт" then
         UnitAddAbility(HeroKazuma,FourCC("A000"))
         SetUnitAbilityLevel(HeroKazuma,FourCC("A000"),talon.DS[talon.level])
+    elseif name=="Удар акулы" then
+        if not data.FishKillPeriod then
+            data.FishKillPeriod=talon.DS[talon.level]
+            FishKill(data)
+        end
+        data.FishKillPeriod=talon.DS[talon.level]
     end
 end
 
@@ -5237,6 +5256,56 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
+--- DateTime: 18.02.2023 22:29
+---
+function FishKill(data)
+    local sec=data.FishKillPeriod
+    TimerStart(CreateTimer(), 1, true, function()
+        sec=sec-1
+        if sec<=0 then
+            local enemy=FindFirstEnemy(data.UnitHero,1000)
+
+            sec=data.FishKillPeriod
+            FishEat(data,enemy)
+        end
+    end)
+end
+
+function FishEat(data,enemy)
+    local x,y=GetUnitXY(enemy)
+    BlzPauseUnitEx(enemy,true)
+    local eff=AddSpecialEffect("Fesh_Final",GetUnitXY(enemy))
+    BlzSetSpecialEffectZ(eff,-200)
+    BlzSetSpecialEffectYaw(eff, math.rad(GetUnitFacing(enemy)-180))
+    BlzSetSpecialEffectPitch(eff, math.rad(-90))
+    BlzSetSpecialEffectScale(eff,7)
+    local z=GetTerrainZ(x,y)-500
+    local f=0
+    print("цель найдена",z)
+    TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+        f=f+5
+        BlzSetSpecialEffectZ(eff,z+f)
+        if f>=500 then
+            print("укус",f)
+            DestroyTimer(GetExpiredTimer())
+            UnitDamageArea(data.UnitHero,9999,x,y,100)
+            ShowUnit(enemy,false)
+            BlzPlaySpecialEffect(eff,ANIM_TYPE_ATTACK)
+            TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
+                f=f-5
+                BlzSetSpecialEffectZ(eff,z+f)
+                if f<=0 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
+    end)
+end
+
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
 --- DateTime: 18.02.2023 13:54
 ---
 function SpellSteal(data)
@@ -5309,6 +5378,17 @@ function AddShield(data)
             data.ShieldOnCD = false
         end)
 
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 22:30
+---
+function LionMaskBlast(data)
+    for i=1,12 do
+        local angle=30*i
+        CreateAndForceBullet(data.UnitHero, angle, 30, "Abilities\\Spells\\Orc\\Shockwave\\ShockwaveMissile", nil, nil, data.LionMaskDamage, 500)
     end
 end
 ---
@@ -6207,7 +6287,7 @@ function InitWASD(hero)
 
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    ReviveHero(hero, x, y, true)
+                    --ReviveHero(hero, x, y, true)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
                         SetUnitInvulnerable(hero, false)
@@ -8108,7 +8188,7 @@ function FindFirstEnemy(unit, range)
     end
     return result
 end
-CountUnitsInGroup()
+
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -8275,74 +8355,75 @@ function GetRandomEnemy()
 end
 --CUSTOM_CODE
 function Trig_Stage1_Conditions()
-    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-        return false
-    end
-    return true
+if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+return false
+end
+return true
 end
 
 function Trig_Stage1_Actions()
-        BlockZone(gg_rct_R1)
+    BlockZone(gg_rct_R1)
 end
 
 function InitTrig_Stage1()
-    gg_trg_Stage1 = CreateTrigger()
-    TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
-    TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
-    TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
+gg_trg_Stage1 = CreateTrigger()
+TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
+TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
+TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
 end
 
 function Trig_Bound1_Actions()
-    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
+SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
+SetTimeOfDayScalePercentBJ(0.00)
 end
 
 function InitTrig_Bound1()
-    gg_trg_Bound1 = CreateTrigger()
-    TriggerRegisterTimerEventSingle(gg_trg_Bound1, 0.50)
-    TriggerAddAction(gg_trg_Bound1, Trig_Bound1_Actions)
+gg_trg_Bound1 = CreateTrigger()
+TriggerRegisterTimerEventSingle(gg_trg_Bound1, 0.50)
+TriggerAddAction(gg_trg_Bound1, Trig_Bound1_Actions)
 end
 
 function InitCustomTriggers()
-    InitTrig_Stage1()
-    InitTrig_Bound1()
+InitTrig_Stage1()
+InitTrig_Bound1()
 end
 
 function InitCustomPlayerSlots()
-    SetPlayerStartLocation(Player(0), 0)
-    SetPlayerColor(Player(0), ConvertPlayerColor(0))
-    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-    SetPlayerRaceSelectable(Player(0), true)
-    SetPlayerController(Player(0), MAP_CONTROL_USER)
+SetPlayerStartLocation(Player(0), 0)
+SetPlayerColor(Player(0), ConvertPlayerColor(0))
+SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+SetPlayerRaceSelectable(Player(0), true)
+SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-    SetPlayerTeam(Player(0), 0)
+SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-    SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-    NewSoundEnvironment("Default")
-    SetAmbientDaySound("CityScapeDay")
-    SetAmbientNightSound("CityScapeNight")
-    SetMapMusic("Music", true, 0)
-    CreateRegions()
-    CreateCameras()
-    CreateAllUnits()
-    InitBlizzard()
-    InitGlobals()
-    InitCustomTriggers()
+SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+NewSoundEnvironment("Default")
+SetAmbientDaySound("CityScapeDay")
+SetAmbientNightSound("CityScapeNight")
+SetMapMusic("Music", true, 0)
+CreateRegions()
+CreateCameras()
+CreateAllUnits()
+InitBlizzard()
+InitGlobals()
+InitCustomTriggers()
 end
 
 function config()
-    SetMapName("TRIGSTR_001")
-    SetMapDescription("TRIGSTR_003")
-    SetPlayers(1)
-    SetTeams(1)
-    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-    DefineStartLocation(0, -1216.0, 5952.0)
-    InitCustomPlayerSlots()
-    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-    InitGenericPlayerSlots()
+SetMapName("TRIGSTR_001")
+SetMapDescription("TRIGSTR_003")
+SetPlayers(1)
+SetTeams(1)
+SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+DefineStartLocation(0, -1216.0, 5952.0)
+InitCustomPlayerSlots()
+SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+InitGenericPlayerSlots()
 end
 

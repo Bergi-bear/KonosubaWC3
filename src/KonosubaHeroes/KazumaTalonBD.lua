@@ -26,7 +26,7 @@ function InitTalonBDForKazuma()
             icon = "DDSICO\\SharkStrike",
             description = "Раз в DS сек. появляется акула и полностью пожирает вражеского юнита",
             level = 0,
-            DS = { 20, 15, 10 },
+            DS = { 5, 15, 10 },
             pos = 3,
         },
         [4] = {

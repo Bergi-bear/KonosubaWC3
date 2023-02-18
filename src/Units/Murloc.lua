@@ -40,7 +40,7 @@ function FindFirstEnemy(unit, range)
             break
         end
 
-        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) then
+        if UnitAlive(e) and IsUnitEnemy(e, GetOwningPlayer(unit)) and not BlzIsUnitInvulnerable(e) then
             --print("найден для сетки",GetUnitName(e))
             result = e
         end
@@ -48,4 +48,3 @@ function FindFirstEnemy(unit, range)
     end
     return result
 end
-CountUnitsInGroup()

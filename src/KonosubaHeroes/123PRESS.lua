@@ -79,7 +79,7 @@ function CreateOSKEY_3Actions()
             if DialogTalonActive then
                 DialogTalonActive=false
                 --print("нажал OSKEY_3",TalonInSlot[3].name)
-                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[2].talon)
+                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[3].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end

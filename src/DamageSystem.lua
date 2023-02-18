@@ -128,6 +128,15 @@ function OnPostDamage()
 
         if target == HeroDarkness then
             -- print("даркнесс")
+            if data.LionMaskPorog then
+                data.LionMaskPorog=data.LionMaskPorog-damage
+                if data.LionMaskPorog<=0 then
+                    data.LionMaskPorog=300
+                    --print("маска льва")
+                    LionMaskBlast(data)
+                end
+            end
+
             if data.ReverseDamage then
                 --print("реверс урона?")
                 HealUnit(target, damage)

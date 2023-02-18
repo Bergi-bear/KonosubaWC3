@@ -164,7 +164,7 @@ function InitWASD(hero)
 
                 TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
-                    ReviveHero(hero, x, y, true)
+                    --ReviveHero(hero, x, y, true)
                     SetUnitInvulnerable(hero, true)
                     TimerStart(CreateTimer(), 2, false, function()
                         SetUnitInvulnerable(hero, false)

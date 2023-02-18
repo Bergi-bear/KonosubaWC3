@@ -10,7 +10,8 @@ function LearnTalonByName(name,talon)
     if name=="Кровавый меч" then
         data.HasBloodBlade=talon.DS[talon.level]
     elseif name=="Маска льва" then
-        data.LionMask=true
+        data.LionMaskPorog=300
+        data.LionMaskDamage=talon.DS[talon.level]
     elseif name=="Разбитое сердце" then
         data.BrokenHeartReturnDamage=talon.DS[talon.level]
     elseif name=="Натуральное питание" then
@@ -23,6 +24,12 @@ function LearnTalonByName(name,talon)
     elseif name=="Ледяной болт" then
         UnitAddAbility(HeroKazuma,FourCC("A000"))
         SetUnitAbilityLevel(HeroKazuma,FourCC("A000"),talon.DS[talon.level])
+    elseif name=="Удар акулы" then
+        if not data.FishKillPeriod then
+            data.FishKillPeriod=talon.DS[talon.level]
+            FishKill(data)
+        end
+        data.FishKillPeriod=talon.DS[talon.level]
     end
 end
 
