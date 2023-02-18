@@ -17,6 +17,9 @@ function FishKill(data)
 end
 
 function FishEat(data,enemy)
+    if not enemy then
+        return
+    end
     local x,y=GetUnitXY(enemy)
     BlzPauseUnitEx(enemy,true)
     local eff=AddSpecialEffect("Fesh_Final",GetUnitXY(enemy))
@@ -26,12 +29,12 @@ function FishEat(data,enemy)
     BlzSetSpecialEffectScale(eff,7)
     local z=GetTerrainZ(x,y)-500
     local f=0
-    print("цель найдена",z)
+    --print("цель найдена",z)
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
         f=f+5
         BlzSetSpecialEffectZ(eff,z+f)
         if f>=500 then
-            print("укус",f)
+            --print("укус",f)
             DestroyTimer(GetExpiredTimer())
             UnitDamageArea(data.UnitHero,9999,x,y,100)
             ShowUnit(enemy,false)

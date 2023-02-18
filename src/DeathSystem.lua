@@ -18,7 +18,7 @@ function InitDeathEvent()
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(this, function()
         local u = GetTriggerUnit() --тот кто умер
-        local killer = GetKillingUnit()
+        local killer = GetKillingUnit() -- тот кто убил
         local xu, yu = GetUnitXY(u)
 
         if IsUnitEnemy(u, GetOwningPlayer(killer)) then

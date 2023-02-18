@@ -16,6 +16,9 @@ function PartyHeal(data)
             HealUnit(heroes[i],20)
             if not IsUnitHidden(heroes[i]) then
                 DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(heroes[i])))
+                if data.HasSharkFromDeep then
+                    FishEat(data,FindFirstEnemy(heroes[i],150))
+                end
             end
             local times=3
             TimerStart(CreateTimer(), 1, true, function()
@@ -24,6 +27,9 @@ function PartyHeal(data)
                 HealUnit(heroes[i],20)
                 if not IsUnitHidden(heroes[i]) then
                     DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(heroes[i])))
+                    if data.HasSharkFromDeep then
+                        FishEat(data,FindFirstEnemy(heroes[i],250))
+                    end
                 end
                 if times<=0 then
                     DestroyTimer(GetExpiredTimer())

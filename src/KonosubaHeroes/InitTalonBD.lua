@@ -32,6 +32,8 @@ function GetTalonBDFromHero(hero)
         return DarknessTalon
     elseif hero == HeroKazuma then
         return KazumaTalon
+    elseif hero == HeroAqua then
+        return AquaTalon
     else
         print("у этого героя ещё нет талантов")
         return KazumaTalon
@@ -43,7 +45,7 @@ function TalonReadyForLearn(BD)
     local SHBD = ShuffleTable(BD)
 
     for i = 1, #SHBD do
-        if SHBD[i].level < 3 then
+        if SHBD[i].level < #(SHBD[i].DS) then
             table.insert(temptable, SHBD[i])
         end
     end

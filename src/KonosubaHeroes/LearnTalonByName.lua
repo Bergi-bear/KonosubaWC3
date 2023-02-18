@@ -3,33 +3,43 @@
 --- Created by User.
 --- DateTime: 18.02.2023 2:37
 ---
-function LearnTalonByName(name,talon)
-    local data=HERO[0]
-    talon.level=talon.level+1
-    print("выбран талант",name,talon.name)
-    if name=="Кровавый меч" then
-        data.HasBloodBlade=talon.DS[talon.level]
-    elseif name=="Маска льва" then
-        data.LionMaskPorog=300
-        data.LionMaskDamage=talon.DS[talon.level]
-    elseif name=="Разбитое сердце" then
-        data.BrokenHeartReturnDamage=talon.DS[talon.level]
-    elseif name=="Натуральное питание" then
+function LearnTalonByName(name, talon)
+    local data = HERO[0]
+    talon.level = talon.level + 1
+    --print("выбран талант",name,talon.name)
+    if name == "Кровавый меч" then
+        data.HasBloodBlade = talon.DS[talon.level]
+    elseif name == "Маска льва" then
+        data.LionMaskPorog = 300
+        data.LionMaskDamage = talon.DS[talon.level]
+    elseif name == "Разбитое сердце" then
+        data.BrokenHeartReturnDamage = talon.DS[talon.level]
+    elseif name == "Натуральное питание" then
         AddMaxLife(HeroDarkness, talon.DS[talon.level])
-    elseif name=="Фамильная реликвия" then
-        UnitAddAbility(HeroDarkness,FourCC("A001"))
-        SetUnitAbilityLevel(HeroDarkness,FourCC("A001"),talon.DS[talon.level])
-    elseif name=="Крепкая хватка" then
-        data.AddMeleeDamage=talon.DS[talon.level]
-    elseif name=="Ледяной болт" then
-        UnitAddAbility(HeroKazuma,FourCC("A000"))
-        SetUnitAbilityLevel(HeroKazuma,FourCC("A000"),talon.DS[talon.level])
-    elseif name=="Удар акулы" then
+    elseif name == "Фамильная реликвия" then
+        UnitAddAbility(HeroDarkness, FourCC("A001"))
+        SetUnitAbilityLevel(HeroDarkness, FourCC("A001"), talon.DS[talon.level])
+    elseif name == "Крепкая хватка" then
+        data.AddMeleeDamage = talon.DS[talon.level]
+    elseif name == "Ледяной болт" then
+        UnitAddAbility(HeroKazuma, FourCC("A000"))
+        SetUnitAbilityLevel(HeroKazuma, FourCC("A000"), talon.DS[talon.level])
+    elseif name == "Удар акулы" then
         if not data.FishKillPeriod then
-            data.FishKillPeriod=talon.DS[talon.level]
+            data.FishKillPeriod = talon.DS[talon.level]
             FishKill(data)
         end
-        data.FishKillPeriod=talon.DS[talon.level]
+        data.FishKillPeriod = talon.DS[talon.level]
+    elseif name == "Пивной уворот" then
+        UnitAddAbility(HeroAqua, FourCC("AEev"))
+        SetUnitAbilityLevel(HeroAqua, FourCC("AEev"), talon.DS[talon.level])
+    elseif name == "Посох маны" then
+        BlzSetUnitMaxMana(HeroAqua, BlzGetUnitMaxMana(HeroAqua) + talon.DS[talon.level])
+    elseif name == "Струя воды" then
+        UnitAddAbility(HeroAqua, FourCC("A000"))
+        SetUnitAbilityLevel(HeroAqua, FourCC("A000"), talon.DS[talon.level])
+    elseif name == "Повод для акулы" then
+        data.HasSharkFromDeep=true
     end
 end
 

@@ -46,6 +46,7 @@ do
 
             InitTalonBDForDarkNess()
             InitTalonBDForKazuma()
+            InitTalonBDForAqua()
             print(">>>")
         end)
     end
