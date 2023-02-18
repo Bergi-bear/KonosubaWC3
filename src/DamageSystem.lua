@@ -22,7 +22,7 @@ function OnPostDamage()
 
 
 
-    if GetUnitTypeId(target) == FourCC("n005")  and damage > 50 then
+    if GetUnitTypeId(target) == FourCC("n005") and damage > 50 then
         normal_sound("MP3\\RO\\Spore\\Hit", GetUnitXY(target))
         --print("писк грибочка")
     end
@@ -101,9 +101,45 @@ function OnPostDamage()
             end
         end
     else
-        --print("наш герой получил урон")
 
     end
+
+    if IsUnitType(target, UNIT_TYPE_HERO) then
+        -- print("наш герой получил урон")
+        local data = GetUnitData(target)
+
+        if ShieldHP[GetHandleId(target)] then
+            if ShieldHP[GetHandleId(target)].hp > 0 then
+                -- print("удар по щиту")
+                ShieldHP[GetHandleId(target)].hp = ShieldHP[GetHandleId(target)].hp - damage
+                BlzSetEventDamage(0) -- держать в самом низу
+                local eff = AddSpecialEffect("DefendCaster", GetUnitXY(target))
+                local AngleSource = AngleBetweenUnits(caster, target)
+                BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
+                DestroyEffect(eff)
+                UnitAddForceSimple(caster, AngleSource - 180, 10, 50)
+                FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Удар в щит", GetOwningPlayer(target))
+            else
+                DestroyEffect(ShieldHP[GetHandleId(target)].eff)
+                ShieldHP[GetHandleId(target)].eff = nil
+                --print("щит сломан досрочно")
+            end
+        end
+
+        if target == HeroDarkness then
+            -- print("даркнесс")
+            if data.ReverseDamage then
+                --print("реверс урона?")
+                HealUnit(target, damage)
+                BlzSetEventDamage(0) -- держать в самом низу
+            end
+            if data.BrokenHeartReturnDamage then
+                UnitDamageArea(target, damage*data.BrokenHeartReturnDamage/100, GetUnitX(target), GetUnitY(target), 250)
+                DestroyEffect(AddSpecialEffectTarget("Effect/727_GreenRing", target,"origin"))
+            end
+        end
+    end
+
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
@@ -139,9 +175,9 @@ function AddDamage2Show(hero, damage)
         --	print("получил урон первый раз")
         ShowDamageTable[GetHandleId(hero)] = {
             damage = 0,
-            sec    = 0,
-            tag    = nil,
-            k      = 0
+            sec = 0,
+            tag = nil,
+            k = 0
         }
         local data = ShowDamageTable[GetHandleId(hero)]
         data.damage = damage
@@ -228,7 +264,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
                                 end
                             else
                                 --print("даём золото за сундук")
-                                if GetDestructableTypeId(d) == FourCC("B008") or GetDestructableTypeId(d) == FourCC("B004")  and false then
+                                if GetDestructableTypeId(d) == FourCC("B008") or GetDestructableTypeId(d) == FourCC("B004") and false then
                                     UnitAddGold(hero, GetRandomInt(2, 5))
                                     DestroyEffect(AddSpecialEffect("SystemGeneric\\PileofGold.mdl", dx, dy))
                                 end

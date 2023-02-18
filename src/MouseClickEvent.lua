@@ -37,7 +37,7 @@ function InitMouseClickEvent()
             if UnitAlive(data.UnitHero) then
 
                 if not data.SpaceForce then
-                    if GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
+                    if GetUnitTypeId(data.UnitHero) == KazumaID or GetUnitTypeId(data.UnitHero) == DarknessID then
                         AttackMelee(data)
 
                     end
@@ -60,12 +60,15 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = true
             local id = GetPlayerId(GetTriggerPlayer())
-            if not GetUnitTypeId(data.UnitHero)==KazumaID then
+            if not GetUnitTypeId(data.UnitHero) == KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
                 data.StartWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.StartWaveCastY = BlzGetTriggerPlayerMouseY()
+            end
+            if data.UnitHero==HeroDarkness then
+                PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
             end
         end
     end)
@@ -79,13 +82,18 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = false
             local id = GetPlayerId(GetTriggerPlayer())
-            if  GetUnitTypeId(data.UnitHero)~=KazumaID then
+            if GetUnitTypeId(data.UnitHero) ~= KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                SpellCastByName(data, "wave")
+                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 50 then
+                    SpellCastByName(data, "wave")
+                    UnitAddMana(data.UnitHero,-50)
+                else
+                    print("недостаточно маны")
+                end
             end
 
 

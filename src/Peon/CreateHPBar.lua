@@ -14,7 +14,7 @@ function CreateHPBar(hero,x,y)
     local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
     BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.002, 0)
     local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, chargesBox, FRAMEPOINT_RIGHT, -0.002, 0)
+    BlzFrameSetPoint(textMax, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.06, 0)
     BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -119,6 +119,7 @@ function CreateEXPBar(hero, x, y)
             SetHeroLevel(hero,GetHeroLevel(hero)+1,true)
             SuspendHeroXP(hero, true)
             SetUnitUserData(hero,1)
+            CreateDialogTalon(hero)
             hp=0
         end
         if not UnitAlive(hero) then

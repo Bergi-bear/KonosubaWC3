@@ -3,13 +3,26 @@
 --- Created by User.
 --- DateTime: 18.02.2023 2:37
 ---
-function LearnTalonByName(name)
+function LearnTalonByName(name,talon)
     local data=HERO[0]
+    talon.level=talon.level+1
+    print("выбран талант",name,talon.name)
     if name=="Кровавый меч" then
-        data.HasBloodBlade=true
+        data.HasBloodBlade=talon.DS[talon.level]
     elseif name=="Маска льва" then
         data.LionMask=true
     elseif name=="Разбитое сердце" then
-        data.BrokenHeart=true
+        data.BrokenHeartReturnDamage=talon.DS[talon.level]
+    elseif name=="Натуральное питание" then
+        AddMaxLife(HeroDarkness, talon.DS[talon.level])
+    elseif name=="Фамильная реликвия" then
+        UnitAddAbility(HeroDarkness,FourCC("A001"))
+        SetUnitAbilityLevel(HeroDarkness,FourCC("A001"),talon.DS[talon.level])
+    elseif name=="Крепкая хватка" then
+        data.AddMeleeDamage=talon.DS[talon.level]
+    elseif name=="Ледяной болт" then
+        UnitAddAbility(HeroKazuma,FourCC("A000"))
+        SetUnitAbilityLevel(HeroKazuma,FourCC("A000"),talon.DS[talon.level])
     end
 end
+

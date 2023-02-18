@@ -16,9 +16,9 @@ function CreateOSKEY_1Actions()
             data.ReleaseOSKEY_1 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_1",TalonInSlot[1])
+                --print("нажал OSKEY_1",TalonInSlot[1].name)
                 BlzFrameSetVisible(DialogMainWindow,false)
-                LearnTalonByName(TalonInSlot[1])
+                LearnTalonByName(TalonInSlot[1].name,TalonInSlot[1].talon)
             end
         end
     end)
@@ -47,8 +47,8 @@ function CreateOSKEY_2Actions()
             data.ReleaseOSKEY_2 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_2",TalonInSlot[2])
-                LearnTalonByName(TalonInSlot[2])
+                --print("нажал OSKEY_2",TalonInSlot[2].name)
+                LearnTalonByName(TalonInSlot[2].name,TalonInSlot[2].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end
@@ -78,8 +78,8 @@ function CreateOSKEY_3Actions()
             data.ReleaseOSKEY_3 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_3",TalonInSlot[3])
-                LearnTalonByName(TalonInSlot[3])
+                --print("нажал OSKEY_3",TalonInSlot[3].name)
+                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[2].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end

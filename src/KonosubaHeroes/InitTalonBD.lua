@@ -3,62 +3,63 @@
 --- Created by User.
 --- DateTime: 18.02.2023 0:32
 ---
-function InitTalonBDForDarkNess()
-    CreateOSKEY_1Actions()
-    CreateOSKEY_2Actions()
-    CreateOSKEY_3Actions()
-    DarknessTalon = {
-        [1] = {
-            name = "Кровавый меч",
-            icon = "DDSICO\\BloodAndBlade",
-            description = "Убийства врагов исцеляют на DS ",
-            level = 0,
-            DS = { 1, 2, 3 },
-        },
-        [2] = {
-            name = "Маска льва",
-            icon = "DDSICO\\LionMask",
-            description = "При получении 300 урона выпускает волну силы наносящую DS урон",
-            level = 0,
-            DS = { 100, 200, 300 },
-        },
-        [3] = {
-            name = "Разбитое сердце",
-            icon = "DDSICO\\BrokenHeart",
-            description = "Получение урона возвращается DS%% урона всем врагам в малом радиусе 250",
-            level = 0,
-            DS = { 100, 200, 300 },
-        }
-    }
-end
 
-DialogTalonActive=false
+
+DialogTalonActive = false
 function CreateDialogTalon(hero)
-    DialogTalonActive=true
-    if hero == HeroDarkness then
+    DialogTalonActive = true
 
-    end
     if not DialogMainWindow then
         DialogMainWindow = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-        TalonInSlot={}
+        CreateOSKEY_1Actions()
+        CreateOSKEY_2Actions()
+        CreateOSKEY_3Actions()
+        TalonInSlot = {}
         --print("11111111111111")
     end
-    BlzFrameSetVisible(DialogMainWindow,true)
+    BlzFrameSetVisible(DialogMainWindow, true)
     local x, y = 0.2, 0.3
+    local tmpTable = TalonReadyForLearn(GetTalonBDFromHero(hero))
     for i = 1, 3 do
-        local name, icon, text = CreateInfoTalonSingle(DialogMainWindow, x + (i - 1) * 0.2, y, i)
-        SetTalonDescription(DarknessTalon,i, name, icon, text)
+        local name, icon, text, level = CreateInfoTalonSingle(DialogMainWindow, x + (i - 1) * 0.2, y, i)
+        SetTalonDescription(tmpTable, i, name, icon, text, level)
 
     end
-
-
 end
 
-function SetTalonDescription(BD, number, name, icon, text)
-    BlzFrameSetText(name, BD[number].name)
+function GetTalonBDFromHero(hero)
+    if hero == HeroDarkness then
+        return DarknessTalon
+    elseif hero == HeroKazuma then
+        return KazumaTalon
+    else
+        print("у этого героя ещё нет талантов")
+        return KazumaTalon
+    end
+end
+
+function TalonReadyForLearn(BD)
+    local temptable = {}
+    local SHBD = ShuffleTable(BD)
+
+    for i = 1, #SHBD do
+        if SHBD[i].level < 3 then
+            table.insert(temptable, SHBD[i])
+        end
+    end
+    return temptable
+end
+
+function SetTalonDescription(BD, number, name, icon, text, level)
+    BlzFrameSetText(name, BD[number].name) -- TODO проверка на пустые таланты
     BlzFrameSetTexture(icon, BD[number].icon, 0, true)
-    BlzFrameSetText(text, BD[number].description)
-    TalonInSlot[number]=BD[number].name
+    BlzFrameSetText(text, DSColorDescription(BD[number]))
+    BlzFrameSetText(level, ColorText2("[Уровень " .. (BD[number].level + 1) .. "]"))
+    TalonInSlot[number] = {
+        name = BD[number].name,
+        talon = BD[number]
+    }
+
 end
 
 function CreateInfoTalonSingle(BoxBarParent, x, y, i)
@@ -73,8 +74,12 @@ function CreateInfoTalonSingle(BoxBarParent, x, y, i)
     BlzFrameSetPoint(icon, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0, 0)
 
     local name = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
-    BlzFrameSetPoint(name, FRAMEPOINT_CENTER, rama, FRAMEPOINT_CENTER, 0.0, -0.02)
+    BlzFrameSetPoint(name, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0.0, -0.08)
     BlzFrameSetText(name, "Название")
+
+    local level = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
+    BlzFrameSetPoint(level, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0.0, -0.1)
+    BlzFrameSetText(level, ColorText2("[Уровень]"))
 
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", rama, "StandardFrameTemplate", 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
@@ -89,6 +94,30 @@ function CreateInfoTalonSingle(BoxBarParent, x, y, i)
     BlzFrameSetPoint(press, FRAMEPOINT_CENTER, rama, FRAMEPOINT_CENTER, 0.0, -0.05)
     BlzFrameSetText(press, "Нажмите " .. i)
     BlzFrameSetScale(press, 2)
-    return name, icon, text
+    return name, icon, text, level
 end
 
+function ShuffleTable(tbl)
+    for i = #tbl, 2, -1 do
+        local j = math.random(i)
+        tbl[i], tbl[j] = tbl[j], tbl[i]
+        --print(j)
+    end
+    return tbl
+end
+
+function DSColorDescription(talon)
+    if #talon.DS > 0 and talon["DS"][talon.level + 1] ~= nil then
+        local s = string.gsub(talon.description, "DS", ColorText2(talon["DS"][talon.level + 1]))
+        return s
+    elseif talon["DS"][talon.level + 1] == nil and #talon.DS > 0 then
+        local s = string.gsub(talon.description, "DS", ColorText2(talon["DS"][#talon.DS]))
+        return s
+    else
+        return talon.description
+    end
+end
+function ColorText2(s)
+    s = "|cffffcc00" .. s .. "|r"
+    return s
+end

@@ -27,6 +27,13 @@ function AttackMelee(data)
             BlzSetUnitFacingEx(data.UnitHero, angle) --был обычный поворот
             local maxAttack = data.MaxAttack
 
+            if data.UnitHero==HeroKazuma then
+                if data.AddMeleeDamage then
+                    damage=damage+data.AddMeleeDamage
+                end
+            end
+
+
             --local tmp=data.DamageInSeries
             --local lastAttack=#tmp
             if data.LineCleaveAttack then

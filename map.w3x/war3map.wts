@@ -128,3 +128,27 @@ STRING 23
 Очко опыта
 }
 
+STRING 24
+// Abilities: A000 (Ледяной болт), Name (Name)
+{
+Ледяной болт
+}
+
+STRING 25
+// Buffs/Effects: B000 (Ледяной болт Бафф), EditorName (Name (Editor Only))
+{
+Ледяной болт Бафф
+}
+
+STRING 26
+// Abilities: A001 (Фамильная реликвия), Name (Name)
+{
+Фамильная реликвия
+}
+
+STRING 27
+// Buffs/Effects: B001 (Фамильная реликвия Бафф), EditorName (Name (Editor Only))
+{
+Фамильная реликвия Бафф
+}
+

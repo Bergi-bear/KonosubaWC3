@@ -216,6 +216,10 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 --print("хексуем")
             end
 
+            if effectmodel== "Valiant Charge Holy" then
+                local xd, yd = GetUnitXY(DamagingUnit)
+                UnitDamageArea(heroCurrent, 0, xd, yd, 100, "push")
+            end
             if effectmodel == "Abilities\\Weapons\\BallistaMissile\\BallistaMissile.mdl" then
                 -- Момент где стрела попадает во врага
                 local data = GetUnitData(heroCurrent)

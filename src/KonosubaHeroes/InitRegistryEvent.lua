@@ -19,6 +19,6 @@ function InitRegistryEvent(hero)
             end
         end
     end)
-
 end
+
 

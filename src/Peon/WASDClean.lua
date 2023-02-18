@@ -46,13 +46,13 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 7 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 8 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == FourCC("Udre") then
+    elseif GetUnitTypeId(data.UnitHero) == AquaID  then
         -- Повелитель ужаса
-        data.AnimDurationWalk = 1 --длительность анимации движения, полный круг
-        data.IndexAnimationWalk = 5 -- индекс анимации движения
-        data.ResetDuration = 1.8 -- время сброса для анимации stand, длительность анимации stand
+        data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 16 -- индекс анимации движения
+        data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 10 -- анимация сплеш удара
-        data.IndexAnimationSpace = 5 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 14 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
         data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
@@ -91,7 +91,7 @@ function InitWASD(hero)
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
-           -- ForceUIKeyBJ(GetOwningPlayer(hero), "F")
+            -- ForceUIKeyBJ(GetOwningPlayer(hero), "F")
             ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
             ForceUIKeyBJ(GetOwningPlayer(hero), "X")
             ForceUIKeyBJ(GetOwningPlayer(hero), "C")
@@ -641,16 +641,6 @@ function CreateWASDActions()
                 --UnitAddItemById(data.UnitHero, FourCC("I000")) -- предмет виндволк
                 BlzSetUnitFacingEx(data.UnitHero, data.DirectionMove)
                 --print("разворот при рывке")
-                if data.Time2HealDash > 0 then
-                    HealUnit(data.UnitHero, data.Time2HealDash)
-                    local talon = GlobalTalons[data.pid]["Trall"][7]
-                    --StartFrameCD(talon.DS[talon.level], data.HealDashCDFH)
-                    data.HealDashCurrentCD = talon.DS[talon.level]
-                    TimerStart(CreateTimer(), data.HealDashCurrentCD, false, function()
-                        data.HealDashCurrentCD = 0
-                        DestroyTimer(GetExpiredTimer())
-                    end)
-                end
 
                 --------------------------------
                 if data.isSpined then
@@ -668,7 +658,7 @@ function CreateWASDActions()
                     --CreateAndForceBullet(data.UnitHero, data.DirectionMove, 5, "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl", x, y, 5, 350, 350)
                 end
 
-                if  GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
+                if GetUnitTypeId(data.UnitHero) == KazumaID or GetUnitTypeId(data.UnitHero) == DarknessID then
                     local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, data.DirectionMove)
                     local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero))
                     --print(PerepadZ)
@@ -693,9 +683,12 @@ function CreateWASDActions()
                 end
 
                 data.SpaceForce = true
-                local effModel = "Hive\\Windwalk\\Windwalk Necro Soul\\Windwalk Necro Soul"
+                local effModel = ""
                 if data.IframesOnDash then
                     effModel = "SystemGeneric\\InkMissile.mdx"
+                end
+                if data.UnitHero == HeroDarkness then
+                    effModel = "Valiant Charge Holy"
                 end
                 if data.IframesOnDashInvul then
                     -- неуязвимый рывок 2 уровень теневого
@@ -725,6 +718,10 @@ function CreateWASDActions()
                             --print("стоя на месте")
                             SetUnitTimeScale(data.UnitHero, 4)
                         end
+                        if data.UnitHero==HeroAqua then
+                            SetUnitTimeScale(data.UnitHero, 1)
+                            PartyHeal(data)
+                        end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
                     end
@@ -742,6 +739,7 @@ function CreateWASDActions()
         local data = HERO[pid]
         data.ReleaseSPACE = false
     end)
+
     -----------------------------------------------------------------OSKEY_Q
 
     local TrigPressQ = CreateTrigger()
@@ -813,7 +811,12 @@ function CreateWASDActions()
                             DestroyTimer(GetExpiredTimer())
                             --StartFrameCD(data.SpellQCDTime * balance, data.cdFrameHandleQ)
                             --SpellSlashQ(data)
-                            print("активация Q")
+                            --print("активация Q")
+                            if data.UnitHero == HeroKazuma then
+                                EndJump(data)
+                            elseif data.UnitHero == HeroDarkness then
+                                ReversePolarity(data)
+                            end
                             if data.DoubleClap then
                                 TimerStart(CreateTimer(), 0.35, false, function()
                                     --SpellSlashQ(data)
@@ -910,13 +913,13 @@ function PlayUnitAnimationFromChat()
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
-          SetUnitAnimationByIndex(data.UnitHero, s)
+        SetUnitAnimationByIndex(data.UnitHero, s)
         print(GetUnitName(data.UnitHero) .. " " .. s)
     end)
 end
 
 function ControlGameCam()
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-           -- CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
+        -- CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
     end)
 end

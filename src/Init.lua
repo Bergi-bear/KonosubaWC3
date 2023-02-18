@@ -32,6 +32,7 @@ do
 
             --PlayList()
             CreateEActions()
+            CreateRActions()
             CreateTabActions()
             PlayUnitAnimationFromChat()
             ControlGameCam()
@@ -44,7 +45,7 @@ do
             StartSpawnMachine()
 
             InitTalonBDForDarkNess()
-            CreateDialogTalon(HeroDarkness)
+            InitTalonBDForKazuma()
             print(">>>")
         end)
     end

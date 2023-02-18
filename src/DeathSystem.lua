@@ -31,11 +31,21 @@ function InitDeathEvent()
                     --AddExp(GetUnitData(killer), exp)
                     --EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
                     --print("создать сферу?")
-                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, 0)
+                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, GetRandomInt(0,360))
+                    CurrentCreepCount=CurrentCreepCount-1
                     UnitAddAbility(new,FourCC("Avul"))
                 end
             else
                 --print("нет героя")
+            end
+            if IsUnitType(killer,UNIT_TYPE_HERO) then
+                local data=GetUnitData(killer)
+                if killer==HeroDarkness then
+
+                    if data.HasBloodBlade then
+                        HealUnit(killer,data.HasBloodBlade)
+                    end
+                end
             end
 
 

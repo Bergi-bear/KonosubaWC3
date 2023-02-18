@@ -74,8 +74,9 @@ function UnitDamageArea(u, damage, x, y, range, flag)
                 UnitAddForceSimple(e, tempA, 20, 300, nil, u)
             end
             if flag == "push" then
-                local distance = GetUnitData(u).DashPerAttack
-                local tempA = GetUnitFacing(u)
+               -- print("push??")
+                local distance =300
+                local tempA = AngleBetweenUnits(e,u)-180
                 UnitAddForceSimple(e, tempA, 15, distance, nil, u)
             end
             if flag == "all" then

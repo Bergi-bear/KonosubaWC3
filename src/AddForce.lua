@@ -145,7 +145,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             end
 
             if currentdistance >= distance then
-                --закончил движение
+                --print("закончил движение")
                 --or (data.OnWater and data.OnTorrent==false)
                 --data.IsDisabled=false
                 --data.OnWater=false

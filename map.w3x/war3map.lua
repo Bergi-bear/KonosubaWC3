@@ -7,75 +7,82 @@ function InitGlobals()
 end
 
 function CreateUnitsForPlayer0()
-local p = Player(0)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 235.356, FourCC("e000"))
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 166.629, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2593.8, 5133.4, 312.900, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2502.4, 5144.2, 259.110, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2634.5, 4968.9, 36.514, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2514.0, 5056.4, 204.263, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2515.8, 4938.7, 91.992, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2612.8, 5103.9, 331.677, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2579.0, 5040.7, 12.420, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2448.9, 4986.7, 136.568, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2386.3, 5155.6, 166.629, FourCC("e000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2411.0, 5111.2, 136.568, FourCC("e000"))
 end
 
 function CreateUnitsForPlayer10()
-local p = Player(10)
-local u
-local unitID
-local t
-local life
-
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
-u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
+    local p = Player(10)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 886.3, 234.4, 29.444, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 850.5, 59.8, 199.188, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 871.1, -66.8, 286.818, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 942.6, -87.1, 226.732, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1033.1, -50.6, 258.154, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1079.8, 20.5, 330.204, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1061.3, 121.4, 100.143, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 1020.4, 182.0, 21.940, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 949.7, 51.9, 86.937, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 950.1, -14.7, 219.766, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 35.8, -796.0, 16.008, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nban"), 27.4, -883.9, 180.192, FourCC("nban"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hpea"), -946.1, -141.1, 223.513, FourCC("hpea"))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-CreateUnitsForPlayer0()
-CreateUnitsForPlayer10()
+    CreateUnitsForPlayer0()
+    CreateUnitsForPlayer10()
 end
 
 function CreateAllUnits()
-CreatePlayerBuildings()
-CreatePlayerUnits()
+    CreatePlayerBuildings()
+    CreatePlayerUnits()
 end
 
 function CreateRegions()
-local we
-
-gg_rct_R1 = Rect(-544.0, 1408.0, -160.0, 2624.0)
-gg_rct_Region_001 = Rect(-1728.0, 4832.0, -640.0, 6944.0)
+    local we
+    gg_rct_R1 = Rect(-544.0, 1408.0, -160.0, 2624.0)
+    gg_rct_Region_001 = Rect(-1728.0, 4832.0, -640.0, 6944.0)
 end
 
 function CreateCameras()
-gg_cam_Camera_001 = CreateCameraSetup()
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 90.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 3000.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
-CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
-CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
+    gg_cam_Camera_001 = CreateCameraSetup()
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ZOFFSET, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROTATION, 90.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ANGLE_OF_ATTACK, 304.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_TARGET_DISTANCE, 3000.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_ROLL, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FIELD_OF_VIEW, 70.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_FARZ, 5000.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_NEARZ, 16.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_PITCH, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_YAW, 0.0, 0.0)
+    CameraSetupSetField(gg_cam_Camera_001, CAMERA_FIELD_LOCAL_ROLL, 0.0, 0.0)
+    CameraSetupSetDestPosition(gg_cam_Camera_001, -2638.3, 2347.4, 0.0)
 end
 
 --CUSTOM_CODE
@@ -226,7 +233,7 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
             end
 
             if currentdistance >= distance then
-                --закончил движение
+                --print("закончил движение")
                 --or (data.OnWater and data.OnTorrent==false)
                 --data.IsDisabled=false
                 --data.OnWater=false
@@ -761,7 +768,7 @@ function OnPostDamage()
 
 
 
-    if GetUnitTypeId(target) == FourCC("n005")  and damage > 50 then
+    if GetUnitTypeId(target) == FourCC("n005") and damage > 50 then
         normal_sound("MP3\\RO\\Spore\\Hit", GetUnitXY(target))
         --print("писк грибочка")
     end
@@ -840,9 +847,45 @@ function OnPostDamage()
             end
         end
     else
-        --print("наш герой получил урон")
 
     end
+
+    if IsUnitType(target, UNIT_TYPE_HERO) then
+        -- print("наш герой получил урон")
+        local data = GetUnitData(target)
+
+        if ShieldHP[GetHandleId(target)] then
+            if ShieldHP[GetHandleId(target)].hp > 0 then
+                -- print("удар по щиту")
+                ShieldHP[GetHandleId(target)].hp = ShieldHP[GetHandleId(target)].hp - damage
+                BlzSetEventDamage(0) -- держать в самом низу
+                local eff = AddSpecialEffect("DefendCaster", GetUnitXY(target))
+                local AngleSource = AngleBetweenUnits(caster, target)
+                BlzSetSpecialEffectYaw(eff, math.rad(AngleSource - 180))
+                DestroyEffect(eff)
+                UnitAddForceSimple(caster, AngleSource - 180, 10, 50)
+                FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Удар в щит", GetOwningPlayer(target))
+            else
+                DestroyEffect(ShieldHP[GetHandleId(target)].eff)
+                ShieldHP[GetHandleId(target)].eff = nil
+                --print("щит сломан досрочно")
+            end
+        end
+
+        if target == HeroDarkness then
+            -- print("даркнесс")
+            if data.ReverseDamage then
+                --print("реверс урона?")
+                HealUnit(target, damage)
+                BlzSetEventDamage(0) -- держать в самом низу
+            end
+            if data.BrokenHeartReturnDamage then
+                UnitDamageArea(target, damage*data.BrokenHeartReturnDamage/100, GetUnitX(target), GetUnitY(target), 250)
+                DestroyEffect(AddSpecialEffectTarget("Effect/727_GreenRing", target,"origin"))
+            end
+        end
+    end
+
     if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
@@ -878,9 +921,9 @@ function AddDamage2Show(hero, damage)
         --	print("получил урон первый раз")
         ShowDamageTable[GetHandleId(hero)] = {
             damage = 0,
-            sec    = 0,
-            tag    = nil,
-            k      = 0
+            sec = 0,
+            tag = nil,
+            k = 0
         }
         local data = ShowDamageTable[GetHandleId(hero)]
         data.damage = damage
@@ -967,7 +1010,7 @@ function PointContentDestructable (x, y, range, iskill, damage, hero)
                                 end
                             else
                                 --print("даём золото за сундук")
-                                if GetDestructableTypeId(d) == FourCC("B008") or GetDestructableTypeId(d) == FourCC("B004")  and false then
+                                if GetDestructableTypeId(d) == FourCC("B008") or GetDestructableTypeId(d) == FourCC("B004") and false then
                                     UnitAddGold(hero, GetRandomInt(2, 5))
                                     DestroyEffect(AddSpecialEffect("SystemGeneric\\PileofGold.mdl", dx, dy))
                                 end
@@ -1078,11 +1121,21 @@ function InitDeathEvent()
                     --AddExp(GetUnitData(killer), exp)
                     --EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", GetUnitData(killer).UnitHero, u,"add gold")
                     --print("создать сферу?")
-                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, 0)
+                    local new = CreateUnit(Player(10), FourCC("e000"), xu, yu, GetRandomInt(0,360))
+                    CurrentCreepCount=CurrentCreepCount-1
                     UnitAddAbility(new,FourCC("Avul"))
                 end
             else
                 --print("нет героя")
+            end
+            if IsUnitType(killer,UNIT_TYPE_HERO) then
+                local data=GetUnitData(killer)
+                if killer==HeroDarkness then
+
+                    if data.HasBloodBlade then
+                        HealUnit(killer,data.HasBloodBlade)
+                    end
+                end
             end
 
 
@@ -1240,7 +1293,7 @@ function HealUnit(hero, amount, flag, eff)
                     if data.ShowHealSec <= 0 then
                         data.ShowHeal = true
                         DestroyTimer(GetExpiredTimer())
-                        if TotalHeal > 1 then
+                        if TotalHeal > 1 and not IsUnitHidden(hero) then
                             FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(data.ShowHealAmount), p)
                             data.StatHealGained=data.StatHealGained+data.ShowHealAmount
                         end
@@ -1295,6 +1348,7 @@ do
 
             --PlayList()
             CreateEActions()
+            CreateRActions()
             CreateTabActions()
             PlayUnitAnimationFromChat()
             ControlGameCam()
@@ -1307,7 +1361,7 @@ do
             StartSpawnMachine()
 
             InitTalonBDForDarkNess()
-            CreateDialogTalon(HeroDarkness)
+            InitTalonBDForKazuma()
             print(">>>")
         end)
     end
@@ -1757,7 +1811,7 @@ function InitMouseClickEvent()
             if UnitAlive(data.UnitHero) then
 
                 if not data.SpaceForce then
-                    if GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
+                    if GetUnitTypeId(data.UnitHero) == KazumaID or GetUnitTypeId(data.UnitHero) == DarknessID then
                         AttackMelee(data)
 
                     end
@@ -1780,12 +1834,15 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = true
             local id = GetPlayerId(GetTriggerPlayer())
-            if not GetUnitTypeId(data.UnitHero)==KazumaID then
+            if not GetUnitTypeId(data.UnitHero) == KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
                 data.StartWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.StartWaveCastY = BlzGetTriggerPlayerMouseY()
+            end
+            if data.UnitHero==HeroDarkness then
+                PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
             end
         end
     end)
@@ -1799,13 +1856,18 @@ function InitMouseClickEvent()
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.RMBIsPressed = false
             local id = GetPlayerId(GetTriggerPlayer())
-            if  GetUnitTypeId(data.UnitHero)~=KazumaID then
+            if GetUnitTypeId(data.UnitHero) ~= KazumaID then
                 GetPlayerMouseX[id] = BlzGetTriggerPlayerMouseX()
                 GetPlayerMouseY[id] = BlzGetTriggerPlayerMouseY()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                SpellCastByName(data, "wave")
+                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 50 then
+                    SpellCastByName(data, "wave")
+                    UnitAddMana(data.UnitHero,-50)
+                else
+                    print("недостаточно маны")
+                end
             end
 
 
@@ -2439,8 +2501,9 @@ function UnitDamageArea(u, damage, x, y, range, flag)
                 UnitAddForceSimple(e, tempA, 20, 300, nil, u)
             end
             if flag == "push" then
-                local distance = GetUnitData(u).DashPerAttack
-                local tempA = GetUnitFacing(u)
+               -- print("push??")
+                local distance =300
+                local tempA = AngleBetweenUnits(e,u)-180
                 UnitAddForceSimple(e, tempA, 15, distance, nil, u)
             end
             if flag == "all" then
@@ -3729,6 +3792,40 @@ end
 --- DateTime: 18.12.2021 22:22
 ---
 
+
+function CreateRActions()
+    -----------------------------------------------------------------OSKEY_R
+    local gg_trg_EventUpR = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpR, Player(i), OSKEY_R, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpR, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseR and UnitAlive(data.UnitHero) then
+            data.ReleaseR = true
+            --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
+
+            if data.UnitHero==HeroKazuma then
+                UltraGreed(data)
+            elseif data.UnitHero==HeroDarkness then
+                ReverseDamage(data)
+            end
+            --print("нажал R")
+        end
+    end)
+
+    local TrigDepressR = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressR, Player(i), OSKEY_R, 0, false)
+    end
+    TriggerAddAction(TrigDepressR, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseR = false
+    end)
+end
+
 function CreateEActions()
     -----------------------------------------------------------------OSKEY_E
     local gg_trg_EventUpE = CreateTrigger()
@@ -3742,7 +3839,11 @@ function CreateEActions()
             data.ReleaseE = true
             --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
 
-            CatchItem(data)
+            if data.UnitHero==HeroKazuma then
+                SpellSteal(data)
+            elseif data.UnitHero==HeroDarkness then
+                AddShield(data)
+            end
             --print("нажал Е")
         end
     end)
@@ -4220,9 +4321,9 @@ function CreateOSKEY_1Actions()
             data.ReleaseOSKEY_1 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_1",TalonInSlot[1])
+                --print("нажал OSKEY_1",TalonInSlot[1].name)
                 BlzFrameSetVisible(DialogMainWindow,false)
-                LearnTalonByName(TalonInSlot[1])
+                LearnTalonByName(TalonInSlot[1].name,TalonInSlot[1].talon)
             end
         end
     end)
@@ -4251,8 +4352,8 @@ function CreateOSKEY_2Actions()
             data.ReleaseOSKEY_2 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_2",TalonInSlot[2])
-                LearnTalonByName(TalonInSlot[2])
+                --print("нажал OSKEY_2",TalonInSlot[2].name)
+                LearnTalonByName(TalonInSlot[2].name,TalonInSlot[2].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end
@@ -4282,8 +4383,8 @@ function CreateOSKEY_3Actions()
             data.ReleaseOSKEY_3 = true
             if DialogTalonActive then
                 DialogTalonActive=false
-                print("нажал OSKEY_3",TalonInSlot[3])
-                LearnTalonByName(TalonInSlot[3])
+                --print("нажал OSKEY_3",TalonInSlot[3].name)
+                LearnTalonByName(TalonInSlot[3].name,TalonInSlot[2].talon)
                 BlzFrameSetVisible(DialogMainWindow,false)
             end
         end
@@ -4377,6 +4478,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
         elseif id == AquaID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,true)
@@ -4392,6 +4497,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
         elseif id == DarknessID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
@@ -4407,6 +4516,11 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+
         elseif id == MeguminID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
@@ -4422,6 +4536,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
         end
     else
         return
@@ -4588,6 +4706,55 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
+--- DateTime: 18.02.2023 12:16
+---
+function InitTalonBDForDarkNess()
+    DarknessTalon = {
+        [1] = {
+            name = "Кровавый меч",
+            icon = "DDSICO\\BloodAndBlade",
+            description = "Убийства врагов исцеляют на DS ",
+            level = 0,
+            DS = { 1, 2, 3 },
+            pos = 1,
+        },
+        [2] = {
+            name = "Маска льва",
+            icon = "DDSICO\\LionMask",
+            description = "При получении 300 урона выпускает волну силы наносящую DS урон",
+            level = 0,
+            DS = { 100, 200, 300 },
+            pos = 2,
+        },
+        [3] = {
+            name = "Разбитое сердце",
+            icon = "DDSICO\\BrokenHeart",
+            description = "Получение урона возвращается DS% урона всем врагам в малом радиусе 250",
+            level = 0,
+            DS = { 100, 200, 300 },
+            pos = 3,
+        },
+        [4] = {
+            name = "Натуральное питание",
+            icon = "DDSICO\\EcoEat",
+            description = "Увеличивает максимальное здоровье на DS",
+            level = 0,
+            DS = { 200, 350, 500 },
+            pos = 4,
+        },
+        [5] = {
+            name = "Фамильная реликвия",
+            icon = "DDSICO\\FamilyRelict",
+            description = "Наносит DS урона случайной цели",
+            level = 0,
+            DS = { 50, 100, 150 },
+            pos = 5,
+        },
+    }
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
 --- DateTime: 17.02.2023 22:14
 ---
 function InitRegistryEvent(hero)
@@ -4606,8 +4773,8 @@ function InitRegistryEvent(hero)
             end
         end
     end)
-
 end
+
 
 
 ---
@@ -4615,62 +4782,63 @@ end
 --- Created by User.
 --- DateTime: 18.02.2023 0:32
 ---
-function InitTalonBDForDarkNess()
-    CreateOSKEY_1Actions()
-    CreateOSKEY_2Actions()
-    CreateOSKEY_3Actions()
-    DarknessTalon = {
-        [1] = {
-            name = "Кровавый меч",
-            icon = "DDSICO\\BloodAndBlade",
-            description = "Убийства врагов исцеляют на DS ",
-            level = 0,
-            DS = { 1, 2, 3 },
-        },
-        [2] = {
-            name = "Маска льва",
-            icon = "DDSICO\\LionMask",
-            description = "При получении 300 урона выпускает волну силы наносящую DS урон",
-            level = 0,
-            DS = { 100, 200, 300 },
-        },
-        [3] = {
-            name = "Разбитое сердце",
-            icon = "DDSICO\\BrokenHeart",
-            description = "Получение урона возвращается DS% урона всем врагам в малом радиусе 250",
-            level = 0,
-            DS = { 100, 200, 300 },
-        }
-    }
-end
 
-DialogTalonActive=false
+
+DialogTalonActive = false
 function CreateDialogTalon(hero)
-    DialogTalonActive=true
-    if hero == HeroDarkness then
+    DialogTalonActive = true
 
-    end
     if not DialogMainWindow then
         DialogMainWindow = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
-        TalonInSlot={}
+        CreateOSKEY_1Actions()
+        CreateOSKEY_2Actions()
+        CreateOSKEY_3Actions()
+        TalonInSlot = {}
         --print("11111111111111")
     end
-    BlzFrameSetVisible(DialogMainWindow,true)
+    BlzFrameSetVisible(DialogMainWindow, true)
     local x, y = 0.2, 0.3
+    local tmpTable = TalonReadyForLearn(GetTalonBDFromHero(hero))
     for i = 1, 3 do
-        local name, icon, text = CreateInfoTalonSingle(DialogMainWindow, x + (i - 1) * 0.2, y, i)
-        SetTalonDescription(DarknessTalon,i, name, icon, text)
+        local name, icon, text, level = CreateInfoTalonSingle(DialogMainWindow, x + (i - 1) * 0.2, y, i)
+        SetTalonDescription(tmpTable, i, name, icon, text, level)
 
     end
-
-
 end
 
-function SetTalonDescription(BD, number, name, icon, text)
-    BlzFrameSetText(name, BD[number].name)
+function GetTalonBDFromHero(hero)
+    if hero == HeroDarkness then
+        return DarknessTalon
+    elseif hero == HeroKazuma then
+        return KazumaTalon
+    else
+        print("у этого героя ещё нет талантов")
+        return KazumaTalon
+    end
+end
+
+function TalonReadyForLearn(BD)
+    local temptable = {}
+    local SHBD = ShuffleTable(BD)
+
+    for i = 1, #SHBD do
+        if SHBD[i].level < 3 then
+            table.insert(temptable, SHBD[i])
+        end
+    end
+    return temptable
+end
+
+function SetTalonDescription(BD, number, name, icon, text, level)
+    BlzFrameSetText(name, BD[number].name) -- TODO проверка на пустые таланты
     BlzFrameSetTexture(icon, BD[number].icon, 0, true)
-    BlzFrameSetText(text, BD[number].description)
-    TalonInSlot[number]=BD[number].name
+    BlzFrameSetText(text, DSColorDescription(BD[number]))
+    BlzFrameSetText(level, ColorText2("[Уровень " .. (BD[number].level + 1) .. "]"))
+    TalonInSlot[number] = {
+        name = BD[number].name,
+        talon = BD[number]
+    }
+
 end
 
 function CreateInfoTalonSingle(BoxBarParent, x, y, i)
@@ -4685,8 +4853,12 @@ function CreateInfoTalonSingle(BoxBarParent, x, y, i)
     BlzFrameSetPoint(icon, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0, 0)
 
     local name = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
-    BlzFrameSetPoint(name, FRAMEPOINT_CENTER, rama, FRAMEPOINT_CENTER, 0.0, -0.02)
+    BlzFrameSetPoint(name, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0.0, -0.08)
     BlzFrameSetText(name, "Название")
+
+    local level = BlzCreateFrameByType("TEXT", "ButtonChargesText", rama, "", 0)
+    BlzFrameSetPoint(level, FRAMEPOINT_TOP, rama, FRAMEPOINT_TOP, 0.0, -0.1)
+    BlzFrameSetText(level, ColorText2("[Уровень]"))
 
     local tooltip = BlzCreateFrameByType("FRAME", "TestDialog", rama, "StandardFrameTemplate", 0)
     local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", tooltip, "", 0)
@@ -4701,26 +4873,145 @@ function CreateInfoTalonSingle(BoxBarParent, x, y, i)
     BlzFrameSetPoint(press, FRAMEPOINT_CENTER, rama, FRAMEPOINT_CENTER, 0.0, -0.05)
     BlzFrameSetText(press, "Нажмите " .. i)
     BlzFrameSetScale(press, 2)
-    return name, icon, text
+    return name, icon, text, level
+end
+
+function ShuffleTable(tbl)
+    for i = #tbl, 2, -1 do
+        local j = math.random(i)
+        tbl[i], tbl[j] = tbl[j], tbl[i]
+        --print(j)
+    end
+    return tbl
+end
+
+function DSColorDescription(talon)
+    if #talon.DS > 0 and talon["DS"][talon.level + 1] ~= nil then
+        local s = string.gsub(talon.description, "DS", ColorText2(talon["DS"][talon.level + 1]))
+        return s
+    elseif talon["DS"][talon.level + 1] == nil and #talon.DS > 0 then
+        local s = string.gsub(talon.description, "DS", ColorText2(talon["DS"][#talon.DS]))
+        return s
+    else
+        return talon.description
+    end
+end
+function ColorText2(s)
+    s = "|cffffcc00" .. s .. "|r"
+    return s
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 12:16
+---
+function InitTalonBDForKazuma()
+    KazumaTalon = {
+        [1] = {
+            name = "Крепкая хватка",
+            icon = "DDSICO\\StrongWeapon",
+            description = "Увеличивает силу атаки меча",
+            level = 0,
+            DS = { 20, 40, 80 },
+            pos = 1,
+        },
+        [2] = {
+            name = "Ледяной болт",
+            icon = "DDSICO\\ColdBolt",
+            description = "Автоматически наносит DS урона ледяным болтом",
+            level = 0,
+            DS = { 100, 200, 300 },
+            pos = 2,
+        },
+        [3] = {
+            name = "Удар акулы",
+            icon = "DDSICO\\SharkStrike",
+            description = "Раз в DS сек. появляется акула и полностью пожирает вражеского юнита",
+            level = 0,
+            DS = { 20, 15, 10 },
+            pos = 3,
+        },
+        [4] = {
+            name = "Рунный генератор",
+            icon = "DDSICO\\RuneGenerator",
+            description = "Из врагов начинают выпадать руны, восстанавливающие DS маны",
+            level = 0,
+            DS = { 10, 20, 30 },
+            pos = 4,
+        },
+        [5] = {
+            name = "Исцеляющий шаг",
+            icon = "DDSICO\\HealStep",
+            description = "Когда Казума двигается он немного исцеляется на DS здоровья, за каждые 1000 ед пути",
+            level = 0,
+            DS = { 50, 100, 150 },
+            pos = 5,
+        },
+    }
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 2:37
+---
+function LearnTalonByName(name,talon)
+    local data=HERO[0]
+    talon.level=talon.level+1
+    print("выбран талант",name,talon.name)
+    if name=="Кровавый меч" then
+        data.HasBloodBlade=talon.DS[talon.level]
+    elseif name=="Маска льва" then
+        data.LionMask=true
+    elseif name=="Разбитое сердце" then
+        data.BrokenHeartReturnDamage=talon.DS[talon.level]
+    elseif name=="Натуральное питание" then
+        AddMaxLife(HeroDarkness, talon.DS[talon.level])
+    elseif name=="Фамильная реликвия" then
+        UnitAddAbility(HeroDarkness,FourCC("A001"))
+        SetUnitAbilityLevel(HeroDarkness,FourCC("A001"),talon.DS[talon.level])
+    elseif name=="Крепкая хватка" then
+        data.AddMeleeDamage=talon.DS[talon.level]
+    elseif name=="Ледяной болт" then
+        UnitAddAbility(HeroKazuma,FourCC("A000"))
+        SetUnitAbilityLevel(HeroKazuma,FourCC("A000"),talon.DS[talon.level])
+    end
 end
 
 
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
---- DateTime: 18.02.2023 2:37
+--- DateTime: 18.02.2023 18:20
 ---
-function LearnTalonByName(name)
-    local data=HERO[0]
-    if name=="Кровавый меч" then
-        data.HasBloodBlade=true
-    elseif name=="Маска льва" then
-        data.LionMask=true
-    elseif name=="Разбитое сердце" then
-        data.BrokenHeart=true
+function PartyHeal(data)
+    if GetUnitState(data.UnitHero, UNIT_STATE_MANA)>30 then
+        UnitAddMana(data.UnitHero,-30)
+        local heroes={
+            HeroKazuma,
+            HeroAqua,
+            HeroDarkness,
+            HeroMegumin,
+        }
+        for i=1,#heroes do
+            HealUnit(heroes[i],20)
+            if not IsUnitHidden(heroes[i]) then
+                DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(heroes[i])))
+            end
+            local times=3
+            TimerStart(CreateTimer(), 1, true, function()
+                times=times-1
+                --print(GetUnitName(heroes[i]))
+                HealUnit(heroes[i],20)
+                if not IsUnitHidden(heroes[i]) then
+                    DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(heroes[i])))
+                end
+                if times<=0 then
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end)
+        end
     end
 end
-
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -4749,6 +5040,13 @@ function AttackMelee(data)
             --print(damage)
             BlzSetUnitFacingEx(data.UnitHero, angle) --был обычный поворот
             local maxAttack = data.MaxAttack
+
+            if data.UnitHero==HeroKazuma then
+                if data.AddMeleeDamage then
+                    damage=damage+data.AddMeleeDamage
+                end
+            end
+
 
             --local tmp=data.DamageInSeries
             --local lastAttack=#tmp
@@ -4919,6 +5217,157 @@ function AttackMelee(data)
                 data.AttackCount = 0
             end
         end
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 13:25
+---
+function EndJump(data)
+    local hero=data.UnitHero
+    local x,y=GetUnitXY(hero)
+    DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x,y))
+    local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 250)
+    for i=1,#t do
+        local angle=AngleBetweenUnits(hero,t[i])
+        UnitAddForceSimple(t[i], angle, 20, 300)
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 13:54
+---
+function SpellSteal(data)
+    if not data.StealOnCD then
+        local x,y=GetUnitXY(data.UnitHero)
+        x,y=MoveXY(x,y,300,GetUnitFacing(data.UnitHero))
+        SetUnitAnimationByIndex(data.UnitHero,10)
+        TimerStart(CreateTimer(), 1, false, function()
+
+            local _, _, _, units = UnitDamageArea(data.UnitHero, 1, x, y, 250)
+            for i = 1, #units do
+                EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", data.UnitHero, units[i],"add exp")
+                FlyTextTagShadowStrike(units[i],"Успешная Кража",GetOwningPlayer(data.UnitHero))
+            end
+        end)
+        data.StealOnCD=true
+        TimerStart(CreateTimer(), 5, false, function()
+            data.StealOnCD=false
+        end)
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 14:17
+---
+function UltraGreed(data)
+    if not data.UltraGreedOnCD then
+        local find,_,units = FindUnitOfType(FourCC("e000"))
+        if find then
+            FlyTextTagShadowStrike(data.UnitHero,"Ультра жадность",GetOwningPlayer(data.UnitHero))
+            data.UltraGreedOnCD=true
+
+            for i=1,#units do
+                EffectFromUnit2Unit(nil,"Firebrand Shot Yellow", data.UnitHero, units[i],"add exp")
+                KillUnit(units[i])
+            end
+            TimerStart(CreateTimer(), 10, false, function()
+                data.UltraGreedOnCD=false
+            end)
+        end
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 16:4820
+---
+ShieldHP={}
+function AddShield(data)
+    local heroes={
+        HeroKazuma,
+        HeroAqua,
+        HeroDarkness,
+        HeroMegumin,
+    }
+    if not data.ShieldOnCD then
+        data.ShieldOnCD = true
+        for i=1,4 do
+            ShieldHP[GetHandleId(heroes[i])]={}
+            ShieldHP[GetHandleId(heroes[i])].hp=200
+            local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
+            ShieldHP[GetHandleId(heroes[i])].eff=eff
+            TimerStart(CreateTimer(), 10, false, function()
+                DestroyEffect(eff)
+                ShieldHP[GetHandleId(heroes[i])].hp=0
+            end)
+        end
+        TimerStart(CreateTimer(), 20, false, function()
+            data.ShieldOnCD = false
+        end)
+
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 15:47
+---
+function PushHandWave(data, xEnd, yEnd)
+    if not data.PushHandWaveOnCD then
+        data.PushHandWaveOnCD = true
+        local hero = data.UnitHero
+        local angle = -180 + AngleBetweenXY(xEnd, yEnd, GetUnitXY(hero)) / bj_DEGTORAD
+        CreateAndForceBullet(hero, angle, 30, "Valiant Charge Holy", nil, nil, 100, 500)
+        TimerStart(CreateTimer(), 3, false, function()
+            data.PushHandWaveOnCD = false
+        end)
+    end
+
+end
+
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 16:21
+---
+function ReverseDamage(data)
+    --Effect/PsychicTarget.mdl
+    if not data.ReverseDamageOnCD then
+        data.ReverseDamageOnCD = true
+        data.ReverseDamage=true
+        local eff = AddSpecialEffectTarget("Effect\\PsychicTarget.mdl", data.UnitHero, "chest")
+
+        TimerStart(CreateTimer(), 5, false, function()
+            DestroyEffect(eff)
+            data.ReverseDamage=false
+        end)
+        TimerStart(CreateTimer(), 20, false, function()
+            data.ReverseDamageOnCD = false
+        end)
+
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 15:34
+---
+function ReversePolarity(data)
+    local hero=data.UnitHero
+    local x,y=GetUnitXY(hero)
+    DestroyEffect(AddSpecialEffect("Effect\\Concecration", x,y))
+
+    local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 300)
+    for i=1,#t do
+        local angle=AngleBetweenUnits(t[i],hero)
+        local dist=DistanceBetweenXY(GetUnitX(hero),GetUnitY(hero),GetUnitXY(t[i]))
+        UnitAddForceSimple(t[i], angle, 20, dist)
+        IssueTargetOrder(t[i],"attack",hero)
     end
 end
 ---
@@ -5371,7 +5820,7 @@ function CreateHPBar(hero,x,y)
     local textCurrent = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
     BlzFrameSetPoint(textCurrent, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.002, 0)
     local textMax = BlzCreateFrameByType("TEXT", "ButtonChargesText", BoxBarParent, "", 0)
-    BlzFrameSetPoint(textMax, FRAMEPOINT_RIGHT, chargesBox, FRAMEPOINT_RIGHT, -0.002, 0)
+    BlzFrameSetPoint(textMax, FRAMEPOINT_LEFT, chargesBox, FRAMEPOINT_LEFT, 0.06, 0)
     BlzFrameSetParent(chargesBox, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textCurrent, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     BlzFrameSetParent(textMax, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -5476,6 +5925,7 @@ function CreateEXPBar(hero, x, y)
             SetHeroLevel(hero,GetHeroLevel(hero)+1,true)
             SuspendHeroXP(hero, true)
             SetUnitUserData(hero,1)
+            CreateDialogTalon(hero)
             hp=0
         end
         if not UnitAlive(hero) then
@@ -5639,13 +6089,13 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 7 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 8 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == FourCC("Udre") then
+    elseif GetUnitTypeId(data.UnitHero) == AquaID  then
         -- Повелитель ужаса
-        data.AnimDurationWalk = 1 --длительность анимации движения, полный круг
-        data.IndexAnimationWalk = 5 -- индекс анимации движения
-        data.ResetDuration = 1.8 -- время сброса для анимации stand, длительность анимации stand
+        data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 16 -- индекс анимации движения
+        data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 10 -- анимация сплеш удара
-        data.IndexAnimationSpace = 5 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationSpace = 14 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
         data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
@@ -5684,7 +6134,7 @@ function InitWASD(hero)
             --ForceUIKeyBJ(GetOwningPlayer(hero), "A")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "S")
             --ForceUIKeyBJ(GetOwningPlayer(hero), "D")
-           -- ForceUIKeyBJ(GetOwningPlayer(hero), "F")
+            -- ForceUIKeyBJ(GetOwningPlayer(hero), "F")
             ForceUIKeyBJ(GetOwningPlayer(hero), "Z")
             ForceUIKeyBJ(GetOwningPlayer(hero), "X")
             ForceUIKeyBJ(GetOwningPlayer(hero), "C")
@@ -6234,16 +6684,6 @@ function CreateWASDActions()
                 --UnitAddItemById(data.UnitHero, FourCC("I000")) -- предмет виндволк
                 BlzSetUnitFacingEx(data.UnitHero, data.DirectionMove)
                 --print("разворот при рывке")
-                if data.Time2HealDash > 0 then
-                    HealUnit(data.UnitHero, data.Time2HealDash)
-                    local talon = GlobalTalons[data.pid]["Trall"][7]
-                    --StartFrameCD(talon.DS[talon.level], data.HealDashCDFH)
-                    data.HealDashCurrentCD = talon.DS[talon.level]
-                    TimerStart(CreateTimer(), data.HealDashCurrentCD, false, function()
-                        data.HealDashCurrentCD = 0
-                        DestroyTimer(GetExpiredTimer())
-                    end)
-                end
 
                 --------------------------------
                 if data.isSpined then
@@ -6261,7 +6701,7 @@ function CreateWASDActions()
                     --CreateAndForceBullet(data.UnitHero, data.DirectionMove, 5, "Abilities\\Weapons\\SentinelMissile\\SentinelMissile.mdl", x, y, 5, 350, 350)
                 end
 
-                if  GetUnitTypeId(data.UnitHero)==KazumaID or GetUnitTypeId(data.UnitHero)==DarknessID then
+                if GetUnitTypeId(data.UnitHero) == KazumaID or GetUnitTypeId(data.UnitHero) == DarknessID then
                     local nx, ny = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), dist, data.DirectionMove)
                     local PerepadZ = GetTerrainZ(MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 120, data.DirectionMove)) - GetTerrainZ(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero))
                     --print(PerepadZ)
@@ -6286,9 +6726,12 @@ function CreateWASDActions()
                 end
 
                 data.SpaceForce = true
-                local effModel = "Hive\\Windwalk\\Windwalk Necro Soul\\Windwalk Necro Soul"
+                local effModel = ""
                 if data.IframesOnDash then
                     effModel = "SystemGeneric\\InkMissile.mdx"
+                end
+                if data.UnitHero == HeroDarkness then
+                    effModel = "Valiant Charge Holy"
                 end
                 if data.IframesOnDashInvul then
                     -- неуязвимый рывок 2 уровень теневого
@@ -6318,6 +6761,10 @@ function CreateWASDActions()
                             --print("стоя на месте")
                             SetUnitTimeScale(data.UnitHero, 4)
                         end
+                        if data.UnitHero==HeroAqua then
+                            SetUnitTimeScale(data.UnitHero, 1)
+                            PartyHeal(data)
+                        end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
                     end
@@ -6335,6 +6782,7 @@ function CreateWASDActions()
         local data = HERO[pid]
         data.ReleaseSPACE = false
     end)
+
     -----------------------------------------------------------------OSKEY_Q
 
     local TrigPressQ = CreateTrigger()
@@ -6406,7 +6854,12 @@ function CreateWASDActions()
                             DestroyTimer(GetExpiredTimer())
                             --StartFrameCD(data.SpellQCDTime * balance, data.cdFrameHandleQ)
                             --SpellSlashQ(data)
-                            print("активация Q")
+                            --print("активация Q")
+                            if data.UnitHero == HeroKazuma then
+                                EndJump(data)
+                            elseif data.UnitHero == HeroDarkness then
+                                ReversePolarity(data)
+                            end
                             if data.DoubleClap then
                                 TimerStart(CreateTimer(), 0.35, false, function()
                                     --SpellSlashQ(data)
@@ -6503,14 +6956,14 @@ function PlayUnitAnimationFromChat()
             --CreateForUnitWayToPoint(mainHero,CQX,CQY)
             return
         end
-          SetUnitAnimationByIndex(data.UnitHero, s)
+        SetUnitAnimationByIndex(data.UnitHero, s)
         print(GetUnitName(data.UnitHero) .. " " .. s)
     end)
 end
 
 function ControlGameCam()
     TimerStart(CreateTimer(), TIMER_PERIOD64, true, function()
-           -- CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
+        -- CameraSetupApplyForPlayer(false, gg_cam_Camera_001, Player(0), 1.00)
     end)
 end
 ---
@@ -6978,6 +7431,10 @@ function CreateAndForceBullet(hero, angle, speed, effectmodel, xs, ys, damage, m
                 --print("хексуем")
             end
 
+            if effectmodel== "Valiant Charge Holy" then
+                local xd, yd = GetUnitXY(DamagingUnit)
+                UnitDamageArea(heroCurrent, 0, xd, yd, 100, "push")
+            end
             if effectmodel == "Abilities\\Weapons\\BallistaMissile\\BallistaMissile.mdl" then
                 -- Момент где стрела попадает во врага
                 local data = GetUnitData(heroCurrent)
@@ -7779,14 +8236,38 @@ function InitEnterPoints()
 end
 
 CurrentWave=1
+MaxCreep=40
+CurrentCreepCount=0
 function StartSpawnMachine()
     local t = {
         FourCC("n005"),
+        FourCC("n006"),
+        FourCC("n007"),
+        FourCC("n000"),
+        FourCC("n001"),
+        FourCC("n002"),
+        FourCC("n003"),
+        FourCC("n004"),
     }
-    TimerStart(CreateTimer(), 2, true, function()
-        local x,y=GetRandomSpawnXY()
-        local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
-        IssueTargetOrder(new,"attack",GetRandomEnemy())
+    local period=1.5
+    local timeNextWave=30
+    TimerStart(CreateTimer(), period, true, function()
+        if CurrentCreepCount<=MaxCreep then
+            local x,y=GetRandomSpawnXY()
+            local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
+            IssueTargetOrder(new,"attack",GetRandomEnemy())
+            CurrentCreepCount=CurrentCreepCount+1
+            timeNextWave=timeNextWave-period
+            if timeNextWave<=0 then
+                if CurrentWave<#t then
+                    CurrentWave=CurrentWave+1
+                    timeNextWave=30
+                end
+
+            end
+        else
+            --print("слишком много крипов")
+        end
     end)
 end
 function GetRandomEnemy()
@@ -7794,74 +8275,74 @@ function GetRandomEnemy()
 end
 --CUSTOM_CODE
 function Trig_Stage1_Conditions()
-if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
-return false
-end
-return true
+    if (not (IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true)) then
+        return false
+    end
+    return true
 end
 
 function Trig_Stage1_Actions()
-    BlockZone(gg_rct_R1)
+        BlockZone(gg_rct_R1)
 end
 
 function InitTrig_Stage1()
-gg_trg_Stage1 = CreateTrigger()
-TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
-TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
-TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
+    gg_trg_Stage1 = CreateTrigger()
+    TriggerRegisterEnterRectSimple(gg_trg_Stage1, gg_rct_R1)
+    TriggerAddCondition(gg_trg_Stage1, Condition(Trig_Stage1_Conditions))
+    TriggerAddAction(gg_trg_Stage1, Trig_Stage1_Actions)
 end
 
 function Trig_Bound1_Actions()
-SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
+    SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
 end
 
 function InitTrig_Bound1()
-gg_trg_Bound1 = CreateTrigger()
-TriggerRegisterTimerEventSingle(gg_trg_Bound1, 0.50)
-TriggerAddAction(gg_trg_Bound1, Trig_Bound1_Actions)
+    gg_trg_Bound1 = CreateTrigger()
+    TriggerRegisterTimerEventSingle(gg_trg_Bound1, 0.50)
+    TriggerAddAction(gg_trg_Bound1, Trig_Bound1_Actions)
 end
 
 function InitCustomTriggers()
-InitTrig_Stage1()
-InitTrig_Bound1()
+    InitTrig_Stage1()
+    InitTrig_Bound1()
 end
 
 function InitCustomPlayerSlots()
-SetPlayerStartLocation(Player(0), 0)
-SetPlayerColor(Player(0), ConvertPlayerColor(0))
-SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
-SetPlayerRaceSelectable(Player(0), true)
-SetPlayerController(Player(0), MAP_CONTROL_USER)
+    SetPlayerStartLocation(Player(0), 0)
+    SetPlayerColor(Player(0), ConvertPlayerColor(0))
+    SetPlayerRacePreference(Player(0), RACE_PREF_HUMAN)
+    SetPlayerRaceSelectable(Player(0), true)
+    SetPlayerController(Player(0), MAP_CONTROL_USER)
 end
 
 function InitCustomTeams()
-SetPlayerTeam(Player(0), 0)
+    SetPlayerTeam(Player(0), 0)
 end
 
 function main()
-SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
-SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-NewSoundEnvironment("Default")
-SetAmbientDaySound("CityScapeDay")
-SetAmbientNightSound("CityScapeNight")
-SetMapMusic("Music", true, 0)
-CreateRegions()
-CreateCameras()
-CreateAllUnits()
-InitBlizzard()
-InitGlobals()
-InitCustomTriggers()
+    SetCameraBounds(-3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -3328.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 11264.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 11520.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -3584.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
+    SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
+    NewSoundEnvironment("Default")
+    SetAmbientDaySound("CityScapeDay")
+    SetAmbientNightSound("CityScapeNight")
+    SetMapMusic("Music", true, 0)
+    CreateRegions()
+    CreateCameras()
+    CreateAllUnits()
+    InitBlizzard()
+    InitGlobals()
+    InitCustomTriggers()
 end
 
 function config()
-SetMapName("TRIGSTR_001")
-SetMapDescription("TRIGSTR_003")
-SetPlayers(1)
-SetTeams(1)
-SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
-DefineStartLocation(0, -1216.0, 5952.0)
-InitCustomPlayerSlots()
-SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
-InitGenericPlayerSlots()
+    SetMapName("TRIGSTR_001")
+    SetMapDescription("TRIGSTR_003")
+    SetPlayers(1)
+    SetTeams(1)
+    SetGamePlacement(MAP_PLACEMENT_USE_MAP_SETTINGS)
+    DefineStartLocation(0, -1216.0, 5952.0)
+    InitCustomPlayerSlots()
+    SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
+    InitGenericPlayerSlots()
 end
 

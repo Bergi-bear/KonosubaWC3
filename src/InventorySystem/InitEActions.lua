@@ -4,6 +4,40 @@
 --- DateTime: 18.12.2021 22:22
 ---
 
+
+function CreateRActions()
+    -----------------------------------------------------------------OSKEY_R
+    local gg_trg_EventUpR = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(gg_trg_EventUpR, Player(i), OSKEY_R, 0, true)
+    end
+    TriggerAddAction(gg_trg_EventUpR, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        if not data.ReleaseR and UnitAlive(data.UnitHero) then
+            data.ReleaseR = true
+            --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
+
+            if data.UnitHero==HeroKazuma then
+                UltraGreed(data)
+            elseif data.UnitHero==HeroDarkness then
+                ReverseDamage(data)
+            end
+            --print("нажал R")
+        end
+    end)
+
+    local TrigDepressR = CreateTrigger()
+    for i = 0, bj_MAX_PLAYER_SLOTS - 1 do
+        BlzTriggerRegisterPlayerKeyEvent(TrigDepressR, Player(i), OSKEY_R, 0, false)
+    end
+    TriggerAddAction(TrigDepressR, function()
+        local pid = GetPlayerId(GetTriggerPlayer())
+        local data = HERO[pid]
+        data.ReleaseR = false
+    end)
+end
+
 function CreateEActions()
     -----------------------------------------------------------------OSKEY_E
     local gg_trg_EventUpE = CreateTrigger()
@@ -17,7 +51,11 @@ function CreateEActions()
             data.ReleaseE = true
             --StartEatingApple(data.UnitHero) -- УДАЛИТЬ!!
 
-            CatchItem(data)
+            if data.UnitHero==HeroKazuma then
+                SpellSteal(data)
+            elseif data.UnitHero==HeroDarkness then
+                AddShield(data)
+            end
             --print("нажал Е")
         end
     end)

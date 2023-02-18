@@ -76,6 +76,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
         elseif id == AquaID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,true)
@@ -91,6 +95,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
         elseif id == DarknessID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
@@ -106,6 +114,11 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroMegumin, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+
         elseif id == MeguminID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
@@ -121,6 +134,10 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
+
+            SetUnitPositionSmooth(HeroKazuma,5000,5000)
+            SetUnitPositionSmooth(HeroAqua,5000,5000)
+            SetUnitPositionSmooth(HeroDarkness,5000,5000)
         end
     else
         return

@@ -23,14 +23,38 @@ function InitEnterPoints()
 end
 
 CurrentWave=1
+MaxCreep=40
+CurrentCreepCount=0
 function StartSpawnMachine()
     local t = {
         FourCC("n005"),
+        FourCC("n006"),
+        FourCC("n007"),
+        FourCC("n000"),
+        FourCC("n001"),
+        FourCC("n002"),
+        FourCC("n003"),
+        FourCC("n004"),
     }
-    TimerStart(CreateTimer(), 2, true, function()
-        local x,y=GetRandomSpawnXY()
-        local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
-        IssueTargetOrder(new,"attack",GetRandomEnemy())
+    local period=1.5
+    local timeNextWave=30
+    TimerStart(CreateTimer(), period, true, function()
+        if CurrentCreepCount<=MaxCreep then
+            local x,y=GetRandomSpawnXY()
+            local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
+            IssueTargetOrder(new,"attack",GetRandomEnemy())
+            CurrentCreepCount=CurrentCreepCount+1
+            timeNextWave=timeNextWave-period
+            if timeNextWave<=0 then
+                if CurrentWave<#t then
+                    CurrentWave=CurrentWave+1
+                    timeNextWave=30
+                end
+
+            end
+        else
+            --print("слишком много крипов")
+        end
     end)
 end
 function GetRandomEnemy()
