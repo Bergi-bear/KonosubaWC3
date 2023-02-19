@@ -22,6 +22,8 @@ function CreateRActions()
                 UltraGreed(data)
             elseif data.UnitHero==HeroDarkness then
                 ReverseDamage(data)
+            elseif data.UnitHero==HeroAqua then
+                AquaResRandomHero(data)
             end
             --print("нажал R")
         end

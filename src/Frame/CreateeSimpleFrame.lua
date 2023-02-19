@@ -74,3 +74,8 @@ function ColorText2(s)
     s = "|cffffcc00" .. s .. "|r"
     return s
 end
+
+function ColorText2Black(s)
+    s = "|cff000000" .. s .. "|r"
+    return s
+end

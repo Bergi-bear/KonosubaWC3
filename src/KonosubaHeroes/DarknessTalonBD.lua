@@ -10,7 +10,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BloodAndBlade",
             description = "Убийства врагов исцеляют на DS ",
             level = 0,
-            DS = { 1, 2, 3 },
+            DS = { 1, 2, 3, 4, 5 },
             pos = 1,
         },
         [2] = {
@@ -18,7 +18,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\LionMask",
             description = "При получении 300 урона выпускает волну силы наносящую DS урон",
             level = 0,
-            DS = { 100, 200, 300 },
+            DS = { 100, 200, 300,400 },
             pos = 2,
         },
         [3] = {
@@ -26,7 +26,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BrokenHeart",
             description = "Получение урона возвращается DS%% урона всем врагам в малом радиусе 250",
             level = 0,
-            DS = { 100, 200, 300 },
+            DS = { 100, 200, 300, 400, 500 },
             pos = 3,
         },
         [4] = {
@@ -34,7 +34,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\EcoEat",
             description = "Увеличивает максимальное здоровье на DS",
             level = 0,
-            DS = { 200, 350, 500 },
+            DS = { 200, 350, 500, 500,500 },
             pos = 4,
         },
         [5] = {
@@ -44,6 +44,20 @@ function InitTalonBDForDarkNess()
             level = 0,
             DS = { 50, 100, 150 },
             pos = 5,
+        },
+        [6] = {
+            name = "Сердечные переживания",
+            icon = "DDSICO\\HalfHP",
+            description = "Пока герой в активном слоте, исцеляет сопартийцев на DS в секунду, но не больше чем 50%% ХП",
+            level = 0,
+            DS = { 10, 20, 30 },
+        },
+        [7] = {
+            name = "Прочнее щит",
+            icon = "DDSICO\\AddHPShield",
+            description = "Щит теперь способен поглотить DS урона ",
+            level = 0,
+            DS = { 300, 400, 500, 600, 700 },
         },
     }
 end

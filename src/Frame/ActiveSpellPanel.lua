@@ -7,6 +7,17 @@ function InitActiveSpellPanel(data)
     CreateKazumaSpellPanel(data)
     CreateAquaSpellPanel(data)
     CreateAquaSpellDarkness(data)
+    CreateMeguminSpell(data)
+end
+
+
+function CreateMeguminSpell(data)
+    data.ContainerSpellMegumin = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    local x,y=0.8,0.08
+    local name="Megumin"
+    data.MegSpace=CreateAbilityButton(data, data.ContainerSpellMegumin, x, y,name,"Space")
+    --BlzFrameSetVisible(data.ContainerSpellKazuma,false)
+    BlzFrameSetVisible(data.ContainerSpellMegumin,false)
 end
 
 function CreateAquaSpellDarkness(data)
@@ -14,12 +25,12 @@ function CreateAquaSpellDarkness(data)
     local x,y=0.78,0.06
     local name="Darkness"
     CreateAbilityButton(data, data.ContainerSpellDarkness, x, y,name,"Space")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext, y+GNext/3,name,"Rmb")
+    data.DarkRMB=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext, y+GNext/3,name,"Rmb")
     CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"Q")
+    data.DarkQ=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*1, y+(GNext/3)*1,name,"R")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"E")
+    data.DarkR=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*1, y+(GNext/3)*1,name,"R")
+    data.DarkE=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"E")
     --CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"F")
     BlzFrameSetVisible(data.ContainerSpellDarkness,false)
 end
@@ -33,7 +44,7 @@ function CreateAquaSpellPanel(data)
     CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
     CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
-    CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*1, y+(GNext/3)*1,name,"R")
+    data.AquaR=CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*1, y+(GNext/3)*1,name,"R")
     --CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*2, y+(GNext/3)*2,name,"E")
     BlzFrameSetVisible(data.ContainerSpellAqua,false)
 end
@@ -45,7 +56,7 @@ function CreateKazumaSpellPanel(data)
     CreateAbilityButton(data, data.ContainerSpellKazuma, x, y,name,"Space")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext, y+GNext/3,name,"Rmb")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
-    CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*3, y+(GNext/3)*3,name,"Q")
+    data.KazumaQ=CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*1, y+(GNext/3)*1,name,"E")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*2, y+(GNext/3)*2,name,"R")
@@ -63,6 +74,9 @@ function CreateAbilityButton(data, container, x, y,name,key)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
     BlzFrameSetTexture(buttonIconFrame, "Textures\\"..name.."\\"..key, 0, true)
     BlzFrameSetSize(SelfFrame, GNext, GNext)
+    if name=="Megumin" then
+        BlzFrameSetSize(SelfFrame, GNext*3, GNext*3)
+    end
 
     --BlzFrameSetPoint(SelfFrame, FRAMEPOINT_CENTER, container, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, x, y)
@@ -92,5 +106,5 @@ function CreateAbilityButton(data, container, x, y,name,key)
     BlzFrameSetText(text, key)
     BlzFrameSetScale(text, 1)
     BlzFrameSetPoint(text, FRAMEPOINT_TOP, SelfFrame, FRAMEPOINT_TOP, 0.00, 0.01)
-
+    return SelfFrame
 end

@@ -35,6 +35,58 @@ function StartSpawnMachine()
         FourCC("n002"),
         FourCC("n003"),
         FourCC("n004"),
+        FourCC("nbdm"),
+        FourCC("nbda"),
+        FourCC("nbdw"),
+        FourCC("nbds"),
+        FourCC("nbdo"),
+
+        FourCC("ncer"),
+        FourCC("ncea"),
+        FourCC("ncen"),
+        FourCC("ncim"),
+        FourCC("ncks"),
+        FourCC("ncnk"),
+
+        FourCC("nfor"),
+        FourCC("nfot"),
+        FourCC("nfod"),
+        FourCC("ners"),
+        FourCC("nerd"),
+        FourCC("nerw"),
+
+        FourCC("ntrv"),
+        FourCC("nrvf"),
+        FourCC("nrvs"),
+        FourCC("nsrv"),
+        FourCC("nrvl"),
+        FourCC("ndrv"),
+        FourCC("nrvi"),
+        FourCC("nrvd"),
+
+        FourCC("nogr"),
+        FourCC("nogm"),
+        FourCC("nomg"),
+        FourCC("nowb"),
+        FourCC("nowe"),
+        FourCC("nowk"),
+        FourCC("nplb"),
+        FourCC("nplg"),
+
+        FourCC("nrzs"),
+        FourCC("nrzt"),
+        FourCC("nrzb"),
+        FourCC("nqbh"),
+        FourCC("nrzm"),
+        FourCC("nrzg"),
+
+        FourCC("nslh"),
+        FourCC("nslr"),
+        FourCC("nslv"),
+        FourCC("nsll"),
+
+
+
     }
     local period=1.5
     local timeNextWave=30
@@ -42,7 +94,12 @@ function StartSpawnMachine()
         if CurrentCreepCount<=MaxCreep then
             local x,y=GetRandomSpawnXY()
             local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
+            AddMaxLife(new, 50*CurrentWave)
+            SetUnitAcquireRange(new,5000)
+            BlzSetUnitRealField( new, UNIT_RF_SIGHT_RADIUS, 5000 )
+            BlzSetUnitBaseDamage(new,BlzGetUnitBaseDamage(new,0)+CurrentWave,0)
             IssueTargetOrder(new,"attack",GetRandomEnemy())
+
             CurrentCreepCount=CurrentCreepCount+1
             timeNextWave=timeNextWave-period
             if timeNextWave<=0 then

@@ -13,18 +13,24 @@ function CreateKonosubaHeroes()
     local x, y = GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0))
 
     HeroKazuma = CreateUnit(Player(0), KazumaID, x, y, 0)
+
     HeroAqua = CreateUnit(Player(0), AquaID, x, y, 0)
+
     HeroDarkness = CreateUnit(Player(0), DarknessID, x, y, 0)
+
     HeroMegumin = CreateUnit(Player(0), MeguminID, x, y, 0)
+
 
     InitActiveSpellPanel(data)
     --скрываем изначально
-    BlzPauseUnitEx(HeroAqua, true)
+    --BlzPauseUnitEx(HeroAqua, true)
     ShowUnit(HeroAqua, false)
-    BlzPauseUnitEx(HeroDarkness, true)
+    --BlzPauseUnitEx(HeroDarkness, true)
     ShowUnit(HeroDarkness, false)
-    BlzPauseUnitEx(HeroMegumin, true)
+    --BlzPauseUnitEx(HeroMegumin, true)
     ShowUnit(HeroMegumin, false)
+
+    StunUnit(HeroKazuma,0.1)
     StunUnit(HeroAqua,0.1)
     StunUnit(HeroDarkness,0.1)
     StunUnit(HeroMegumin,0.1)
@@ -43,6 +49,7 @@ function CreateKonosubaHeroes()
     SelectOnceHero(data, KazumaID)
 
     InitWASD(data.UnitHero)
+
 
     local xh, yh = -0.07, 0.596
     local step = 0.13
@@ -65,13 +72,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,true)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroKazuma
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroDarkness, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
@@ -79,18 +87,19 @@ function SelectOnceHero(data, id)
 
             SetUnitPositionSmooth(HeroAqua,5000,5000)
             SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
         elseif id == AquaID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,true)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroAqua
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroDarkness, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroDarkness, false)
@@ -103,13 +112,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,true)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroDarkness
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
@@ -123,13 +133,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,true)
             data.UnitHero = HeroMegumin
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
@@ -147,6 +158,9 @@ function SelectOnceHero(data, id)
     BlzSetUnitFacingEx(data.UnitHero, angle)
     SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
     SetUnitTimeScale(data.UnitHero,1)
+    if x>=4500 then
+        print("Игра сломалась?")
+    end
     InitAnimations(nil, data)
     if data.IsMoving then
         --print("walk")
@@ -165,7 +179,7 @@ function CreateHudForHero(hero, x, y)
     CreateEXPBar(hero, x, y- GNext/2)
     InitRegistryEvent(hero)
 end
-
+CrossFH={}
 function CreateHeroPortrait(hero, x, y)
     local ico = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetParent(ico, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -185,6 +199,14 @@ function CreateHeroPortrait(hero, x, y)
     BlzFrameSetTexture(ico, texture, 0, true)
     BlzFrameSetSize(ico, GNext, GNext)
     BlzFrameSetAbsPoint(ico, FRAMEPOINT_LEFT, x, 0.6 - GNext / 2)
+
+    local cross = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', ico, '', 0)
+    BlzFrameSetTexture(cross, "crossmark", 0, true)
+    BlzFrameSetSize(cross, GNext, GNext)
+    BlzFrameSetAllPoints(cross,ico)
+    CrossFH[GetHandleId(hero)]=cross
+    BlzFrameSetVisible(CrossFH[GetHandleId(hero)],false)
+    --crossmark
 end
 
 function CreateSelectActions()
@@ -198,8 +220,12 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF1 then
             data.ReleaseF1 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroKazuma then
-                SelectOnceHero(data, KazumaID)
+            if data.UnitHero ~= HeroKazuma then
+                if UnitAlive(HeroKazuma) then
+                    SelectOnceHero(data, KazumaID)
+                else
+                    print("герой мёртв")
+                end
                 -- print("F1")
             else
                 -- print("повторый выбор")
@@ -226,8 +252,12 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF2 then
             data.ReleaseF2 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroAqua then
-                SelectOnceHero(data, AquaID)
+            if data.UnitHero ~= HeroAqua then
+                if UnitAlive(HeroAqua) then
+                    SelectOnceHero(data, AquaID)
+                else
+                    print("аква мертва")
+                end
                 --print("F2")
             else
 
@@ -254,8 +284,10 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF3 then
             data.ReleaseF3 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroDarkness then
-                SelectOnceHero(data, DarknessID)
+            if data.UnitHero ~= HeroDarkness then
+                if UnitAlive(HeroDarkness) then
+                    SelectOnceHero(data, DarknessID)
+                end
                 --print("F3")
             else
 
@@ -282,8 +314,10 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF4 then
             data.ReleaseF4 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroMegumin then
-                SelectOnceHero(data, MeguminID)
+            if data.UnitHero ~= HeroMegumin then
+                if UnitAlive(HeroMegumin) then
+                    SelectOnceHero(data, MeguminID)
+                end
                 -- print("F4")
             else
 

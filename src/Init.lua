@@ -47,6 +47,12 @@ do
             InitTalonBDForDarkNess()
             InitTalonBDForKazuma()
             InitTalonBDForAqua()
+            InitTalonBDForMegumin()
+
+            ClearMapMusicBJ()
+            PlayMusicBJ("How About a Cart Ride")
+            SetMusicVolumeBJ(100)
+
             print(">>>")
         end)
     end

@@ -5,6 +5,7 @@
 ---
 function PushHandWave(data, xEnd, yEnd)
     if not data.PushHandWaveOnCD then
+        StatCDText(3,data.DarkRMB)
         data.PushHandWaveOnCD = true
         local hero = data.UnitHero
         local angle = -180 + AngleBetweenXY(xEnd, yEnd, GetUnitXY(hero)) / bj_DEGTORAD

@@ -11,11 +11,16 @@ function AddShield(data)
         HeroDarkness,
         HeroMegumin,
     }
+
+    if not data.ShieldMaxHP then
+        data.ShieldMaxHP=200
+    end
     if not data.ShieldOnCD then
         data.ShieldOnCD = true
+        StatCDText(20,data.DarkE)
         for i=1,4 do
             ShieldHP[GetHandleId(heroes[i])]={}
-            ShieldHP[GetHandleId(heroes[i])].hp=200
+            ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
             local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
             ShieldHP[GetHandleId(heroes[i])].eff=eff
             TimerStart(CreateTimer(), 10, false, function()

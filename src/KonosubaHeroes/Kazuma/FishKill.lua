@@ -11,6 +11,7 @@ function FishKill(data)
             local enemy=FindFirstEnemy(data.UnitHero,1000)
 
             sec=data.FishKillPeriod
+            DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(enemy)))
             FishEat(data,enemy)
         end
     end)

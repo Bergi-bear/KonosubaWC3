@@ -31,7 +31,7 @@ function InitMouseClickEvent()
             GetPlayerMouseX[pid] = BlzGetTriggerPlayerMouseX()
             GetPlayerMouseY[pid] = BlzGetTriggerPlayerMouseY()
 
-            if BlzGetTriggerPlayerMouseX() >= 511 and BlzGetTriggerPlayerMouseX() <= 513 then
+            if BlzGetTriggerPlayerMouseX() >= 0 and BlzGetTriggerPlayerMouseX() <= 0 then
                 GetPlayerMouseX[pid], GetPlayerMouseY[pid] = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 500, GetUnitFacing(data.UnitHero))
             end
             if UnitAlive(data.UnitHero) then
@@ -69,6 +69,7 @@ function InitMouseClickEvent()
             end
             if data.UnitHero==HeroDarkness then
                 PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
+
             end
         end
     end)
@@ -88,9 +89,9 @@ function InitMouseClickEvent()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 50 then
+                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
                     SpellCastByName(data, "wave")
-                    UnitAddMana(data.UnitHero,-50)
+                    UnitAddMana(data.UnitHero,-10)
                 else
                     print("недостаточно маны")
                 end

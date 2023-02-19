@@ -34,6 +34,8 @@ function GetTalonBDFromHero(hero)
         return KazumaTalon
     elseif hero == HeroAqua then
         return AquaTalon
+    elseif hero == HeroMegumin then
+        return MeguminTalon
     else
         print("у этого героя ещё нет талантов")
         return KazumaTalon

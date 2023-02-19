@@ -40,6 +40,35 @@ function LearnTalonByName(name, talon)
         SetUnitAbilityLevel(HeroAqua, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Повод для акулы" then
         data.HasSharkFromDeep=true
+    elseif name == "Сердечные переживания" then
+        if not data.HalfPartyHealAmount then
+            HalfPartyHeal(data)
+        end
+        data.HalfPartyHealAmount=talon.DS[talon.level]
+    elseif name == "Призыв петуеникса" then
+        StartAiPhoenix(data)
+    elseif name == "Посох алых Мазоку" then
+        BlzSetUnitMaxMana(HeroMegumin, BlzGetUnitMaxMana(HeroMegumin) + talon.DS[talon.level])
+    elseif name == "Пополняемый запас" then
+        if not data.ManaReplenish then
+            data.ManaReplenish=true
+            StartManaReplenish(HeroMegumin,data)
+        end
+        data.ManaReplenishCount=talon.DS[talon.level]
+    elseif name == "Кольцо огня" then
+        if not data.FireCircleDamage then
+            data.FireCircleDamage=talon.DS[talon.level]
+            StartFireCircle(data)
+        end
+        data.FireCircleDamage=talon.DS[talon.level]
+    elseif name == "Первый среди метеоров" then
+        if not data.FirstMeteorDamage then
+            data.FirstMeteorDamage=talon.DS[talon.level]
+            StartMeteor(data)
+        end
+        data.FirstMeteorDamage=talon.DS[talon.level]
+    elseif name == "Прочнее щит" then
+        data.ShieldMaxHP = talon.DS[talon.level]
     end
 end
 

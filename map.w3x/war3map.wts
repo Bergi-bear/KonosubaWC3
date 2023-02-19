@@ -5,12 +5,12 @@ Konosuba
 
 STRING 2
 {
-1-4
+1
 }
 
 STRING 3
 {
-Город новичков
+Анера новичков
 }
 
 STRING 4
@@ -150,5 +150,59 @@ STRING 27
 // Buffs/Effects: B001 (Фамильная реликвия Бафф), EditorName (Name (Editor Only))
 {
 Фамильная реликвия Бафф
+}
+
+STRING 28
+// Doodads: D004 (Дождь), Name (Name)
+{
+Дождь
+}
+
+STRING 29
+// Doodads: D005 (Арена), Name (Name)
+{
+Арена
+}
+
+STRING 30
+// Destructibles: B002 (Арена можно ходить), Name (Name)
+{
+Арена можно ходить
+}
+
+STRING 31
+// Doodads: YCc4 (16x16), Name (Name)
+{
+16x16
+}
+
+STRING 32
+// Doodads: D006 (Каменная стена 1), Name (Name)
+{
+Каменная стена 1
+}
+
+STRING 33
+// Doodads: D007 (Каменная стена 2), Name (Name)
+{
+Каменная стена 2
+}
+
+STRING 34
+// Doodads: D008 (Дерево зелёное), Name (Name)
+{
+Дерево зелёное
+}
+
+STRING 35
+// Doodads: D009 (Трава), Name (Name)
+{
+Трава
+}
+
+STRING 36
+// Doodads: D00A (Куст), Name (Name)
+{
+Куст
 }
 

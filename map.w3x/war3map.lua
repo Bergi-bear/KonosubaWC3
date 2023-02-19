@@ -1305,7 +1305,7 @@ function HealUnit(hero, amount, flag, eff)
                     if data.ShowHealSec <= 0 then
                         data.ShowHeal = true
                         DestroyTimer(GetExpiredTimer())
-                        if TotalHeal > 1 and not IsUnitHidden(hero) then
+                        if TotalHeal > 1 then --not IsUnitHidden(hero)
                             FlyTextTagHealXY(GetUnitX(hero), GetUnitY(hero), "+" .. R2I(data.ShowHealAmount), p)
                             data.StatHealGained=data.StatHealGained+data.ShowHealAmount
                         end
@@ -1375,6 +1375,12 @@ do
             InitTalonBDForDarkNess()
             InitTalonBDForKazuma()
             InitTalonBDForAqua()
+            InitTalonBDForMegumin()
+
+            ClearMapMusicBJ()
+            PlayMusicBJ("How About a Cart Ride")
+            SetMusicVolumeBJ(100)
+
             print(">>>")
         end)
     end
@@ -1697,7 +1703,11 @@ end
 
 --Bergi
 function GetUnitXY(unit)
-    return GetUnitX(unit), GetUnitY(unit)
+    if unit then
+        return GetUnitX(unit), GetUnitY(unit)
+    else
+        return -1200,6000
+    end
 end
 
 function MoveXY(x, y, distance, angle)
@@ -1818,7 +1828,7 @@ function InitMouseClickEvent()
             GetPlayerMouseX[pid] = BlzGetTriggerPlayerMouseX()
             GetPlayerMouseY[pid] = BlzGetTriggerPlayerMouseY()
 
-            if BlzGetTriggerPlayerMouseX() >= 511 and BlzGetTriggerPlayerMouseX() <= 513 then
+            if BlzGetTriggerPlayerMouseX() >= 0 and BlzGetTriggerPlayerMouseX() <= 0 then
                 GetPlayerMouseX[pid], GetPlayerMouseY[pid] = MoveXY(GetUnitX(data.UnitHero), GetUnitY(data.UnitHero), 500, GetUnitFacing(data.UnitHero))
             end
             if UnitAlive(data.UnitHero) then
@@ -1856,6 +1866,7 @@ function InitMouseClickEvent()
             end
             if data.UnitHero==HeroDarkness then
                 PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
+
             end
         end
     end)
@@ -1875,9 +1886,9 @@ function InitMouseClickEvent()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 50 then
+                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
                     SpellCastByName(data, "wave")
-                    UnitAddMana(data.UnitHero,-50)
+                    UnitAddMana(data.UnitHero,-10)
                 else
                     print("недостаточно маны")
                 end
@@ -2703,6 +2714,17 @@ function InitActiveSpellPanel(data)
     CreateKazumaSpellPanel(data)
     CreateAquaSpellPanel(data)
     CreateAquaSpellDarkness(data)
+    CreateMeguminSpell(data)
+end
+
+
+function CreateMeguminSpell(data)
+    data.ContainerSpellMegumin = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
+    local x,y=0.8,0.08
+    local name="Megumin"
+    data.MegSpace=CreateAbilityButton(data, data.ContainerSpellMegumin, x, y,name,"Space")
+    --BlzFrameSetVisible(data.ContainerSpellKazuma,false)
+    BlzFrameSetVisible(data.ContainerSpellMegumin,false)
 end
 
 function CreateAquaSpellDarkness(data)
@@ -2710,12 +2732,12 @@ function CreateAquaSpellDarkness(data)
     local x,y=0.78,0.06
     local name="Darkness"
     CreateAbilityButton(data, data.ContainerSpellDarkness, x, y,name,"Space")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext, y+GNext/3,name,"Rmb")
+    data.DarkRMB=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext, y+GNext/3,name,"Rmb")
     CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"Q")
+    data.DarkQ=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*1, y+(GNext/3)*1,name,"R")
-    CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"E")
+    data.DarkR=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*1, y+(GNext/3)*1,name,"R")
+    data.DarkE=CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*2, y+(GNext/3)*2,name,"E")
     --CreateAbilityButton(data, data.ContainerSpellDarkness, x+GNext*3, y+(GNext/3)*3,name,"F")
     BlzFrameSetVisible(data.ContainerSpellDarkness,false)
 end
@@ -2729,7 +2751,7 @@ function CreateAquaSpellPanel(data)
     CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
     CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
-    CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*1, y+(GNext/3)*1,name,"R")
+    data.AquaR=CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*1, y+(GNext/3)*1,name,"R")
     --CreateAbilityButton(data, data.ContainerSpellAqua, x+GNext*2, y+(GNext/3)*2,name,"E")
     BlzFrameSetVisible(data.ContainerSpellAqua,false)
 end
@@ -2741,7 +2763,7 @@ function CreateKazumaSpellPanel(data)
     CreateAbilityButton(data, data.ContainerSpellKazuma, x, y,name,"Space")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext, y+GNext/3,name,"Rmb")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*2, y+(GNext/3)*2,name,"Lmb")
-    CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*3, y+(GNext/3)*3,name,"Q")
+    data.KazumaQ=CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*3, y+(GNext/3)*3,name,"Q")
     y=0.012
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*1, y+(GNext/3)*1,name,"E")
     CreateAbilityButton(data, data.ContainerSpellKazuma, x+GNext*2, y+(GNext/3)*2,name,"R")
@@ -2759,6 +2781,9 @@ function CreateAbilityButton(data, container, x, y,name,key)
     BlzFrameSetAllPoints(buttonIconFrame, SelfFrame)
     BlzFrameSetTexture(buttonIconFrame, "Textures\\"..name.."\\"..key, 0, true)
     BlzFrameSetSize(SelfFrame, GNext, GNext)
+    if name=="Megumin" then
+        BlzFrameSetSize(SelfFrame, GNext*3, GNext*3)
+    end
 
     --BlzFrameSetPoint(SelfFrame, FRAMEPOINT_CENTER, container, FRAMEPOINT_CENTER, x, y)
     BlzFrameSetAbsPoint(SelfFrame, FRAMEPOINT_CENTER, x, y)
@@ -2788,7 +2813,31 @@ function CreateAbilityButton(data, container, x, y,name,key)
     BlzFrameSetText(text, key)
     BlzFrameSetScale(text, 1)
     BlzFrameSetPoint(text, FRAMEPOINT_TOP, SelfFrame, FRAMEPOINT_TOP, 0.00, 0.01)
+    return SelfFrame
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 15:54
+---
+function StatCDText(cd,parent,scale)
+    local text = BlzCreateFrameByType("TEXT", "ButtonChargesText", parent, "", 0)
+    BlzFrameSetPoint(text, FRAMEPOINT_CENTER, parent, FRAMEPOINT_CENTER, 0.0, 0.00)
+    BlzFrameSetText(text, "")
+    BlzFrameSetScale(text, 2.4)
+    TimerStart(CreateTimer(), 0.05, true, function()
 
+        cd = cd - 0.05
+        local textShowed = string.format("%02.1f", cd)
+        if cd >= 10 then
+            textShowed = R2I(cd)
+        end
+        BlzFrameSetText(text, ColorText2Black(textShowed))
+        if cd<=0 then
+            DestroyTimer(GetExpiredTimer())
+            BlzDestroyFrame(text)
+        end
+    end)
 end
 function CreateSimpleFrameGlue(posX, PosY, texture,parent)
     --, call,callENTER,callLEAVE
@@ -2864,6 +2913,11 @@ end
 
 function ColorText2(s)
     s = "|cffffcc00" .. s .. "|r"
+    return s
+end
+
+function ColorText2Black(s)
+    s = "|cff000000" .. s .. "|r"
     return s
 end
 
@@ -2954,33 +3008,84 @@ function MenuFrame()
     HideToolTips()
 end
 
-function CreateAndStartClock()
-
-    local charges = BlzCreateFrameByType("BACKDROP", "Face", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "", 0)
+function CreateAndStartClock(x, y, reverse, sec, min, h,parentFH,hero)
+    if not parentFH then
+        parentFH=BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+    end
+    local charges = BlzCreateFrameByType("BACKDROP", "Face", parentFH, "", 0)
+    BlzFrameSetParent(charges, BlzGetFrameByName("ConsoleUIBackdrop", 0))
     local new_FrameChargesText = BlzCreateFrameByType("TEXT", "ButtonChargesText", charges, "", 0)
+    if not x then
+        x=0.45
+    end
+    if not y then
+        y=0.59
+    end
 
+    if not sec then
+        sec = 0 --стартовые секунды
+    end
+    if not min then
+        min = 0 -- стартовые минуты
+    end
+    if not h then
+        h = 0 -- стартовые часы
+    end
     BlzFrameSetTexture(charges, "UI\\Widgets\\Console\\Human\\CommandButton\\human-button-lvls-overlay", 0, true)
     BlzFrameSetSize(charges, 0.08, 0.02)
-    BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, 0.48, 0.6 - 0.01)
-    --BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, wood, FRAMEPOINT_BOTTOM, 0,0)
+    if not hero then
+        BlzFrameSetAbsPoint(charges, FRAMEPOINT_CENTER, x, y)
+    else
+        BlzFrameSetPoint(charges, FRAMEPOINT_BOTTOM, parentFH, FRAMEPOINT_BOTTOM, 0., -0.015)
+        BlzFrameSetSize(charges, 0.06, 0.02)
+    end
     BlzFrameSetText(new_FrameChargesText, Zero(0) .. ":" .. Zero(0) .. ":" .. Zero(0))
     BlzFrameSetPoint(new_FrameChargesText, FRAMEPOINT_CENTER, charges, FRAMEPOINT_CENTER, 0., 0.)
-    local sec = 0
-    local min = 0
-    local h = 0
+
     TimerStart(CreateTimer(), 1, true, function()
-        sec = sec + 1
-        if sec == 60 then
-            sec = 0
-            min = min + 1
-        end
-        if min == 60 then
-            min = 0
-            h = h + 1
+        if not reverse then
+            sec = sec + 1
+            if sec == 60 then
+                sec = 0
+                min = min + 1
+            end
+            if min == 60 then
+                min = 0
+                h = h + 1
+            end
+        else -- реверс времени
+            sec = sec - 1
+            if sec <= 0 then
+                sec = 59
+                min = min - 1
+                if min<0 then
+                    --print("Обратный таймер закончился")
+                    if hero then
+                        ReviveKonosubaHero(hero)
+                    end
+                    --DEFENSEND=true
+                    BlzDestroyFrame(charges)
+                    DestroyTimer(GetExpiredTimer())
+                end
+            end
+
+            if min <= 0 then
+                if h>0 then
+                    min = 59
+                    h = h - 1
+                end
+                min=0
+            end
+            if sec<=0 and min <=0 and h<=0 then
+                --print("Обратный таймер закончился ПОЛЧНОСТЬЮ")
+                BlzDestroyFrame(charges)
+                DestroyTimer(GetExpiredTimer())
+            end
         end
 
         BlzFrameSetText(new_FrameChargesText, Zero(h) .. ":" .. Zero(min) .. ":" .. Zero(sec))
     end)
+    return charges
 end
 
 function Zero(s)
@@ -2992,7 +3097,6 @@ function Zero(s)
     end
     return ns
 end
-
 function HideToolTips()
     BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_UBERTOOLTIP, 0))
     BlzFrameClearAllPoints(BlzGetOriginFrame(ORIGIN_FRAME_TOOLTIP, 0))
@@ -3823,6 +3927,8 @@ function CreateRActions()
                 UltraGreed(data)
             elseif data.UnitHero==HeroDarkness then
                 ReverseDamage(data)
+            elseif data.UnitHero==HeroAqua then
+                AquaResRandomHero(data)
             end
             --print("нажал R")
         end
@@ -4470,18 +4576,24 @@ function CreateKonosubaHeroes()
     local x, y = GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0))
 
     HeroKazuma = CreateUnit(Player(0), KazumaID, x, y, 0)
+
     HeroAqua = CreateUnit(Player(0), AquaID, x, y, 0)
+
     HeroDarkness = CreateUnit(Player(0), DarknessID, x, y, 0)
+
     HeroMegumin = CreateUnit(Player(0), MeguminID, x, y, 0)
+
 
     InitActiveSpellPanel(data)
     --скрываем изначально
-    BlzPauseUnitEx(HeroAqua, true)
+    --BlzPauseUnitEx(HeroAqua, true)
     ShowUnit(HeroAqua, false)
-    BlzPauseUnitEx(HeroDarkness, true)
+    --BlzPauseUnitEx(HeroDarkness, true)
     ShowUnit(HeroDarkness, false)
-    BlzPauseUnitEx(HeroMegumin, true)
+    --BlzPauseUnitEx(HeroMegumin, true)
     ShowUnit(HeroMegumin, false)
+
+    StunUnit(HeroKazuma,0.1)
     StunUnit(HeroAqua,0.1)
     StunUnit(HeroDarkness,0.1)
     StunUnit(HeroMegumin,0.1)
@@ -4500,6 +4612,7 @@ function CreateKonosubaHeroes()
     SelectOnceHero(data, KazumaID)
 
     InitWASD(data.UnitHero)
+
 
     local xh, yh = -0.07, 0.596
     local step = 0.13
@@ -4522,13 +4635,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,true)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroKazuma
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroDarkness, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
@@ -4536,18 +4650,19 @@ function SelectOnceHero(data, id)
 
             SetUnitPositionSmooth(HeroAqua,5000,5000)
             SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroMegumin,5000,5000)
         elseif id == AquaID then
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,true)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroAqua
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroDarkness, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroDarkness, false)
@@ -4560,13 +4675,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,true)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
             data.UnitHero = HeroDarkness
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroMegumin, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroMegumin, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
@@ -4580,13 +4696,14 @@ function SelectOnceHero(data, id)
             BlzFrameSetVisible(data.ContainerSpellKazuma,false)
             BlzFrameSetVisible(data.ContainerSpellAqua,false)
             BlzFrameSetVisible(data.ContainerSpellDarkness,false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin,true)
             data.UnitHero = HeroMegumin
-            BlzPauseUnitEx(data.UnitHero, false)
+            --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
 
-            BlzPauseUnitEx(HeroKazuma, true)
-            BlzPauseUnitEx(HeroAqua, true)
-            BlzPauseUnitEx(HeroDarkness, true)
+            --BlzPauseUnitEx(HeroKazuma, true)
+            --BlzPauseUnitEx(HeroAqua, true)
+            --BlzPauseUnitEx(HeroDarkness, true)
 
             ShowUnit(HeroKazuma, false)
             ShowUnit(HeroAqua, false)
@@ -4604,6 +4721,9 @@ function SelectOnceHero(data, id)
     BlzSetUnitFacingEx(data.UnitHero, angle)
     SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
     SetUnitTimeScale(data.UnitHero,1)
+    if x>=4500 then
+        print("Игра сломалась?")
+    end
     InitAnimations(nil, data)
     if data.IsMoving then
         --print("walk")
@@ -4622,7 +4742,7 @@ function CreateHudForHero(hero, x, y)
     CreateEXPBar(hero, x, y- GNext/2)
     InitRegistryEvent(hero)
 end
-
+CrossFH={}
 function CreateHeroPortrait(hero, x, y)
     local ico = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetParent(ico, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -4642,6 +4762,14 @@ function CreateHeroPortrait(hero, x, y)
     BlzFrameSetTexture(ico, texture, 0, true)
     BlzFrameSetSize(ico, GNext, GNext)
     BlzFrameSetAbsPoint(ico, FRAMEPOINT_LEFT, x, 0.6 - GNext / 2)
+
+    local cross = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', ico, '', 0)
+    BlzFrameSetTexture(cross, "crossmark", 0, true)
+    BlzFrameSetSize(cross, GNext, GNext)
+    BlzFrameSetAllPoints(cross,ico)
+    CrossFH[GetHandleId(hero)]=cross
+    BlzFrameSetVisible(CrossFH[GetHandleId(hero)],false)
+    --crossmark
 end
 
 function CreateSelectActions()
@@ -4655,8 +4783,12 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF1 then
             data.ReleaseF1 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroKazuma then
-                SelectOnceHero(data, KazumaID)
+            if data.UnitHero ~= HeroKazuma then
+                if UnitAlive(HeroKazuma) then
+                    SelectOnceHero(data, KazumaID)
+                else
+                    print("герой мёртв")
+                end
                 -- print("F1")
             else
                 -- print("повторый выбор")
@@ -4683,8 +4815,12 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF2 then
             data.ReleaseF2 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroAqua then
-                SelectOnceHero(data, AquaID)
+            if data.UnitHero ~= HeroAqua then
+                if UnitAlive(HeroAqua) then
+                    SelectOnceHero(data, AquaID)
+                else
+                    print("аква мертва")
+                end
                 --print("F2")
             else
 
@@ -4711,8 +4847,10 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF3 then
             data.ReleaseF3 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroDarkness then
-                SelectOnceHero(data, DarknessID)
+            if data.UnitHero ~= HeroDarkness then
+                if UnitAlive(HeroDarkness) then
+                    SelectOnceHero(data, DarknessID)
+                end
                 --print("F3")
             else
 
@@ -4739,8 +4877,10 @@ function CreateSelectActions()
         local data = HERO[pid]
         if not data.ReleaseF4 then
             data.ReleaseF4 = true
-            if GetUnitTypeId(data.UnitHero) ~= HeroMegumin then
-                SelectOnceHero(data, MeguminID)
+            if data.UnitHero ~= HeroMegumin then
+                if UnitAlive(HeroMegumin) then
+                    SelectOnceHero(data, MeguminID)
+                end
                 -- print("F4")
             else
 
@@ -4771,7 +4911,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BloodAndBlade",
             description = "Убийства врагов исцеляют на DS ",
             level = 0,
-            DS = { 1, 2, 3 },
+            DS = { 1, 2, 3, 4, 5 },
             pos = 1,
         },
         [2] = {
@@ -4779,7 +4919,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\LionMask",
             description = "При получении 300 урона выпускает волну силы наносящую DS урон",
             level = 0,
-            DS = { 100, 200, 300 },
+            DS = { 100, 200, 300,400 },
             pos = 2,
         },
         [3] = {
@@ -4787,7 +4927,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BrokenHeart",
             description = "Получение урона возвращается DS% урона всем врагам в малом радиусе 250",
             level = 0,
-            DS = { 100, 200, 300 },
+            DS = { 100, 200, 300, 400, 500 },
             pos = 3,
         },
         [4] = {
@@ -4795,7 +4935,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\EcoEat",
             description = "Увеличивает максимальное здоровье на DS",
             level = 0,
-            DS = { 200, 350, 500 },
+            DS = { 200, 350, 500, 500,500 },
             pos = 4,
         },
         [5] = {
@@ -4805,6 +4945,20 @@ function InitTalonBDForDarkNess()
             level = 0,
             DS = { 50, 100, 150 },
             pos = 5,
+        },
+        [6] = {
+            name = "Сердечные переживания",
+            icon = "DDSICO\\HalfHP",
+            description = "Пока герой в активном слоте, исцеляет сопартийцев на DS в секунду, но не больше чем 50% ХП",
+            level = 0,
+            DS = { 10, 20, 30 },
+        },
+        [7] = {
+            name = "Прочнее щит",
+            icon = "DDSICO\\AddHPShield",
+            description = "Щит теперь способен поглотить DS урона ",
+            level = 0,
+            DS = { 300, 400, 500, 600, 700 },
         },
     }
 end
@@ -4869,6 +5023,8 @@ function GetTalonBDFromHero(hero)
         return KazumaTalon
     elseif hero == HeroAqua then
         return AquaTalon
+    elseif hero == HeroMegumin then
+        return MeguminTalon
     else
         print("у этого героя ещё нет талантов")
         return KazumaTalon
@@ -5049,10 +5205,138 @@ function LearnTalonByName(name, talon)
         SetUnitAbilityLevel(HeroAqua, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Повод для акулы" then
         data.HasSharkFromDeep=true
+    elseif name == "Сердечные переживания" then
+        if not data.HalfPartyHealAmount then
+            HalfPartyHeal(data)
+        end
+        data.HalfPartyHealAmount=talon.DS[talon.level]
+    elseif name == "Призыв петуеникса" then
+        StartAiPhoenix(data)
+    elseif name == "Посох алых Мазоку" then
+        BlzSetUnitMaxMana(HeroMegumin, BlzGetUnitMaxMana(HeroMegumin) + talon.DS[talon.level])
+    elseif name == "Пополняемый запас" then
+        if not data.ManaReplenish then
+            data.ManaReplenish=true
+            StartManaReplenish(HeroMegumin,data)
+        end
+        data.ManaReplenishCount=talon.DS[talon.level]
+    elseif name == "Кольцо огня" then
+        if not data.FireCircleDamage then
+            data.FireCircleDamage=talon.DS[talon.level]
+            StartFireCircle(data)
+        end
+        data.FireCircleDamage=talon.DS[talon.level]
+    elseif name == "Первый среди метеоров" then
+        if not data.FirstMeteorDamage then
+            data.FirstMeteorDamage=talon.DS[talon.level]
+            StartMeteor(data)
+        end
+        data.FirstMeteorDamage=talon.DS[talon.level]
+    elseif name == "Прочнее щит" then
+        data.ShieldMaxHP = talon.DS[talon.level]
     end
 end
 
 
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 18.02.2023 12:16
+---
+function InitTalonBDForMegumin()
+    MeguminTalon = {
+        [1] = {
+            name = "Призыв петуеникса",
+            icon = "DDSICO\\Phoeniks",
+            description = "Призывает DS бессмертного феникса, точь в точь как у Келя",
+            level = 0,
+            DS = { "одного", "второго", "третьего" },
+        },
+        [2] = {
+            name = "Пополняемый запас",
+            icon = "DDSICO\\Manaregen",
+            description = "Восстанавливает DS маны каждую секунду",
+            level = 0,
+            DS = { 1,2,3,4,5,6,7,8,9 },
+        },
+        [3] = {
+            name = "Посох алых Мазоку",
+            icon = "DDSICO\\ManaStaff",
+            description = "Увеличивает максимальную ману ещё на DS пунктов",
+            level = 0,
+            DS = { 300, 300, 300, 300, 300, 300, 300, 300, 300, 300 },
+        },
+        [4] = {
+            name = "Кольцо огня",
+            icon = "DDSICO\\FireCircle",
+            description = "Покрывает героя кольцом, которое наносит DS урона вокруг героя каждые 0.1 сек",
+            level = 0,
+            DS = { 20,40,60,80,100 },
+        },
+        [5] = {
+            name = "Первый среди метеоров",
+            icon = "DDSICO\\FirstMeteot",
+            description = "Каждые 5 секунд на случайного врага падает метеор, наносящий DS урона по небольшой области",
+            level = 0,
+            DS = { 200,400,600,800,1000 },
+        },
+
+    }
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 11:41
+---
+function AquaResRandomHero(data)
+    if not data.ResOnCD then
+        local cd=60
+        local resHero=GetRandomDeadHero()
+        if resHero then
+            ReviveKonosubaHero(resHero)
+            StatCDText(cd,data.AquaR)
+            DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Human\\ReviveHuman\\ReviveHuman.mdl",GetUnitXY(data.UnitHero)))
+            data.ResOnCD = true
+            TimerStart(CreateTimer(), cd, false, function()
+                data.ResOnCD = false
+            end)
+        else
+            print("все герои живы")
+        end
+    end
+end
+
+function GetRandomDeadHero()
+    local heroes={
+        HeroKazuma,
+        HeroAqua,
+        HeroDarkness,
+        HeroMegumin,
+    }
+    local tmp={}
+    for i=1,#heroes do
+        if not UnitAlive(heroes[i]) then
+            table.insert(tmp,heroes[i])
+        end
+    end
+    local r=GetRandomInt(1,#tmp)
+    return tmp[r]
+end
+
+function ReviveKonosubaHero(hero)
+    local data=GetUnitData(hero)
+    local x,y=5000, 5000
+    if data.UnitHero==hero then
+        x,y=GetUnitXY(hero)
+    end
+    ReviveHero(hero, x,y, true)
+    SetUnitInvulnerable(hero, true)
+    TimerStart(CreateTimer(), 2, false, function()
+        SetUnitInvulnerable(hero, false)
+        DestroyTimer(GetExpiredTimer())
+    end)
+    BlzFrameSetVisible(CrossFH[GetHandleId(hero)],false)
+end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
@@ -5328,6 +5612,7 @@ function FishKill(data)
             local enemy=FindFirstEnemy(data.UnitHero,1000)
 
             sec=data.FishKillPeriod
+            DestroyEffect(AddSpecialEffect("Effect/AquaSpikeVersion2",GetUnitXY(enemy)))
             FishEat(data,enemy)
         end
     end)
@@ -5427,11 +5712,16 @@ function AddShield(data)
         HeroDarkness,
         HeroMegumin,
     }
+
+    if not data.ShieldMaxHP then
+        data.ShieldMaxHP=200
+    end
     if not data.ShieldOnCD then
         data.ShieldOnCD = true
+        StatCDText(20,data.DarkE)
         for i=1,4 do
             ShieldHP[GetHandleId(heroes[i])]={}
-            ShieldHP[GetHandleId(heroes[i])].hp=200
+            ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
             local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
             ShieldHP[GetHandleId(heroes[i])].eff=eff
             TimerStart(CreateTimer(), 10, false, function()
@@ -5444,6 +5734,31 @@ function AddShield(data)
         end)
 
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 12:26
+---
+function HalfPartyHeal(data)
+    TimerStart(CreateTimer(), 1, true, function()
+        if data.UnitHero==HeroDarkness then
+            local hp=GetUnitLifePercent(HeroDarkness)
+            if hp<=50 then
+                local heroes={
+                    HeroKazuma,
+                    HeroAqua,
+                    HeroMegumin,
+                }
+                for i=1,#heroes do
+                    local hph=GetUnitLifePercent(heroes[i])
+                    if hph<50 then
+                        HealUnit(heroes[i],data.HalfPartyHealAmount)
+                    end
+                end
+            end
+        end
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -5463,6 +5778,7 @@ end
 ---
 function PushHandWave(data, xEnd, yEnd)
     if not data.PushHandWaveOnCD then
+        StatCDText(3,data.DarkRMB)
         data.PushHandWaveOnCD = true
         local hero = data.UnitHero
         local angle = -180 + AngleBetweenXY(xEnd, yEnd, GetUnitXY(hero)) / bj_DEGTORAD
@@ -5484,6 +5800,8 @@ function ReverseDamage(data)
     --Effect/PsychicTarget.mdl
     if not data.ReverseDamageOnCD then
         data.ReverseDamageOnCD = true
+        StatCDText(20,data.DarkR)
+
         data.ReverseDamage=true
         local eff = AddSpecialEffectTarget("Effect\\PsychicTarget.mdl", data.UnitHero, "chest")
 
@@ -5506,7 +5824,7 @@ function ReversePolarity(data)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("Effect\\Concecration", x,y))
-
+    StatCDText(5,data.DarkQ)
     local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 300)
     for i=1,#t do
         local angle=AngleBetweenUnits(t[i],hero)
@@ -5514,6 +5832,122 @@ function ReversePolarity(data)
         UnitAddForceSimple(t[i], angle, 20, dist)
         IssueTargetOrder(t[i],"attack",hero)
     end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 19:59
+---
+function StartFireCircle(data)
+    AddSpecialEffectTarget("Effect/flame aura3.mdl",HeroMegumin,"origin")
+    TimerStart(CreateTimer(), 0.1, true, function()
+        local _,enemy=UnitDamageArea(HeroMegumin, data.FireCircleDamage, GetUnitX(HeroMegumin), GetUnitY(HeroMegumin), 150)
+        if enemy then
+            DestroyEffect(AddSpecialEffect("Abilities\\Weapons\\AncestralGuardianMissile\\AncestralGuardianMissile.mdl",GetUnitXY(enemy)))
+        end
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 13:17
+---
+function MegCastUltima(data)
+    local hero = data.UnitHero
+    local x, y = GetUnitXY(hero)
+    local damage=GetUnitState(hero,UNIT_STATE_MANA)*10
+    UnitDamageArea(hero, damage, x, y, 3000)
+    local eff=AddSpecialEffect("Effect/A-Bomb.mdl",x,y)
+    BlzSetSpecialEffectScale(eff,5)
+    local eff2=AddSpecialEffect("Effect/DustExplosion.mdl",x,y)
+    BlzSetSpecialEffectScale(eff,5)
+    SetUnitState(hero,UNIT_STATE_LIFE,1)
+    SetUnitState(hero,UNIT_STATE_MANA,1)
+end
+
+
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 14:28
+---
+function StartAiPhoenix(data)
+    local fen = CreateUnit(GetOwningPlayer(data.UnitHero), FourCC("hphx"), data.x, data.y, 0)
+    StartCompanionAI(fen, data)
+
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 15:40
+---
+function StartManaReplenish(hero,data)
+    TimerStart(CreateTimer(), 1, true, function()
+        UnitAddMana(hero,data.ManaReplenishCount)
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 19.02.2023 20:44
+---
+function StartMeteor(data)
+    --Effect/FlameGroundEX.mdl
+    TimerStart(CreateTimer(), 5, true, function()
+        local enemy=FindFirstEnemy(HeroMegumin,1000)
+        local x,y=GetUnitXY(enemy)
+        if enemy then
+            MarkAndFall(x, y, "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile", HeroMegumin,0.5)
+        end
+    end)
+end
+
+function MarkAndFall(x, y, effModel, hero,delay)
+    local mark = AddSpecialEffect("Snipe Target", x, y)
+    local data=GetUnitData(hero)
+    BlzSetSpecialEffectScale(mark, 5)
+    if not delay then
+        delay=2
+    end
+    local deep=50
+    if effModel=="Icicle" then
+        deep=GetRandomInt(200, 400)
+    end
+    TimerStart(CreateTimer(), delay, false, function()
+
+        local FallenEff = AddSpecialEffect(effModel, x, y)
+        BlzSetSpecialEffectZ(FallenEff, GetTerrainZ(x,y)+1000)
+        BlzSetSpecialEffectYaw(FallenEff, math.rad(GetRandomReal(0, 360)))
+        BlzSetSpecialEffectScale(FallenEff, 5)
+        TimerStart(CreateTimer(), TIMER_PERIOD, true, function()
+            local z = BlzGetLocalSpecialEffectZ(FallenEff)
+            BlzSetSpecialEffectZ(FallenEff, z - 50)
+            if z + deep <= GetTerrainZ(x, y) then
+                DestroyEffect(mark)
+                BlzSetSpecialEffectPosition(mark, 5000, 5000, 0)
+                DestroyTimer(GetExpiredTimer())
+
+                local nd =nil
+                --SetDestructableInvulnerable(nd,true)
+                DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
+                --PlayerSeeNoiseInRangeTimed(0.5, x, y)
+                UnitDamageArea(hero, data.FirstMeteorDamage, x, y, 150) --при падении камня
+                local k = GetUnitLifePercent(hero) / 100
+                k = 1 - k
+                if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
+                    DestroyEffect(FallenEff)
+                    DestroyEffect(AddSpecialEffect("Effect/FlameGroundEX.mdl", x, y))
+                else
+                    nd= CreateDestructableZ(FourCC('B002'), x, y, 0, 0, 5, 1)
+                end
+                TimerStart(CreateTimer(), 5 + (k * 5), false, function()
+                    DestroyEffect(FallenEff)
+                    BlzSetSpecialEffectPosition(FallenEff, 999, 999, 999)
+                    KillDestructable(nd)
+                end)
+            end
+        end)
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -6219,13 +6653,26 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 7 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 8 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == AquaID  then
+    elseif GetUnitTypeId(data.UnitHero) == AquaID then
         -- Повелитель ужаса
         data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 16 -- индекс анимации движения
         data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 10 -- анимация сплеш удара
         data.IndexAnimationSpace = 14 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
+        data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
+        data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
+        data.IndexAnimationAttack2 = 4 --индекс анимации атаки в серии
+        data.IndexAnimationAttack3 = 10 --индекс анимации  атаки в серии
+        data.IndexAnimationSpin = 5 -- индекс анимации для удара во вращении
+    elseif GetUnitTypeId(data.UnitHero) == MeguminID then
+        -- Повелитель ужаса
+        data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 1 -- индекс анимации движения
+        data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
+        data.IndexAnimationQ = 10 -- анимация сплеш удара
+        data.IndexAnimationSpace = 2 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
         data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
@@ -6331,11 +6778,36 @@ function InitWASD(hero)
                 --and not data.CameraOnSaw
                 data.CameraStabUnit = CreateUnit(Player(data.pid), FourCC("hdhw"), x, y, 0)
                 ShowUnit(data.CameraStabUnit, false)
+                SetUnitInvulnerable(data.CameraStabUnit)
 
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
+                BlzFrameSetVisible(CrossFH[GetHandleId(hero)], true)
 
-                TimerStart(CreateTimer(), 3, false, function()
+                if hero == HeroAqua then
+                    CreateAndStartClock(0.4, 0.3, true, 30, 1, 0, CrossFH[GetHandleId(hero)], hero)
+                elseif hero == HeroKazuma then
+                    if true then
+                        CreateAndStartClock(0.4, 0.3, true, 30, 0, 0, CrossFH[GetHandleId(hero)], hero)
+                    end
+                end
+                local heroes={
+                    HeroKazuma,
+                    HeroAqua,
+                    HeroDarkness,
+                    HeroMegumin,
+                }
+                local defeat=true
+                for i=1,#heroes do
+                    if UnitAlive(heroes[i]) then
+                        defeat=false
+                    end
+                end
+                if defeat then
+                    CustomDefeatBJ(Player(0), "Поражение")
+                end
+
+                --[[TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
                     --ReviveHero(hero, x, y, true)
                     SetUnitInvulnerable(hero, true)
@@ -6344,6 +6816,7 @@ function InitWASD(hero)
                         DestroyTimer(GetExpiredTimer())
                     end)
                 end)
+                ]]
             end
 
             SetCameraQuickPosition(GetUnitX(data.CameraStabUnit), GetUnitY(data.CameraStabUnit))
@@ -6490,6 +6963,7 @@ function InitWASD(hero)
                         SetUnitTimeScale(hero, 1)
                     end
                     local x, y = GetUnitXY(hero)
+                    data.x, data.y = x, y
                     local nx, ny = MoveXY(x, y, speed, angle)
                     local dx, dy = nx - x, ny - y
 
@@ -6891,9 +7365,13 @@ function CreateWASDActions()
                             --print("стоя на месте")
                             SetUnitTimeScale(data.UnitHero, 4)
                         end
-                        if data.UnitHero==HeroAqua then
+                        if data.UnitHero == HeroAqua then
                             SetUnitTimeScale(data.UnitHero, 1)
                             PartyHeal(data)
+                        elseif data.UnitHero == HeroMegumin then
+                            SetUnitTimeScale(data.UnitHero, 1)
+                            MegCastUltima(data)
+                            StatCDText(12,data.MegSpace)
                         end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
@@ -7024,7 +7502,7 @@ function BlockMouse(data)
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER)
     TriggerAddAction(this, function()
         --  MouseX,MouseY=GetPlayerMouseX
-        --print(OrderId2String(GetUnitCurrentOrder(mainHero)))
+        --print(OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())),GetUnitName(GetTriggerUnit()))
         if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "dropitem" then
             data.DropInventory = false
             TimerStart(CreateTimer(), 2, false, function()
@@ -7032,24 +7510,27 @@ function BlockMouse(data)
                 data.DropInventory = true
             end)
         end
-
-        if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" or OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "move" then
-            --Строковый список приказов, которые игрок не может выполнить
-            if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then
-                if not data.Desync and not FirstGoto then
-                    print(GetPlayerName(Player(data.pid)) .. L(" Внимание! вы должны использовать классическую схему управления", "Attention!! you must use the classic control scheme"))
-                    data.Desync = true
+        if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO) then
+            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" then
+                --Строковый список приказов, которые игрок не может выполнить
+                --print(OrderId2String(GetUnitCurrentOrder(data.UnitHero)))
+                if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then
+                    if not data.Desync and not FirstGoto then
+                        -- print(GetPlayerName(Player(data.pid)) .. L(" Внимание! вы должны использовать классическую схему управления", "Attention!! you must use the classic control scheme"))
+                        data.Desync = true
+                    end
+                else
+                    --print("click LMB")
+                    -- data.LMBFIRST=true
                 end
-            else
-                --print("click LMB")
-                -- data.LMBFIRST=true
+                --gkm=gkm+1
+                --print(gkm)
+                --print("STOP",GetUnitName(GetTriggerUnit()))
+                --BlzPauseUnitEx(GetTriggerUnit(), true)
+                BlzPauseUnitEx(GetTriggerUnit(), true)
+                IssueImmediateOrder(GetTriggerUnit(), "stop")
+                BlzPauseUnitEx(GetTriggerUnit(), false)
             end
-            --gkm=gkm+1
-            --print(gkm)
-            --print("STOP")
-            BlzPauseUnitEx(data.UnitHero, true)
-            IssueImmediateOrder(data.UnitHero, "stop")
-            BlzPauseUnitEx(data.UnitHero, false)
         end
     end)
 end
@@ -7979,10 +8460,13 @@ end
 function StartCompanionAI(unit, data)
     TimerStart(CreateTimer(), 2, true, function()
         if not UnitAlive(unit) then
-            DestroyTimer(GetExpiredTimer())
+            --DestroyTimer(GetExpiredTimer())
         else
-            if not IsUnitInRange(unit, data.UnitHero, 300) then
-                IssuePointOrder(unit, "attack", GetUnitXY(data.UnitHero))
+            if not IsUnitInRange(unit, data.HeroMegumin, 300) then
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+                SetUnitPositionSmooth(unit, GetUnitXY(HeroMegumin))
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+                IssueTargetOrder(unit, "patrol", HeroMegumin)
             end
         end
     end)
@@ -8378,6 +8862,58 @@ function StartSpawnMachine()
         FourCC("n002"),
         FourCC("n003"),
         FourCC("n004"),
+        FourCC("nbdm"),
+        FourCC("nbda"),
+        FourCC("nbdw"),
+        FourCC("nbds"),
+        FourCC("nbdo"),
+
+        FourCC("ncer"),
+        FourCC("ncea"),
+        FourCC("ncen"),
+        FourCC("ncim"),
+        FourCC("ncks"),
+        FourCC("ncnk"),
+
+        FourCC("nfor"),
+        FourCC("nfot"),
+        FourCC("nfod"),
+        FourCC("ners"),
+        FourCC("nerd"),
+        FourCC("nerw"),
+
+        FourCC("ntrv"),
+        FourCC("nrvf"),
+        FourCC("nrvs"),
+        FourCC("nsrv"),
+        FourCC("nrvl"),
+        FourCC("ndrv"),
+        FourCC("nrvi"),
+        FourCC("nrvd"),
+
+        FourCC("nogr"),
+        FourCC("nogm"),
+        FourCC("nomg"),
+        FourCC("nowb"),
+        FourCC("nowe"),
+        FourCC("nowk"),
+        FourCC("nplb"),
+        FourCC("nplg"),
+
+        FourCC("nrzs"),
+        FourCC("nrzt"),
+        FourCC("nrzb"),
+        FourCC("nqbh"),
+        FourCC("nrzm"),
+        FourCC("nrzg"),
+
+        FourCC("nslh"),
+        FourCC("nslr"),
+        FourCC("nslv"),
+        FourCC("nsll"),
+
+
+
     }
     local period=1.5
     local timeNextWave=30
@@ -8385,7 +8921,12 @@ function StartSpawnMachine()
         if CurrentCreepCount<=MaxCreep then
             local x,y=GetRandomSpawnXY()
             local new=CreateUnit(Player(10), t[CurrentWave], x, y, 0)
+            AddMaxLife(new, 50*CurrentWave)
+            SetUnitAcquireRange(new,5000)
+            BlzSetUnitRealField( new, UNIT_RF_SIGHT_RADIUS, 5000 )
+            BlzSetUnitBaseDamage(new,BlzGetUnitBaseDamage(new,0)+CurrentWave,0)
             IssueTargetOrder(new,"attack",GetRandomEnemy())
+
             CurrentCreepCount=CurrentCreepCount+1
             timeNextWave=timeNextWave-period
             if timeNextWave<=0 then
@@ -8425,6 +8966,7 @@ end
 function Trig_Bound1_Actions()
 SetCameraBoundsToRectForPlayerBJ(Player(0), gg_rct_Region_001)
 SetTimeOfDayScalePercentBJ(0.00)
+SetSkyModel("Environment\\Sky\\FoggedSky\\FoggedSky.mdl")
 end
 
 function InitTrig_Bound1()

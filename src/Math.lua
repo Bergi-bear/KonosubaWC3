@@ -200,7 +200,11 @@ end
 
 --Bergi
 function GetUnitXY(unit)
-    return GetUnitX(unit), GetUnitY(unit)
+    if unit then
+        return GetUnitX(unit), GetUnitY(unit)
+    else
+        return -1200,6000
+    end
 end
 
 function MoveXY(x, y, distance, angle)

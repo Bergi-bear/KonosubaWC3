@@ -7,7 +7,7 @@ function ReversePolarity(data)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("Effect\\Concecration", x,y))
-
+    StatCDText(5,data.DarkQ)
     local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 300)
     for i=1,#t do
         local angle=AngleBetweenUnits(t[i],hero)

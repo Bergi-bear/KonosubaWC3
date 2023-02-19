@@ -18,10 +18,13 @@ end
 function StartCompanionAI(unit, data)
     TimerStart(CreateTimer(), 2, true, function()
         if not UnitAlive(unit) then
-            DestroyTimer(GetExpiredTimer())
+            --DestroyTimer(GetExpiredTimer())
         else
-            if not IsUnitInRange(unit, data.UnitHero, 300) then
-                IssuePointOrder(unit, "attack", GetUnitXY(data.UnitHero))
+            if not IsUnitInRange(unit, data.HeroMegumin, 300) then
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+                SetUnitPositionSmooth(unit, GetUnitXY(HeroMegumin))
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\NightElf\\Blink\\BlinkCaster.mdl", GetUnitXY(unit)))
+                IssueTargetOrder(unit, "patrol", HeroMegumin)
             end
         end
     end)

@@ -46,13 +46,26 @@ function InitAnimations(hero, data)
         data.IndexAnimationAttack2 = 7 --индекс анимации атаки в серии
         data.IndexAnimationAttack3 = 8 --индекс анимации  атаки в серии
         data.IndexAnimationSpin = 4 -- индекс анимации для удара во вращении
-    elseif GetUnitTypeId(data.UnitHero) == AquaID  then
+    elseif GetUnitTypeId(data.UnitHero) == AquaID then
         -- Повелитель ужаса
         data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
         data.IndexAnimationWalk = 16 -- индекс анимации движения
         data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
         data.IndexAnimationQ = 10 -- анимация сплеш удара
         data.IndexAnimationSpace = 14 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
+        data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
+        data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
+        data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
+        data.IndexAnimationAttack2 = 4 --индекс анимации атаки в серии
+        data.IndexAnimationAttack3 = 10 --индекс анимации  атаки в серии
+        data.IndexAnimationSpin = 5 -- индекс анимации для удара во вращении
+    elseif GetUnitTypeId(data.UnitHero) == MeguminID then
+        -- Повелитель ужаса
+        data.AnimDurationWalk = 0.808 --длительность анимации движения, полный круг
+        data.IndexAnimationWalk = 1 -- индекс анимации движения
+        data.ResetDuration = 4.515 -- время сброса для анимации stand, длительность анимации stand
+        data.IndexAnimationQ = 10 -- анимация сплеш удара
+        data.IndexAnimationSpace = 2 -- анимация для рывка, если анимации нет, ставь индекс аналогичный бегу
         data.IndexAnimationAttackInDash = 6 --анимация удара в рывке
         data.IndexAnimationThrow = 9 -- индекс анимациии броска чего либо
         data.IndexAnimationAttack1 = 9 --индекс анимации атаки в серии
@@ -158,11 +171,36 @@ function InitWASD(hero)
                 --and not data.CameraOnSaw
                 data.CameraStabUnit = CreateUnit(Player(data.pid), FourCC("hdhw"), x, y, 0)
                 ShowUnit(data.CameraStabUnit, false)
+                SetUnitInvulnerable(data.CameraStabUnit)
 
                 --print("death")
                 SetUnitAnimation(data.UnitHero, "death")
+                BlzFrameSetVisible(CrossFH[GetHandleId(hero)], true)
 
-                TimerStart(CreateTimer(), 3, false, function()
+                if hero == HeroAqua then
+                    CreateAndStartClock(0.4, 0.3, true, 30, 1, 0, CrossFH[GetHandleId(hero)], hero)
+                elseif hero == HeroKazuma then
+                    if true then
+                        CreateAndStartClock(0.4, 0.3, true, 30, 0, 0, CrossFH[GetHandleId(hero)], hero)
+                    end
+                end
+                local heroes={
+                    HeroKazuma,
+                    HeroAqua,
+                    HeroDarkness,
+                    HeroMegumin,
+                }
+                local defeat=true
+                for i=1,#heroes do
+                    if UnitAlive(heroes[i]) then
+                        defeat=false
+                    end
+                end
+                if defeat then
+                    CustomDefeatBJ(Player(0), "Поражение")
+                end
+
+                --[[TimerStart(CreateTimer(), 3, false, function()
                     DestroyTimer(GetExpiredTimer())
                     --ReviveHero(hero, x, y, true)
                     SetUnitInvulnerable(hero, true)
@@ -171,6 +209,7 @@ function InitWASD(hero)
                         DestroyTimer(GetExpiredTimer())
                     end)
                 end)
+                ]]
             end
 
             SetCameraQuickPosition(GetUnitX(data.CameraStabUnit), GetUnitY(data.CameraStabUnit))
@@ -317,6 +356,7 @@ function InitWASD(hero)
                         SetUnitTimeScale(hero, 1)
                     end
                     local x, y = GetUnitXY(hero)
+                    data.x, data.y = x, y
                     local nx, ny = MoveXY(x, y, speed, angle)
                     local dx, dy = nx - x, ny - y
 
@@ -718,9 +758,13 @@ function CreateWASDActions()
                             --print("стоя на месте")
                             SetUnitTimeScale(data.UnitHero, 4)
                         end
-                        if data.UnitHero==HeroAqua then
+                        if data.UnitHero == HeroAqua then
                             SetUnitTimeScale(data.UnitHero, 1)
                             PartyHeal(data)
+                        elseif data.UnitHero == HeroMegumin then
+                            SetUnitTimeScale(data.UnitHero, 1)
+                            MegCastUltima(data)
+                            StatCDText(12,data.MegSpace)
                         end
                         SetUnitAnimationByIndex(data.UnitHero, data.IndexAnimationSpace)-- Всегда бег
                         --SetUnitAnimationByIndex(data.UnitHero, 27) -- 27 для кувырка -- IndexAnimationWalk -- для бега
@@ -851,7 +895,7 @@ function BlockMouse(data)
     TriggerRegisterAnyUnitEventBJ(this, EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER)
     TriggerAddAction(this, function()
         --  MouseX,MouseY=GetPlayerMouseX
-        --print(OrderId2String(GetUnitCurrentOrder(mainHero)))
+        --print(OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())),GetUnitName(GetTriggerUnit()))
         if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "dropitem" then
             data.DropInventory = false
             TimerStart(CreateTimer(), 2, false, function()
@@ -859,24 +903,27 @@ function BlockMouse(data)
                 data.DropInventory = true
             end)
         end
-
-        if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" or OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "move" then
-            --Строковый список приказов, которые игрок не может выполнить
-            if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then
-                if not data.Desync and not FirstGoto then
-                    print(GetPlayerName(Player(data.pid)) .. L(" Внимание! вы должны использовать классическую схему управления", "Attention!! you must use the classic control scheme"))
-                    data.Desync = true
+        if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO) then
+            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" then
+                --Строковый список приказов, которые игрок не может выполнить
+                --print(OrderId2String(GetUnitCurrentOrder(data.UnitHero)))
+                if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then
+                    if not data.Desync and not FirstGoto then
+                        -- print(GetPlayerName(Player(data.pid)) .. L(" Внимание! вы должны использовать классическую схему управления", "Attention!! you must use the classic control scheme"))
+                        data.Desync = true
+                    end
+                else
+                    --print("click LMB")
+                    -- data.LMBFIRST=true
                 end
-            else
-                --print("click LMB")
-                -- data.LMBFIRST=true
+                --gkm=gkm+1
+                --print(gkm)
+                --print("STOP",GetUnitName(GetTriggerUnit()))
+                --BlzPauseUnitEx(GetTriggerUnit(), true)
+                BlzPauseUnitEx(GetTriggerUnit(), true)
+                IssueImmediateOrder(GetTriggerUnit(), "stop")
+                BlzPauseUnitEx(GetTriggerUnit(), false)
             end
-            --gkm=gkm+1
-            --print(gkm)
-            --print("STOP")
-            BlzPauseUnitEx(data.UnitHero, true)
-            IssueImmediateOrder(data.UnitHero, "stop")
-            BlzPauseUnitEx(data.UnitHero, false)
         end
     end)
 end

@@ -7,6 +7,8 @@ function ReverseDamage(data)
     --Effect/PsychicTarget.mdl
     if not data.ReverseDamageOnCD then
         data.ReverseDamageOnCD = true
+        StatCDText(20,data.DarkR)
+
         data.ReverseDamage=true
         local eff = AddSpecialEffectTarget("Effect\\PsychicTarget.mdl", data.UnitHero, "chest")
 
