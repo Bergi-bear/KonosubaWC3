@@ -94,5 +94,12 @@ function InitTalonBDForDarkNess()
             level = 0,
             DS = { 5 },
         },
+        [13] = {
+            name = "Горе",
+            icon = "DDSICO\\Misery",
+            description = "Когда Казума мёртв, увеличивает весь исходящий урон DS раза",
+            level = 0,
+            DS = { 1.5,2,2.5 },
+        },
     }
 end
