@@ -69,6 +69,9 @@ function LearnTalonByName(name, talon)
         data.FirstMeteorDamage=talon.DS[talon.level]
     elseif name == "Прочнее щит" then
         data.ShieldMaxHP = talon.DS[talon.level]
+    elseif name == "Исцеляющий шаг" then
+        data.HealStepAmount=talon.DS[talon.level]
+        data.HealStepCurrent=0
     end
 end
 

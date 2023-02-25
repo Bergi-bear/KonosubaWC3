@@ -45,6 +45,7 @@ function ReviveKonosubaHero(hero)
         x,y=GetUnitXY(hero)
     end
     ReviveHero(hero, x,y, true)
+    SetUnitLifePercentBJ(hero,10)
     SetUnitInvulnerable(hero, true)
     TimerStart(CreateTimer(), 2, false, function()
         SetUnitInvulnerable(hero, false)

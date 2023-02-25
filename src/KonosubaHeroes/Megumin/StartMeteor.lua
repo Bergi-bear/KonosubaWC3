@@ -5,7 +5,7 @@
 ---
 function StartMeteor(data)
     --Effect/FlameGroundEX.mdl
-    TimerStart(CreateTimer(), 5, true, function()
+    TimerStart(CreateTimer(), 1.5, true, function()
         local enemy=FindFirstEnemy(HeroMegumin,1000)
         local x,y=GetUnitXY(enemy)
         if enemy then

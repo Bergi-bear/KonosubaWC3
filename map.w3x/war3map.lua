@@ -17,17 +17,6 @@ u = BlzCreateUnitWithSkin(p, FourCC("h004"), 609.4, 5993.7, 160.757, FourCC("h00
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1217.6, 7764.8, 142.475, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -3045.6, 5981.1, 160.757, FourCC("h004"))
 u = BlzCreateUnitWithSkin(p, FourCC("h004"), -1212.9, 4192.3, 102.548, FourCC("h004"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2424.3, 5031.1, 166.629, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2593.8, 5133.4, 312.900, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2502.4, 5144.2, 259.110, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2634.5, 4968.9, 36.514, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2514.0, 5056.4, 204.263, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2515.8, 4938.7, 91.992, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2612.8, 5103.9, 331.677, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2579.0, 5040.7, 12.420, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2448.9, 4986.7, 136.568, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2386.3, 5155.6, 166.629, FourCC("e000"))
-u = BlzCreateUnitWithSkin(p, FourCC("e000"), -2411.0, 5111.2, 136.568, FourCC("e000"))
 end
 
 function CreateUnitsForPlayer10()
@@ -871,6 +860,9 @@ function OnPostDamage()
             else
                 DestroyEffect(ShieldHP[GetHandleId(target)].eff)
                 ShieldHP[GetHandleId(target)].eff = nil
+                BlzDestroyFrame(ShieldHP[GetHandleId(target)].fh)
+                ShieldHP[GetHandleId(target)].fh=nil
+                FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Цит сломан", GetOwningPlayer(target))
                 --print("щит сломан досрочно")
             end
         end
@@ -1287,12 +1279,16 @@ function HealUnit(hero, amount, flag, eff)
     if LoosingHP <= amount then
         TotalHeal = LoosingHP
     end
-    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
     SetUnitState(hero, UNIT_STATE_LIFE, CurrentHP + TotalHeal)
+    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         if HERO[GetPlayerId(GetOwningPlayer(hero))] then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            if UnitAlive(hero) and TotalHeal>0 then  -- показ справйта лечения
+                CreateRamaSprite("hearts_sprite", PortraitFH[GetHandleId(hero)],2,0.6)
+            end
+
             data.ShowHealSec = 0.3
             if not data.ShowHealAmount then
                 data.ShowHealAmount = 0
@@ -1807,8 +1803,21 @@ function InitMouseClickEvent()
         TriggerRegisterPlayerEvent(TrigPressLMB, Player(i), EVENT_PLAYER_MOUSE_DOWN)
     end
     TriggerAddAction(TrigPressLMB, function()
+        EnableUserControl(true)
+        TimerStart(CreateTimer(), TIMER_PERIOD, false, function()
+            EnableUserControl(true)
+        end)
+        TimerStart(CreateTimer(), 0.1, false, function()
+            EnableUserControl(true)
+        end)
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
-            --print("клик левой")
+           -- print("клик левой")
+
+            EnableUserControl(true)
+            BlzPauseUnitEx(GetTriggerUnit(), true)
+            IssueImmediateOrder(GetTriggerUnit(), "stop")
+            BlzPauseUnitEx(GetTriggerUnit(), false)
+
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = true
 
@@ -1820,7 +1829,12 @@ function InitMouseClickEvent()
         TriggerRegisterPlayerEvent(TrigDEPressLMB, Player(i), EVENT_PLAYER_MOUSE_UP)
     end
     TriggerAddAction(TrigDEPressLMB, function()
+
+        --EnableUserControl(true)
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
+
+
+            --ForceUICancelBJ(Player(0))
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = false
             local pid = data.pid
@@ -1864,8 +1878,8 @@ function InitMouseClickEvent()
                 data.StartWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.StartWaveCastY = BlzGetTriggerPlayerMouseY()
             end
-            if data.UnitHero==HeroDarkness then
-                PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
+            if data.UnitHero == HeroDarkness then
+                PushHandWave(data, BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY())
 
             end
         end
@@ -1886,9 +1900,9 @@ function InitMouseClickEvent()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
+                if GetUnitState(data.UnitHero, UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
                     SpellCastByName(data, "wave")
-                    UnitAddMana(data.UnitHero,-10)
+                    UnitAddMana(data.UnitHero, -10)
                 else
                     print("недостаточно маны")
                 end
@@ -3118,6 +3132,36 @@ function DrawSelectionPortrait(state)
     BlzFrameSetAbsPoint(Portrait, FRAMEPOINT_CENTER, -0.0, 0.59)
     BlzFrameSetVisible(Portrait, state)
 end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 25.02.2023 1:27
+---
+function CreateRamaSprite(path, parent, timed,scale)
+    --[[local button = BlzCreateFrame('ScriptDialogButton', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), 0, 0)
+    BlzFrameSetAbsPoint(button, FRAMEPOINT_CENTER, pointx, pointy)
+    BlzFrameSetSize(button, 0.0435, 0.0435)
+
+    local new_Frame = BlzCreateFrameByType('BACKDROP', "PORTRAIT", BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), "",0)
+    BlzFrameSetAllPoints(new_Frame, button)
+    BlzFrameSetTexture(new_Frame, "ReplaceableTextures\\CommandButtons\\BTNFootman.blp", 0, true)
+    ]]
+
+    local sprite = BlzCreateFrameByType("SPRITE", "justAName", parent, "WarCraftIIILogo", 0)
+    BlzFrameClearAllPoints(sprite)
+    BlzFrameSetPoint(sprite, FRAMEPOINT_BOTTOMLEFT, parent, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+    BlzFrameSetSize(sprite, 0.00001, 0.00001)
+    BlzFrameSetScale(sprite, scale)
+    BlzFrameSetModel(sprite, path, 0)
+
+    TimerStart(CreateTimer(), timed, false, function()
+        BlzDestroyFrame(sprite)
+    end)
+    --BlzFrameSetVisible(sprite,true)
+    return sprite
+end
+
+--CreateRamaSprite("hearts_sprite",fh)
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by Bergi.
@@ -4583,7 +4627,6 @@ function CreateKonosubaHeroes()
 
     HeroMegumin = CreateUnit(Player(0), MeguminID, x, y, 0)
 
-
     InitActiveSpellPanel(data)
     --скрываем изначально
     --BlzPauseUnitEx(HeroAqua, true)
@@ -4593,26 +4636,25 @@ function CreateKonosubaHeroes()
     --BlzPauseUnitEx(HeroMegumin, true)
     ShowUnit(HeroMegumin, false)
 
-    StunUnit(HeroKazuma,0.1)
-    StunUnit(HeroAqua,0.1)
-    StunUnit(HeroDarkness,0.1)
-    StunUnit(HeroMegumin,0.1)
+    StunUnit(HeroKazuma, 0.1)
+    StunUnit(HeroAqua, 0.1)
+    StunUnit(HeroDarkness, 0.1)
+    StunUnit(HeroMegumin, 0.1)
 
-    UnitAddAbility(HeroKazuma,FourCC("Abun"))
-    UnitAddAbility(HeroAqua,FourCC("Abun"))
-    UnitAddAbility(HeroDarkness,FourCC("Abun"))
-    UnitAddAbility(HeroMegumin,FourCC("Abun"))
+    UnitAddAbility(HeroKazuma, FourCC("Abun"))
+    UnitAddAbility(HeroAqua, FourCC("Abun"))
+    UnitAddAbility(HeroDarkness, FourCC("Abun"))
+    UnitAddAbility(HeroMegumin, FourCC("Abun"))
 
-    SuspendHeroXP(HeroKazuma,true)
-    SuspendHeroXP(HeroAqua,true)
-    SuspendHeroXP(HeroDarkness,true)
-    SuspendHeroXP(HeroMegumin,true)
+    SuspendHeroXP(HeroKazuma, true)
+    SuspendHeroXP(HeroAqua, true)
+    SuspendHeroXP(HeroDarkness, true)
+    SuspendHeroXP(HeroMegumin, true)
 
     data.UnitHero = HeroKazuma
     SelectOnceHero(data, KazumaID)
 
     InitWASD(data.UnitHero)
-
 
     local xh, yh = -0.07, 0.596
     local step = 0.13
@@ -4632,10 +4674,10 @@ function SelectOnceHero(data, id)
 
         if id == KazumaID then
             --print(1)
-            BlzFrameSetVisible(data.ContainerSpellKazuma,true)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, true)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroKazuma
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -4648,14 +4690,14 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
         elseif id == AquaID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,true)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, true)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroAqua
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -4668,14 +4710,14 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
         elseif id == DarknessID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,true)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, true)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroDarkness
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -4688,15 +4730,15 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
 
         elseif id == MeguminID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,true)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, true)
             data.UnitHero = HeroMegumin
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -4709,9 +4751,9 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
         end
     else
         return
@@ -4720,9 +4762,10 @@ function SelectOnceHero(data, id)
     SetUnitPositionSmooth(data.UnitHero, x, y)
     BlzSetUnitFacingEx(data.UnitHero, angle)
     SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
-    SetUnitTimeScale(data.UnitHero,1)
-    if x>=4500 then
+    SetUnitTimeScale(data.UnitHero, 1)
+    if x >= 4500 then
         print("Игра сломалась?")
+        SetUnitPositionSmooth(data.UnitHero, GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0)))
     end
     InitAnimations(nil, data)
     if data.IsMoving then
@@ -4738,11 +4781,12 @@ end
 function CreateHudForHero(hero, x, y)
     CreateHeroPortrait(hero, x - GNext, y)
     CreateHPBar(hero, x, y)
-    CreateMANABar(hero, x, y- GNext/4)
-    CreateEXPBar(hero, x, y- GNext/2)
+    CreateMANABar(hero, x, y - GNext / 4)
+    CreateEXPBar(hero, x, y - GNext / 2)
     InitRegistryEvent(hero)
 end
-CrossFH={}
+CrossFH = {}
+PortraitFH = {}
 function CreateHeroPortrait(hero, x, y)
     local ico = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetParent(ico, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -4762,13 +4806,15 @@ function CreateHeroPortrait(hero, x, y)
     BlzFrameSetTexture(ico, texture, 0, true)
     BlzFrameSetSize(ico, GNext, GNext)
     BlzFrameSetAbsPoint(ico, FRAMEPOINT_LEFT, x, 0.6 - GNext / 2)
+    PortraitFH[GetHandleId(hero)] = ico
 
     local cross = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', ico, '', 0)
     BlzFrameSetTexture(cross, "crossmark", 0, true)
     BlzFrameSetSize(cross, GNext, GNext)
-    BlzFrameSetAllPoints(cross,ico)
-    CrossFH[GetHandleId(hero)]=cross
-    BlzFrameSetVisible(CrossFH[GetHandleId(hero)],false)
+    BlzFrameSetAllPoints(cross, ico)
+    CrossFH[GetHandleId(hero)] = cross
+    BlzFrameSetVisible(CrossFH[GetHandleId(hero)], false)
+    --CreateRamaSprite("exploder_sprite", PortraitFH[GetHandleId(hero)],10,0.62)
     --crossmark
 end
 
@@ -4927,7 +4973,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BrokenHeart",
             description = "Получение урона возвращается DS% урона всем врагам в малом радиусе 250",
             level = 0,
-            DS = { 100, 200, 300, 400, 500 },
+            DS = { 5,10,15,20,25,30 },
             pos = 3,
         },
         [4] = {
@@ -5142,7 +5188,7 @@ function InitTalonBDForKazuma()
             icon = "DDSICO\\SharkStrike",
             description = "Раз в DS сек. появляется акула и полностью пожирает вражеского юнита",
             level = 0,
-            DS = { 5, 15, 10 },
+            DS = { 20, 15, 10 },
             pos = 3,
         },
         [4] = {
@@ -5156,7 +5202,7 @@ function InitTalonBDForKazuma()
         [5] = {
             name = "Исцеляющий шаг",
             icon = "DDSICO\\HealStep",
-            description = "Когда Казума двигается он немного исцеляется на DS здоровья, за каждые 1000 ед пути",
+            description = "Когда Казума двигается он немного исцеляется на DS здоровья, за каждые 2000 ед пути",
             level = 0,
             DS = { 50, 100, 150 },
             pos = 5,
@@ -5234,6 +5280,9 @@ function LearnTalonByName(name, talon)
         data.FirstMeteorDamage=talon.DS[talon.level]
     elseif name == "Прочнее щит" then
         data.ShieldMaxHP = talon.DS[talon.level]
+    elseif name == "Исцеляющий шаг" then
+        data.HealStepAmount=talon.DS[talon.level]
+        data.HealStepCurrent=0
     end
 end
 
@@ -5276,7 +5325,7 @@ function InitTalonBDForMegumin()
         [5] = {
             name = "Первый среди метеоров",
             icon = "DDSICO\\FirstMeteot",
-            description = "Каждые 5 секунд на случайного врага падает метеор, наносящий DS урона по небольшой области",
+            description = "Каждые 1.5 секунды на случайного врага падает метеор, наносящий DS урона по небольшой области",
             level = 0,
             DS = { 200,400,600,800,1000 },
         },
@@ -5330,6 +5379,7 @@ function ReviveKonosubaHero(hero)
         x,y=GetUnitXY(hero)
     end
     ReviveHero(hero, x,y, true)
+    SetUnitLifePercentBJ(hero,10)
     SetUnitInvulnerable(hero, true)
     TimerStart(CreateTimer(), 2, false, function()
         SetUnitInvulnerable(hero, false)
@@ -5656,6 +5706,23 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
+--- DateTime: 25.02.2023 3:14
+---
+function HealStep(data)
+    if data.HealStepAmount then
+        if data.UnitHero == HeroKazuma then
+            data.HealStepCurrent = data.HealStepCurrent + data.HeroMoveSpeed
+            --print(data.HealStepCurrent)
+            if data.HealStepCurrent > 2000 then
+                data.HealStepCurrent = 0
+                HealUnit(data.UnitHero, data.HealStepAmount)
+            end
+        end
+    end
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
 --- DateTime: 18.02.2023 13:54
 ---
 function SpellSteal(data)
@@ -5716,18 +5783,23 @@ function AddShield(data)
     if not data.ShieldMaxHP then
         data.ShieldMaxHP=200
     end
+    local durations=10
+
     if not data.ShieldOnCD then
         data.ShieldOnCD = true
         StatCDText(20,data.DarkE)
         for i=1,4 do
-            ShieldHP[GetHandleId(heroes[i])]={}
-            ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
-            local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
-            ShieldHP[GetHandleId(heroes[i])].eff=eff
-            TimerStart(CreateTimer(), 10, false, function()
-                DestroyEffect(eff)
-                ShieldHP[GetHandleId(heroes[i])].hp=0
-            end)
+            if UnitAlive(heroes[i]) then
+                ShieldHP[GetHandleId(heroes[i])]={}
+                ShieldHP[GetHandleId(heroes[i])].fh=CreateRamaSprite("exploder_sprite", PortraitFH[GetHandleId(heroes[i])],10,0.62)
+                ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
+                local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
+                ShieldHP[GetHandleId(heroes[i])].eff=eff
+                TimerStart(CreateTimer(), durations, false, function()
+                    DestroyEffect(eff)
+                    ShieldHP[GetHandleId(heroes[i])].hp=0
+                end)
+            end
         end
         TimerStart(CreateTimer(), 20, false, function()
             data.ShieldOnCD = false
@@ -5893,7 +5965,7 @@ end
 ---
 function StartMeteor(data)
     --Effect/FlameGroundEX.mdl
-    TimerStart(CreateTimer(), 5, true, function()
+    TimerStart(CreateTimer(), 1.5, true, function()
         local enemy=FindFirstEnemy(HeroMegumin,1000)
         local x,y=GetUnitXY(enemy)
         if enemy then
@@ -6937,6 +7009,9 @@ function InitWASD(hero)
             --data.ReleaseS=false
             --data.ReleaseD=false
         end
+        if data.IsMoving then
+            HealStep(data)
+        end
         if not StunSystem[GetHandleId(hero)] then
             StunUnit(hero, 0.2)
         end
@@ -6950,6 +7025,7 @@ function InitWASD(hero)
                     data.DirectionMove = angle
 
                     speed = GetUnitMoveSpeed(hero) / 38
+                    data.HeroMoveSpeed=speed
                     --print(speed)
                     if data.isAttacking or (data.ReleaseQ and data.CDSpellQ > 0) or data.ReleaseRMB then
                         speed = 0.5
@@ -7057,7 +7133,7 @@ function CreateWASDActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         --print("W "..GetUnitName(data.UnitHero))
-
+        EnableUserControl(true)
 
 
         if not data.ReleaseW and UnitAlive(data.UnitHero) then
@@ -7511,7 +7587,7 @@ function BlockMouse(data)
             end)
         end
         if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO) then
-            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" then
+            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" or  OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "patrol" then
                 --Строковый список приказов, которые игрок не может выполнить
                 --print(OrderId2String(GetUnitCurrentOrder(data.UnitHero)))
                 if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then

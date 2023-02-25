@@ -26,7 +26,7 @@ function InitTalonBDForKazuma()
             icon = "DDSICO\\SharkStrike",
             description = "Раз в DS сек. появляется акула и полностью пожирает вражеского юнита",
             level = 0,
-            DS = { 5, 15, 10 },
+            DS = { 20, 15, 10 },
             pos = 3,
         },
         [4] = {
@@ -40,7 +40,7 @@ function InitTalonBDForKazuma()
         [5] = {
             name = "Исцеляющий шаг",
             icon = "DDSICO\\HealStep",
-            description = "Когда Казума двигается он немного исцеляется на DS здоровья, за каждые 1000 ед пути",
+            description = "Когда Казума двигается он немного исцеляется на DS здоровья, за каждые 2000 ед пути",
             level = 0,
             DS = { 50, 100, 150 },
             pos = 5,

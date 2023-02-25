@@ -29,12 +29,16 @@ function HealUnit(hero, amount, flag, eff)
     if LoosingHP <= amount then
         TotalHeal = LoosingHP
     end
-    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
     SetUnitState(hero, UNIT_STATE_LIFE, CurrentHP + TotalHeal)
+    DestroyEffect(AddSpecialEffectTarget(eff, hero, "overhead"))
 
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         if HERO[GetPlayerId(GetOwningPlayer(hero))] then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            if UnitAlive(hero) and TotalHeal>0 then  -- показ справйта лечения
+                CreateRamaSprite("hearts_sprite", PortraitFH[GetHandleId(hero)],2,0.6)
+            end
+
             data.ShowHealSec = 0.3
             if not data.ShowHealAmount then
                 data.ShowHealAmount = 0

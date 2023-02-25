@@ -120,8 +120,13 @@ function OnPostDamage()
                 UnitAddForceSimple(caster, AngleSource - 180, 10, 50)
                 FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Удар в щит", GetOwningPlayer(target))
             else
-                DestroyEffect(ShieldHP[GetHandleId(target)].eff)
-                ShieldHP[GetHandleId(target)].eff = nil
+                if ShieldHP[GetHandleId(target)].eff then
+                    DestroyEffect(ShieldHP[GetHandleId(target)].eff)
+                    ShieldHP[GetHandleId(target)].eff = nil
+                    BlzDestroyFrame(ShieldHP[GetHandleId(target)].fh)
+                    ShieldHP[GetHandleId(target)].fh=nil
+                    FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Цит сломан", GetOwningPlayer(target))
+                end
                 --print("щит сломан досрочно")
             end
         end

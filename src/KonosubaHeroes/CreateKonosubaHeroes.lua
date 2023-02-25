@@ -20,7 +20,6 @@ function CreateKonosubaHeroes()
 
     HeroMegumin = CreateUnit(Player(0), MeguminID, x, y, 0)
 
-
     InitActiveSpellPanel(data)
     --скрываем изначально
     --BlzPauseUnitEx(HeroAqua, true)
@@ -30,26 +29,25 @@ function CreateKonosubaHeroes()
     --BlzPauseUnitEx(HeroMegumin, true)
     ShowUnit(HeroMegumin, false)
 
-    StunUnit(HeroKazuma,0.1)
-    StunUnit(HeroAqua,0.1)
-    StunUnit(HeroDarkness,0.1)
-    StunUnit(HeroMegumin,0.1)
+    StunUnit(HeroKazuma, 0.1)
+    StunUnit(HeroAqua, 0.1)
+    StunUnit(HeroDarkness, 0.1)
+    StunUnit(HeroMegumin, 0.1)
 
-    UnitAddAbility(HeroKazuma,FourCC("Abun"))
-    UnitAddAbility(HeroAqua,FourCC("Abun"))
-    UnitAddAbility(HeroDarkness,FourCC("Abun"))
-    UnitAddAbility(HeroMegumin,FourCC("Abun"))
+    UnitAddAbility(HeroKazuma, FourCC("Abun"))
+    UnitAddAbility(HeroAqua, FourCC("Abun"))
+    UnitAddAbility(HeroDarkness, FourCC("Abun"))
+    UnitAddAbility(HeroMegumin, FourCC("Abun"))
 
-    SuspendHeroXP(HeroKazuma,true)
-    SuspendHeroXP(HeroAqua,true)
-    SuspendHeroXP(HeroDarkness,true)
-    SuspendHeroXP(HeroMegumin,true)
+    SuspendHeroXP(HeroKazuma, true)
+    SuspendHeroXP(HeroAqua, true)
+    SuspendHeroXP(HeroDarkness, true)
+    SuspendHeroXP(HeroMegumin, true)
 
     data.UnitHero = HeroKazuma
     SelectOnceHero(data, KazumaID)
 
     InitWASD(data.UnitHero)
-
 
     local xh, yh = -0.07, 0.596
     local step = 0.13
@@ -69,10 +67,10 @@ function SelectOnceHero(data, id)
 
         if id == KazumaID then
             --print(1)
-            BlzFrameSetVisible(data.ContainerSpellKazuma,true)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, true)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroKazuma
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -85,14 +83,14 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
         elseif id == AquaID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,true)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, true)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroAqua
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -105,14 +103,14 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroDarkness, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
         elseif id == DarknessID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,true)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,false)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, true)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, false)
             data.UnitHero = HeroDarkness
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -125,15 +123,15 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroMegumin, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroMegumin,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroMegumin, 5000, 5000)
 
         elseif id == MeguminID then
-            BlzFrameSetVisible(data.ContainerSpellKazuma,false)
-            BlzFrameSetVisible(data.ContainerSpellAqua,false)
-            BlzFrameSetVisible(data.ContainerSpellDarkness,false)
-            BlzFrameSetVisible(data.ContainerSpellMegumin,true)
+            BlzFrameSetVisible(data.ContainerSpellKazuma, false)
+            BlzFrameSetVisible(data.ContainerSpellAqua, false)
+            BlzFrameSetVisible(data.ContainerSpellDarkness, false)
+            BlzFrameSetVisible(data.ContainerSpellMegumin, true)
             data.UnitHero = HeroMegumin
             --BlzPauseUnitEx(data.UnitHero, false)
             ShowUnit(data.UnitHero, true)
@@ -146,9 +144,9 @@ function SelectOnceHero(data, id)
             ShowUnit(HeroAqua, false)
             ShowUnit(HeroDarkness, false)
 
-            SetUnitPositionSmooth(HeroKazuma,5000,5000)
-            SetUnitPositionSmooth(HeroAqua,5000,5000)
-            SetUnitPositionSmooth(HeroDarkness,5000,5000)
+            SetUnitPositionSmooth(HeroKazuma, 5000, 5000)
+            SetUnitPositionSmooth(HeroAqua, 5000, 5000)
+            SetUnitPositionSmooth(HeroDarkness, 5000, 5000)
         end
     else
         return
@@ -157,9 +155,10 @@ function SelectOnceHero(data, id)
     SetUnitPositionSmooth(data.UnitHero, x, y)
     BlzSetUnitFacingEx(data.UnitHero, angle)
     SelectUnitForPlayerSingle(data.UnitHero, Player(data.pid))
-    SetUnitTimeScale(data.UnitHero,1)
-    if x>=4500 then
+    SetUnitTimeScale(data.UnitHero, 1)
+    if x >= 4500 then
         print("Игра сломалась?")
+        SetUnitPositionSmooth(data.UnitHero, GetPlayerStartLocationX(Player(0)), GetPlayerStartLocationY(Player(0)))
     end
     InitAnimations(nil, data)
     if data.IsMoving then
@@ -175,11 +174,12 @@ end
 function CreateHudForHero(hero, x, y)
     CreateHeroPortrait(hero, x - GNext, y)
     CreateHPBar(hero, x, y)
-    CreateMANABar(hero, x, y- GNext/4)
-    CreateEXPBar(hero, x, y- GNext/2)
+    CreateMANABar(hero, x, y - GNext / 4)
+    CreateEXPBar(hero, x, y - GNext / 2)
     InitRegistryEvent(hero)
 end
-CrossFH={}
+CrossFH = {}
+PortraitFH = {}
 function CreateHeroPortrait(hero, x, y)
     local ico = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0), '', 0)
     BlzFrameSetParent(ico, BlzGetFrameByName("ConsoleUIBackdrop", 0))
@@ -199,13 +199,15 @@ function CreateHeroPortrait(hero, x, y)
     BlzFrameSetTexture(ico, texture, 0, true)
     BlzFrameSetSize(ico, GNext, GNext)
     BlzFrameSetAbsPoint(ico, FRAMEPOINT_LEFT, x, 0.6 - GNext / 2)
+    PortraitFH[GetHandleId(hero)] = ico
 
     local cross = BlzCreateFrameByType('BACKDROP', 'FaceButtonIcon', ico, '', 0)
     BlzFrameSetTexture(cross, "crossmark", 0, true)
     BlzFrameSetSize(cross, GNext, GNext)
-    BlzFrameSetAllPoints(cross,ico)
-    CrossFH[GetHandleId(hero)]=cross
-    BlzFrameSetVisible(CrossFH[GetHandleId(hero)],false)
+    BlzFrameSetAllPoints(cross, ico)
+    CrossFH[GetHandleId(hero)] = cross
+    BlzFrameSetVisible(CrossFH[GetHandleId(hero)], false)
+    --CreateRamaSprite("exploder_sprite", PortraitFH[GetHandleId(hero)],10,0.62)
     --crossmark
 end
 

@@ -15,18 +15,23 @@ function AddShield(data)
     if not data.ShieldMaxHP then
         data.ShieldMaxHP=200
     end
+    local durations=10
+
     if not data.ShieldOnCD then
         data.ShieldOnCD = true
         StatCDText(20,data.DarkE)
         for i=1,4 do
-            ShieldHP[GetHandleId(heroes[i])]={}
-            ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
-            local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
-            ShieldHP[GetHandleId(heroes[i])].eff=eff
-            TimerStart(CreateTimer(), 10, false, function()
-                DestroyEffect(eff)
-                ShieldHP[GetHandleId(heroes[i])].hp=0
-            end)
+            if UnitAlive(heroes[i]) then
+                ShieldHP[GetHandleId(heroes[i])]={}
+                ShieldHP[GetHandleId(heroes[i])].fh=CreateRamaSprite("exploder_sprite", PortraitFH[GetHandleId(heroes[i])],10,0.62)
+                ShieldHP[GetHandleId(heroes[i])].hp=data.ShieldMaxHP
+                local eff = AddSpecialEffectTarget("Effect\\SC2ForceField_ByEpsilon.mdl", heroes[i], "origin")
+                ShieldHP[GetHandleId(heroes[i])].eff=eff
+                TimerStart(CreateTimer(), durations, false, function()
+                    DestroyEffect(eff)
+                    ShieldHP[GetHandleId(heroes[i])].hp=0
+                end)
+            end
         end
         TimerStart(CreateTimer(), 20, false, function()
             data.ShieldOnCD = false

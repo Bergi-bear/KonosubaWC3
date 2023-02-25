@@ -26,7 +26,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BrokenHeart",
             description = "Получение урона возвращается DS%% урона всем врагам в малом радиусе 250",
             level = 0,
-            DS = { 100, 200, 300, 400, 500 },
+            DS = { 5,10,15,20,25,30 },
             pos = 3,
         },
         [4] = {

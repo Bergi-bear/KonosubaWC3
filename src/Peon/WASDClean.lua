@@ -330,6 +330,9 @@ function InitWASD(hero)
             --data.ReleaseS=false
             --data.ReleaseD=false
         end
+        if data.IsMoving then
+            HealStep(data)
+        end
         if not StunSystem[GetHandleId(hero)] then
             StunUnit(hero, 0.2)
         end
@@ -343,6 +346,7 @@ function InitWASD(hero)
                     data.DirectionMove = angle
 
                     speed = GetUnitMoveSpeed(hero) / 38
+                    data.HeroMoveSpeed=speed
                     --print(speed)
                     if data.isAttacking or (data.ReleaseQ and data.CDSpellQ > 0) or data.ReleaseRMB then
                         speed = 0.5
@@ -450,7 +454,7 @@ function CreateWASDActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         --print("W "..GetUnitName(data.UnitHero))
-
+        EnableUserControl(true)
 
 
         if not data.ReleaseW and UnitAlive(data.UnitHero) then
@@ -904,7 +908,7 @@ function BlockMouse(data)
             end)
         end
         if IsUnitType(GetTriggerUnit(),UNIT_TYPE_HERO) then
-            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" then
+            if OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "smart" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "move" or OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "attack" or  OrderId2String(GetUnitCurrentOrder(GetTriggerUnit())) == "patrol" then
                 --Строковый список приказов, которые игрок не может выполнить
                 --print(OrderId2String(GetUnitCurrentOrder(data.UnitHero)))
                 if OrderId2String(GetUnitCurrentOrder(data.UnitHero)) == "smart" then

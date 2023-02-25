@@ -10,8 +10,21 @@ function InitMouseClickEvent()
         TriggerRegisterPlayerEvent(TrigPressLMB, Player(i), EVENT_PLAYER_MOUSE_DOWN)
     end
     TriggerAddAction(TrigPressLMB, function()
+        EnableUserControl(true)
+        TimerStart(CreateTimer(), TIMER_PERIOD, false, function()
+            EnableUserControl(true)
+        end)
+        TimerStart(CreateTimer(), 0.1, false, function()
+            EnableUserControl(true)
+        end)
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
-            --print("клик левой")
+           -- print("клик левой")
+
+            EnableUserControl(true)
+            BlzPauseUnitEx(GetTriggerUnit(), true)
+            IssueImmediateOrder(GetTriggerUnit(), "stop")
+            BlzPauseUnitEx(GetTriggerUnit(), false)
+
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = true
 
@@ -23,7 +36,12 @@ function InitMouseClickEvent()
         TriggerRegisterPlayerEvent(TrigDEPressLMB, Player(i), EVENT_PLAYER_MOUSE_UP)
     end
     TriggerAddAction(TrigDEPressLMB, function()
+
+        --EnableUserControl(true)
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
+
+
+            --ForceUICancelBJ(Player(0))
             local data = HERO[GetPlayerId(GetTriggerPlayer())]
             data.LMBIsPressed = false
             local pid = data.pid
@@ -67,8 +85,8 @@ function InitMouseClickEvent()
                 data.StartWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.StartWaveCastY = BlzGetTriggerPlayerMouseY()
             end
-            if data.UnitHero==HeroDarkness then
-                PushHandWave(data,BlzGetTriggerPlayerMouseX(),BlzGetTriggerPlayerMouseY())
+            if data.UnitHero == HeroDarkness then
+                PushHandWave(data, BlzGetTriggerPlayerMouseX(), BlzGetTriggerPlayerMouseY())
 
             end
         end
@@ -89,9 +107,9 @@ function InitMouseClickEvent()
             else
                 data.EndWaveCastX = BlzGetTriggerPlayerMouseX()
                 data.EndWaveCastY = BlzGetTriggerPlayerMouseY()
-                if GetUnitState( data.UnitHero,UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
+                if GetUnitState(data.UnitHero, UNIT_STATE_MANA) > 10 and UnitAlive(data.UnitHero) then
                     SpellCastByName(data, "wave")
-                    UnitAddMana(data.UnitHero,-10)
+                    UnitAddMana(data.UnitHero, -10)
                 else
                     print("недостаточно маны")
                 end
