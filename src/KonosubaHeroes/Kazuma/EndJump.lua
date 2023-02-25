@@ -4,6 +4,7 @@
 --- DateTime: 18.02.2023 13:25
 ---
 function EndJump(data)
+    StatCDText(4,data.KazumaQ)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x,y))

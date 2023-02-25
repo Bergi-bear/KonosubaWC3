@@ -8,7 +8,7 @@ function StartMeteor(data)
     TimerStart(CreateTimer(), 1.5, true, function()
         local enemy=FindFirstEnemy(HeroMegumin,1000)
         local x,y=GetUnitXY(enemy)
-        if enemy then
+        if enemy and UnitAlive(HeroMegumin) then
             MarkAndFall(x, y, "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile", HeroMegumin,0.5)
         end
     end)
@@ -43,7 +43,7 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 --PlayerSeeNoiseInRangeTimed(0.5, x, y)
-                UnitDamageArea(hero, data.FirstMeteorDamage, x, y, 150) --при падении камня
+                UnitDamageArea(hero, data.FirstMeteorDamage, x, y, 300) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
                 if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then

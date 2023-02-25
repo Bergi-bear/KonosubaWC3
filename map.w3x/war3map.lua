@@ -261,22 +261,10 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                         end
                     end
                     data.ResetSeriesTime = 0
-                    if data.IllusionDashCDFH then
-                        if not data.IllusionDashCurrentCD then
-                            data.IllusionDashCurrentCD = 1
-                        end
-                        if data.IllusionDashCurrentCD <= 0 then
-                            local talon = GlobalTalons[data.pid]["HeroBlademaster"][4]
-                            local cd = 10
-                            data.IllusionDashCurrentCD = cd
-                            StartFrameCD(cd, data.IllusionDashCDFH)
-                            local damage = talon.DS[talon.level]
-                            UnitDamageArea(hero, damage, newX, newY, 150)
-                            UnitAddForceSimple(hero, angle - 180, 25, 200, "ignore")
-                            TimerStart(CreateTimer(), cd, false, function()
-                                data.IllusionDashCurrentCD = 0
-                                DestroyTimer(GetExpiredTimer())
-                            end)
+                    if hero==HeroDarkness then
+                        if data.QAndDash then
+                            --print("даркнес закончила рывок")
+                            ReversePolarity(data,true)
                         end
                     end
 
@@ -858,11 +846,13 @@ function OnPostDamage()
                 UnitAddForceSimple(caster, AngleSource - 180, 10, 50)
                 FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Удар в щит", GetOwningPlayer(target))
             else
-                DestroyEffect(ShieldHP[GetHandleId(target)].eff)
-                ShieldHP[GetHandleId(target)].eff = nil
-                BlzDestroyFrame(ShieldHP[GetHandleId(target)].fh)
-                ShieldHP[GetHandleId(target)].fh=nil
-                FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Цит сломан", GetOwningPlayer(target))
+                if ShieldHP[GetHandleId(target)].eff then
+                    DestroyEffect(ShieldHP[GetHandleId(target)].eff)
+                    ShieldHP[GetHandleId(target)].eff = nil
+                    BlzDestroyFrame(ShieldHP[GetHandleId(target)].fh)
+                    ShieldHP[GetHandleId(target)].fh=nil
+                    FlyTextTagShieldXY(GetUnitX(target), GetUnitY(target), "Цит сломан", GetOwningPlayer(target))
+                end
                 --print("щит сломан досрочно")
             end
         end
@@ -887,10 +877,15 @@ function OnPostDamage()
                 UnitDamageArea(target, damage*data.BrokenHeartReturnDamage/100, GetUnitX(target), GetUnitY(target), 250)
                 DestroyEffect(AddSpecialEffectTarget("Effect/727_GreenRing", target,"origin"))
             end
+        elseif target == HeroMegumin  then
+            if data.AngryCloudDamage then
+                DestroyEffect(AddSpecialEffect("Effect/LightningWrath",GetUnitXY(caster)))
+                UnitDamageArea(target, data.AngryCloudDamage , GetUnitX(caster), GetUnitY(caster), 250)
+            end
         end
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
+    if not  IsUnitType(target, UNIT_TYPE_HERO)  and IsUnitType(caster, UNIT_TYPE_HERO)  then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
@@ -901,11 +896,9 @@ function OnPostDamage()
             if not showData.tag then
                 showData.tag = FlyTextTagCriticalStrike(target, R2I(matchShow), GetOwningPlayer(caster), true)
             else
-
                 SetTextTagText(showData.tag, R2I(matchShow), 0.024 + (showData.k))
                 SetTextTagVelocity(showData.tag, 0, 0.01)
                 SetTextTagLifespan(showData.tag, 99)
-
             end
         end
     end
@@ -939,9 +932,11 @@ function AddDamage2Show(hero, damage)
                 --print("таймер уничтожен")
                 TimerStart(CreateTimer(), 1, false, function()
                     DestroyTextTag(data.tag)
-                    data.tag = nil
+                    --data.tag = nil
                     DestroyTimer(GetExpiredTimer())
                 end)
+            else
+
             end
 
             SetTextTagPos(data.tag, GetUnitX(hero), GetUnitY(hero), 0)
@@ -954,6 +949,11 @@ function AddDamage2Show(hero, damage)
                 data.k = 0
                 data.tag = nil
                 --print("сброс показа урона")
+            end
+            if data.sec>=10 then
+                SetTextTagLifespan(data.tag, 2)
+                DestroyTextTag(data.tag)
+                print("время показа превышено")
             end
         end)
     else
@@ -1266,6 +1266,9 @@ function HealUnit(hero, amount, flag, eff)
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         if HERO[GetPlayerId(GetOwningPlayer(hero))] then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            if hero==HeroDarkness and data.RoadLeafAmount then
+                amount=amount+data.RoadLeafAmount
+            end
             amount = amount * data.HealRate
         end
     end
@@ -1805,15 +1808,15 @@ function InitMouseClickEvent()
     TriggerAddAction(TrigPressLMB, function()
         EnableUserControl(true)
         TimerStart(CreateTimer(), TIMER_PERIOD, false, function()
-            EnableUserControl(true)
+           -- EnableUserControl(true)
         end)
         TimerStart(CreateTimer(), 0.1, false, function()
-            EnableUserControl(true)
+            --EnableUserControl(true)
         end)
         if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_LEFT then
            -- print("клик левой")
 
-            EnableUserControl(true)
+            --EnableUserControl(true)
             BlzPauseUnitEx(GetTriggerUnit(), true)
             IssueImmediateOrder(GetTriggerUnit(), "stop")
             BlzPauseUnitEx(GetTriggerUnit(), false)
@@ -4965,7 +4968,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\LionMask",
             description = "При получении 300 урона выпускает волну силы наносящую DS урон",
             level = 0,
-            DS = { 100, 200, 300,400 },
+            DS = { 100, 200, 300, 400 },
             pos = 2,
         },
         [3] = {
@@ -4973,7 +4976,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\BrokenHeart",
             description = "Получение урона возвращается DS% урона всем врагам в малом радиусе 250",
             level = 0,
-            DS = { 5,10,15,20,25,30 },
+            DS = { 5, 10, 15, 20, 25, 30 },
             pos = 3,
         },
         [4] = {
@@ -4981,7 +4984,7 @@ function InitTalonBDForDarkNess()
             icon = "DDSICO\\EcoEat",
             description = "Увеличивает максимальное здоровье на DS",
             level = 0,
-            DS = { 200, 350, 500, 500,500 },
+            DS = { 200, 350, 500, 500, 500 },
             pos = 4,
         },
         [5] = {
@@ -5005,6 +5008,41 @@ function InitTalonBDForDarkNess()
             description = "Щит теперь способен поглотить DS урона ",
             level = 0,
             DS = { 300, 400, 500, 600, 700 },
+        },
+        [8] = {
+            name = "Принцесса из башни",
+            icon = "DDSICO\\PrincessTower",
+            description = "Увеличивает естественную броню Лалатины ещё на DS единиц",
+            level = 0,
+            DS = { 5, 5, 5, 5, 5, 10 },
+        },
+        [9] = {
+            name = "Золотая корона",
+            icon = "DDSICO\\GoldCrown",
+            description = "Применяет способность DS при завершении рывка",
+            level = 0,
+            DS = { "Стягивание Q" },
+        },
+        [10] = {
+            name = "Тройной толчок",
+            icon = "DDSICO\\TripleBall",
+            description = "Позволяет стрелять сразу DS шарами при применении отталкивания RMB",
+            level = 0,
+            DS = { "Тремя" },
+        },
+        [11] = {
+            name = "Подорожник",
+            icon = "DDSICO\\Roadleef",
+            description = "Увеличивает эффект получаемого лечения на DS ед., при любых обстоятельствах",
+            level = 0,
+            DS = { 1, 2, 3, 4, 5 },
+        },
+        [12] = {
+            name = "Теневая тентакля",
+            icon = "DDSICO\\Tentacle",
+            description = "Каждые 5 секунд хватает случайного врага и убирает его из игры на 6 секунд, уменьшает максимальное хп на DS% за каждую секунду действия",
+            level = 0,
+            DS = { 5 },
         },
     }
 end
@@ -5170,9 +5208,9 @@ function InitTalonBDForKazuma()
         [1] = {
             name = "Крепкая хватка",
             icon = "DDSICO\\StrongWeapon",
-            description = "Увеличивает силу атаки меча",
+            description = "Увеличивает силу атаки меча на DS",
             level = 0,
-            DS = { 20, 40, 80 },
+            DS = { 50, 100, 150,200 },
             pos = 1,
         },
         [2] = {
@@ -5228,13 +5266,13 @@ function LearnTalonByName(name, talon)
     elseif name == "Натуральное питание" then
         AddMaxLife(HeroDarkness, talon.DS[talon.level])
     elseif name == "Фамильная реликвия" then
+        SetUnitAbilityLevel(HeroDarkness, FourCC("A001"), 1 + GetUnitAbilityLevel(HeroDarkness, FourCC("A001")))
         UnitAddAbility(HeroDarkness, FourCC("A001"))
-        SetUnitAbilityLevel(HeroDarkness, FourCC("A001"), talon.DS[talon.level])
     elseif name == "Крепкая хватка" then
         data.AddMeleeDamage = talon.DS[talon.level]
     elseif name == "Ледяной болт" then
+        SetUnitAbilityLevel(HeroKazuma, FourCC("A000"), 1 + GetUnitAbilityLevel(HeroKazuma, FourCC("A000")))
         UnitAddAbility(HeroKazuma, FourCC("A000"))
-        SetUnitAbilityLevel(HeroKazuma, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Удар акулы" then
         if not data.FishKillPeriod then
             data.FishKillPeriod = talon.DS[talon.level]
@@ -5247,44 +5285,68 @@ function LearnTalonByName(name, talon)
     elseif name == "Посох маны" then
         BlzSetUnitMaxMana(HeroAqua, BlzGetUnitMaxMana(HeroAqua) + talon.DS[talon.level])
     elseif name == "Струя воды" then
+        SetUnitAbilityLevel(HeroAqua, FourCC("A000"), 1 + GetUnitAbilityLevel(HeroAqua, FourCC("A000")))
         UnitAddAbility(HeroAqua, FourCC("A000"))
-        SetUnitAbilityLevel(HeroAqua, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Повод для акулы" then
-        data.HasSharkFromDeep=true
+        data.HasSharkFromDeep = true
     elseif name == "Сердечные переживания" then
         if not data.HalfPartyHealAmount then
             HalfPartyHeal(data)
         end
-        data.HalfPartyHealAmount=talon.DS[talon.level]
+        data.HalfPartyHealAmount = talon.DS[talon.level]
     elseif name == "Призыв петуеникса" then
         StartAiPhoenix(data)
     elseif name == "Посох алых Мазоку" then
         BlzSetUnitMaxMana(HeroMegumin, BlzGetUnitMaxMana(HeroMegumin) + talon.DS[talon.level])
     elseif name == "Пополняемый запас" then
         if not data.ManaReplenish then
-            data.ManaReplenish=true
-            StartManaReplenish(HeroMegumin,data)
+            data.ManaReplenish = true
+            StartManaReplenish(HeroMegumin, data)
         end
-        data.ManaReplenishCount=talon.DS[talon.level]
+        data.ManaReplenishCount = talon.DS[talon.level]
     elseif name == "Кольцо огня" then
         if not data.FireCircleDamage then
-            data.FireCircleDamage=talon.DS[talon.level]
+            data.FireCircleDamage = talon.DS[talon.level]
             StartFireCircle(data)
         end
-        data.FireCircleDamage=talon.DS[talon.level]
+        data.FireCircleDamage = talon.DS[talon.level]
     elseif name == "Первый среди метеоров" then
         if not data.FirstMeteorDamage then
-            data.FirstMeteorDamage=talon.DS[talon.level]
+            data.FirstMeteorDamage = talon.DS[talon.level]
             StartMeteor(data)
         end
-        data.FirstMeteorDamage=talon.DS[talon.level]
+        data.FirstMeteorDamage = talon.DS[talon.level]
     elseif name == "Прочнее щит" then
         data.ShieldMaxHP = talon.DS[talon.level]
     elseif name == "Исцеляющий шаг" then
-        data.HealStepAmount=talon.DS[talon.level]
-        data.HealStepCurrent=0
+        data.HealStepAmount = talon.DS[talon.level]
+        data.HealStepCurrent = 0
+    elseif name == "Злое облако" then
+        data.AngryCloudDamage = talon.DS[talon.level]
+    elseif name == "Хожу по костям твоим" then
+        if not data.FindBonesAmount then
+            data.FindBonesAmount = talon.DS[talon.level]
+            StartFindBones(data)
+        end
+        data.FindBonesAmount = talon.DS[talon.level]
+    elseif name == "Принцесса из башни" then
+        print("было брони", BlzGetUnitArmor(HeroDarkness))
+        BlzSetUnitArmor(HeroDarkness, BlzGetUnitArmor(HeroDarkness) + talon.DS[talon.level])
+        print("стало брони", BlzGetUnitArmor(HeroDarkness))
+    elseif name == "Тройной толчок" then
+        data.TripleRMB = true
+    elseif name == "Подорожник" then
+        data.RoadLeafAmount = talon.DS[talon.level]
+    elseif name == "Теневая тентакля" then
+        UnitAddAbility(HeroDarkness,FourCC("A003"))
+        data.DarkTentacles=true
+        FindTentacled()
+    elseif name == "Золотая корона" then
+        data.QAndDash=true
     end
 end
+
+
 
 
 ---
@@ -5328,6 +5390,20 @@ function InitTalonBDForMegumin()
             description = "Каждые 1.5 секунды на случайного врага падает метеор, наносящий DS урона по небольшой области",
             level = 0,
             DS = { 200,400,600,800,1000 },
+        },
+        [6] = {
+            name = "Злое облако",
+            icon = "DDSICO\\AngyCloud",
+            description = "Всякий раз при получении урона, молния из плазмы бьёт обидчика на DS урона",
+            level = 0,
+            DS = { 500,1000,1500,2000,2500 },
+        },
+        [7] = {
+            name = "Хожу по костям твоим",
+            icon = "DDSICO\\3skull",
+            description = "Мегумим топчет черепа своих врагов и восстанавливает DS маны",
+            level = 0,
+            DS = { 1,2,3,4,5 },
         },
 
     }
@@ -5640,6 +5716,7 @@ end
 --- DateTime: 18.02.2023 13:25
 ---
 function EndJump(data)
+    StatCDText(4,data.KazumaQ)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x,y))
@@ -5810,6 +5887,36 @@ end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
 --- Created by User.
+--- DateTime: 19.02.2023 19:59
+---
+function FindTentacled(data)
+    TimerStart(CreateTimer(), 1, true, function()
+        local x, y = GetUnitXY(HeroDarkness)
+        TimerStart(CreateTimer(), 0.5, true, function()
+            local e = nil
+            local k = 0
+            --print("ищем")
+            x, y = GetUnitXY(HeroDarkness)
+            GroupEnumUnitsInRange(perebor, x, y, 500, nil)
+            while true do
+                e = FirstOfGroup(perebor)
+
+                if e == nil then
+                    break
+                end
+                if UnitAlive(e) and GetUnitAbilityLevel(e, FourCC("Btsp")) >= 1 or GetUnitAbilityLevel(e, FourCC("Btsa")) >= 1 then
+                    --print("найден юнит поднятый тентаклей", GetUnitName(e))
+                    SetUnitLifePercentBJ(e,GetUnitLifePercent(e)-data.DarkTentacles)
+                end
+                GroupRemoveUnit(perebor, e)
+            end
+
+        end)
+    end)
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
 --- DateTime: 19.02.2023 12:26
 ---
 function HalfPartyHeal(data)
@@ -5850,11 +5957,16 @@ end
 ---
 function PushHandWave(data, xEnd, yEnd)
     if not data.PushHandWaveOnCD then
+        local damage=100
         StatCDText(3,data.DarkRMB)
         data.PushHandWaveOnCD = true
         local hero = data.UnitHero
         local angle = -180 + AngleBetweenXY(xEnd, yEnd, GetUnitXY(hero)) / bj_DEGTORAD
-        CreateAndForceBullet(hero, angle, 30, "Valiant Charge Holy", nil, nil, 100, 500)
+        CreateAndForceBullet(hero, angle, 30, "Valiant Charge Holy", nil, nil, damage, 500)
+        if data.TripleRMB then
+            CreateAndForceBullet(hero, angle-15, 30, "Valiant Charge Holy", nil, nil, damage, 500)
+            CreateAndForceBullet(hero, angle+15, 30, "Valiant Charge Holy", nil, nil, damage, 500)
+        end
         TimerStart(CreateTimer(), 3, false, function()
             data.PushHandWaveOnCD = false
         end)
@@ -5892,11 +6004,13 @@ end
 --- Created by User.
 --- DateTime: 18.02.2023 15:34
 ---
-function ReversePolarity(data)
+function ReversePolarity(data,noCD)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("Effect\\Concecration", x,y))
-    StatCDText(5,data.DarkQ)
+    if not noCD then
+        StatCDText(4,data.DarkQ)
+    end
     local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 300)
     for i=1,#t do
         local angle=AngleBetweenUnits(t[i],hero)
@@ -5927,14 +6041,16 @@ end
 function MegCastUltima(data)
     local hero = data.UnitHero
     local x, y = GetUnitXY(hero)
-    local damage=GetUnitState(hero,UNIT_STATE_MANA)*10
+    local damage = GetUnitState(hero, UNIT_STATE_MANA) * 10
     UnitDamageArea(hero, damage, x, y, 3000)
-    local eff=AddSpecialEffect("Effect/A-Bomb.mdl",x,y)
-    BlzSetSpecialEffectScale(eff,5)
-    local eff2=AddSpecialEffect("Effect/DustExplosion.mdl",x,y)
-    BlzSetSpecialEffectScale(eff,5)
-    SetUnitState(hero,UNIT_STATE_LIFE,1)
-    SetUnitState(hero,UNIT_STATE_MANA,1)
+    local eff = AddSpecialEffect("Effect/A-Bomb.mdl", x, y)
+    BlzSetSpecialEffectScale(eff, 5)
+    local eff2 = AddSpecialEffect("Effect/DustExplosion.mdl", x, y)
+    BlzSetSpecialEffectScale(eff, 5)
+    local eff3 = AddSpecialEffect("A_P.blast2", x, y)
+
+    SetUnitState(hero, UNIT_STATE_LIFE, 1)
+    SetUnitState(hero, UNIT_STATE_MANA, 1)
 end
 
 
@@ -5947,6 +6063,36 @@ function StartAiPhoenix(data)
     local fen = CreateUnit(GetOwningPlayer(data.UnitHero), FourCC("hphx"), data.x, data.y, 0)
     StartCompanionAI(fen, data)
 
+end
+---
+--- Generated by EmmyLua(https://github.com/EmmyLua)
+--- Created by User.
+--- DateTime: 25.02.2023 13:55
+---
+function StartFindBones(data)
+    local x, y = GetUnitXY(HeroMegumin)
+    TimerStart(CreateTimer(), 0.5, true, function()
+        local e = nil
+        local k = 0
+        --print("ищем")
+        x, y = GetUnitXY(HeroMegumin)
+        GroupEnumUnitsInRange(perebor, x, y, 250, nil)
+        while true do
+            e = FirstOfGroup(perebor)
+
+            if e == nil then
+                break
+            end
+            if not UnitAlive(e) and not IsUnitType(e, UNIT_TYPE_HERO) then
+                --print("найден труп", GetUnitName(e))
+                DestroyEffect(AddSpecialEffect("Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl", GetUnitXY(e)))
+                UnitAddMana(HeroMegumin, data.FindBonesAmount)
+                RemoveUnit(e)
+            end
+            GroupRemoveUnit(perebor, e)
+        end
+
+    end)
 end
 ---
 --- Generated by EmmyLua(https://github.com/EmmyLua)
@@ -5968,7 +6114,7 @@ function StartMeteor(data)
     TimerStart(CreateTimer(), 1.5, true, function()
         local enemy=FindFirstEnemy(HeroMegumin,1000)
         local x,y=GetUnitXY(enemy)
-        if enemy then
+        if enemy and UnitAlive(HeroMegumin) then
             MarkAndFall(x, y, "Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile", HeroMegumin,0.5)
         end
     end)
@@ -6003,7 +6149,7 @@ function MarkAndFall(x, y, effModel, hero,delay)
                 --SetDestructableInvulnerable(nd,true)
                 DestroyEffect(AddSpecialEffect("ThunderclapCasterClassic", x, y))
                 --PlayerSeeNoiseInRangeTimed(0.5, x, y)
-                UnitDamageArea(hero, data.FirstMeteorDamage, x, y, 150) --при падении камня
+                UnitDamageArea(hero, data.FirstMeteorDamage, x, y, 300) --при падении камня
                 local k = GetUnitLifePercent(hero) / 100
                 k = 1 - k
                 if effModel =="Abilities\\Weapons\\DemonHunterMissile\\DemonHunterMissile" then
@@ -7133,7 +7279,7 @@ function CreateWASDActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         --print("W "..GetUnitName(data.UnitHero))
-        EnableUserControl(true)
+        --EnableUserControl(true)
 
 
         if not data.ReleaseW and UnitAlive(data.UnitHero) then

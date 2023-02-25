@@ -181,22 +181,10 @@ function UnitAddForceSimple(hero, angle, speed, distance, flag, pushing)
                         end
                     end
                     data.ResetSeriesTime = 0
-                    if data.IllusionDashCDFH then
-                        if not data.IllusionDashCurrentCD then
-                            data.IllusionDashCurrentCD = 1
-                        end
-                        if data.IllusionDashCurrentCD <= 0 then
-                            local talon = GlobalTalons[data.pid]["HeroBlademaster"][4]
-                            local cd = 10
-                            data.IllusionDashCurrentCD = cd
-                            StartFrameCD(cd, data.IllusionDashCDFH)
-                            local damage = talon.DS[talon.level]
-                            UnitDamageArea(hero, damage, newX, newY, 150)
-                            UnitAddForceSimple(hero, angle - 180, 25, 200, "ignore")
-                            TimerStart(CreateTimer(), cd, false, function()
-                                data.IllusionDashCurrentCD = 0
-                                DestroyTimer(GetExpiredTimer())
-                            end)
+                    if hero==HeroDarkness then
+                        if data.QAndDash then
+                            --print("даркнес закончила рывок")
+                            ReversePolarity(data,true)
                         end
                     end
 

@@ -151,10 +151,15 @@ function OnPostDamage()
                 UnitDamageArea(target, damage*data.BrokenHeartReturnDamage/100, GetUnitX(target), GetUnitY(target), 250)
                 DestroyEffect(AddSpecialEffectTarget("Effect/727_GreenRing", target,"origin"))
             end
+        elseif target == HeroMegumin  then
+            if data.AngryCloudDamage then
+                DestroyEffect(AddSpecialEffect("Effect/LightningWrath",GetUnitXY(caster)))
+                UnitDamageArea(target, data.AngryCloudDamage , GetUnitX(caster), GetUnitY(caster), 250)
+            end
         end
     end
 
-    if GetUnitTypeId(target) ~= HeroID and GetUnitTypeId(caster) == HeroID then
+    if not  IsUnitType(target, UNIT_TYPE_HERO)  and IsUnitType(caster, UNIT_TYPE_HERO)  then
         --Функция должна быть в самом низу
         AddDamage2Show(target, GetEventDamage())
         local data = GetUnitData(caster)
@@ -165,11 +170,9 @@ function OnPostDamage()
             if not showData.tag then
                 showData.tag = FlyTextTagCriticalStrike(target, R2I(matchShow), GetOwningPlayer(caster), true)
             else
-
                 SetTextTagText(showData.tag, R2I(matchShow), 0.024 + (showData.k))
                 SetTextTagVelocity(showData.tag, 0, 0.01)
                 SetTextTagLifespan(showData.tag, 99)
-
             end
         end
     end
@@ -203,9 +206,11 @@ function AddDamage2Show(hero, damage)
                 --print("таймер уничтожен")
                 TimerStart(CreateTimer(), 1, false, function()
                     DestroyTextTag(data.tag)
-                    data.tag = nil
+                    --data.tag = nil
                     DestroyTimer(GetExpiredTimer())
                 end)
+            else
+
             end
 
             SetTextTagPos(data.tag, GetUnitX(hero), GetUnitY(hero), 0)
@@ -218,6 +223,11 @@ function AddDamage2Show(hero, damage)
                 data.k = 0
                 data.tag = nil
                 --print("сброс показа урона")
+            end
+            if data.sec>=10 then
+                SetTextTagLifespan(data.tag, 2)
+                DestroyTextTag(data.tag)
+                print("время показа превышено")
             end
         end)
     else

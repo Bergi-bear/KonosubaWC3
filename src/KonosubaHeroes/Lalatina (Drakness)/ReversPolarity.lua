@@ -3,11 +3,13 @@
 --- Created by User.
 --- DateTime: 18.02.2023 15:34
 ---
-function ReversePolarity(data)
+function ReversePolarity(data,noCD)
     local hero=data.UnitHero
     local x,y=GetUnitXY(hero)
     DestroyEffect(AddSpecialEffect("Effect\\Concecration", x,y))
-    StatCDText(5,data.DarkQ)
+    if not noCD then
+        StatCDText(4,data.DarkQ)
+    end
     local _,_,_,t=UnitDamageArea(data.UnitHero, 300, x, y, 300)
     for i=1,#t do
         local angle=AngleBetweenUnits(t[i],hero)

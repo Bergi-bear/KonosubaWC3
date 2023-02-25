@@ -16,6 +16,9 @@ function HealUnit(hero, amount, flag, eff)
     if IsUnitType(hero, UNIT_TYPE_HERO) then
         if HERO[GetPlayerId(GetOwningPlayer(hero))] then
             local data = HERO[GetPlayerId(GetOwningPlayer(hero))]
+            if hero==HeroDarkness and data.RoadLeafAmount then
+                amount=amount+data.RoadLeafAmount
+            end
             amount = amount * data.HealRate
         end
     end

@@ -6,13 +6,15 @@
 function MegCastUltima(data)
     local hero = data.UnitHero
     local x, y = GetUnitXY(hero)
-    local damage=GetUnitState(hero,UNIT_STATE_MANA)*10
+    local damage = GetUnitState(hero, UNIT_STATE_MANA) * 10
     UnitDamageArea(hero, damage, x, y, 3000)
-    local eff=AddSpecialEffect("Effect/A-Bomb.mdl",x,y)
-    BlzSetSpecialEffectScale(eff,5)
-    local eff2=AddSpecialEffect("Effect/DustExplosion.mdl",x,y)
-    BlzSetSpecialEffectScale(eff,5)
-    SetUnitState(hero,UNIT_STATE_LIFE,1)
-    SetUnitState(hero,UNIT_STATE_MANA,1)
+    local eff = AddSpecialEffect("Effect/A-Bomb.mdl", x, y)
+    BlzSetSpecialEffectScale(eff, 5)
+    local eff2 = AddSpecialEffect("Effect/DustExplosion.mdl", x, y)
+    BlzSetSpecialEffectScale(eff, 5)
+    local eff3 = AddSpecialEffect("A_P.blast2", x, y)
+
+    SetUnitState(hero, UNIT_STATE_LIFE, 1)
+    SetUnitState(hero, UNIT_STATE_MANA, 1)
 end
 

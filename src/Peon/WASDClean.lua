@@ -454,7 +454,7 @@ function CreateWASDActions()
         local pid = GetPlayerId(GetTriggerPlayer())
         local data = HERO[pid]
         --print("W "..GetUnitName(data.UnitHero))
-        EnableUserControl(true)
+        --EnableUserControl(true)
 
 
         if not data.ReleaseW and UnitAlive(data.UnitHero) then

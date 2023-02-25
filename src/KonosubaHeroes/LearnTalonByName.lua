@@ -17,13 +17,13 @@ function LearnTalonByName(name, talon)
     elseif name == "Натуральное питание" then
         AddMaxLife(HeroDarkness, talon.DS[talon.level])
     elseif name == "Фамильная реликвия" then
+        SetUnitAbilityLevel(HeroDarkness, FourCC("A001"), 1 + GetUnitAbilityLevel(HeroDarkness, FourCC("A001")))
         UnitAddAbility(HeroDarkness, FourCC("A001"))
-        SetUnitAbilityLevel(HeroDarkness, FourCC("A001"), talon.DS[talon.level])
     elseif name == "Крепкая хватка" then
         data.AddMeleeDamage = talon.DS[talon.level]
     elseif name == "Ледяной болт" then
+        SetUnitAbilityLevel(HeroKazuma, FourCC("A000"), 1 + GetUnitAbilityLevel(HeroKazuma, FourCC("A000")))
         UnitAddAbility(HeroKazuma, FourCC("A000"))
-        SetUnitAbilityLevel(HeroKazuma, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Удар акулы" then
         if not data.FishKillPeriod then
             data.FishKillPeriod = talon.DS[talon.level]
@@ -36,42 +36,66 @@ function LearnTalonByName(name, talon)
     elseif name == "Посох маны" then
         BlzSetUnitMaxMana(HeroAqua, BlzGetUnitMaxMana(HeroAqua) + talon.DS[talon.level])
     elseif name == "Струя воды" then
+        SetUnitAbilityLevel(HeroAqua, FourCC("A000"), 1 + GetUnitAbilityLevel(HeroAqua, FourCC("A000")))
         UnitAddAbility(HeroAqua, FourCC("A000"))
-        SetUnitAbilityLevel(HeroAqua, FourCC("A000"), talon.DS[talon.level])
     elseif name == "Повод для акулы" then
-        data.HasSharkFromDeep=true
+        data.HasSharkFromDeep = true
     elseif name == "Сердечные переживания" then
         if not data.HalfPartyHealAmount then
             HalfPartyHeal(data)
         end
-        data.HalfPartyHealAmount=talon.DS[talon.level]
+        data.HalfPartyHealAmount = talon.DS[talon.level]
     elseif name == "Призыв петуеникса" then
         StartAiPhoenix(data)
     elseif name == "Посох алых Мазоку" then
         BlzSetUnitMaxMana(HeroMegumin, BlzGetUnitMaxMana(HeroMegumin) + talon.DS[talon.level])
     elseif name == "Пополняемый запас" then
         if not data.ManaReplenish then
-            data.ManaReplenish=true
-            StartManaReplenish(HeroMegumin,data)
+            data.ManaReplenish = true
+            StartManaReplenish(HeroMegumin, data)
         end
-        data.ManaReplenishCount=talon.DS[talon.level]
+        data.ManaReplenishCount = talon.DS[talon.level]
     elseif name == "Кольцо огня" then
         if not data.FireCircleDamage then
-            data.FireCircleDamage=talon.DS[talon.level]
+            data.FireCircleDamage = talon.DS[talon.level]
             StartFireCircle(data)
         end
-        data.FireCircleDamage=talon.DS[talon.level]
+        data.FireCircleDamage = talon.DS[talon.level]
     elseif name == "Первый среди метеоров" then
         if not data.FirstMeteorDamage then
-            data.FirstMeteorDamage=talon.DS[talon.level]
+            data.FirstMeteorDamage = talon.DS[talon.level]
             StartMeteor(data)
         end
-        data.FirstMeteorDamage=talon.DS[talon.level]
+        data.FirstMeteorDamage = talon.DS[talon.level]
     elseif name == "Прочнее щит" then
         data.ShieldMaxHP = talon.DS[talon.level]
     elseif name == "Исцеляющий шаг" then
-        data.HealStepAmount=talon.DS[talon.level]
-        data.HealStepCurrent=0
+        data.HealStepAmount = talon.DS[talon.level]
+        data.HealStepCurrent = 0
+    elseif name == "Злое облако" then
+        data.AngryCloudDamage = talon.DS[talon.level]
+    elseif name == "Хожу по костям твоим" then
+        if not data.FindBonesAmount then
+            data.FindBonesAmount = talon.DS[talon.level]
+            StartFindBones(data)
+        end
+        data.FindBonesAmount = talon.DS[talon.level]
+    elseif name == "Принцесса из башни" then
+        print("было брони", BlzGetUnitArmor(HeroDarkness))
+        BlzSetUnitArmor(HeroDarkness, BlzGetUnitArmor(HeroDarkness) + talon.DS[talon.level])
+        print("стало брони", BlzGetUnitArmor(HeroDarkness))
+    elseif name == "Тройной толчок" then
+        data.TripleRMB = true
+    elseif name == "Подорожник" then
+        data.RoadLeafAmount = talon.DS[talon.level]
+    elseif name == "Теневая тентакля" then
+        UnitAddAbility(HeroDarkness,FourCC("A003"))
+        data.DarkTentacles=true
+        FindTentacled()
+    elseif name == "Золотая корона" then
+        data.QAndDash=true
     end
 end
+
+
 

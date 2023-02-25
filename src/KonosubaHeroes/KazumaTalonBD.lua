@@ -8,9 +8,9 @@ function InitTalonBDForKazuma()
         [1] = {
             name = "Крепкая хватка",
             icon = "DDSICO\\StrongWeapon",
-            description = "Увеличивает силу атаки меча",
+            description = "Увеличивает силу атаки меча на DS",
             level = 0,
-            DS = { 20, 40, 80 },
+            DS = { 50, 100, 150,200 },
             pos = 1,
         },
         [2] = {
