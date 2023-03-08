@@ -50,7 +50,9 @@ do
             InitTalonBDForMegumin()
 
             ClearMapMusicBJ()
+            PlayMusicBJ("CliCliInfinit")
             PlayMusicBJ("How About a Cart Ride")
+
             SetMusicVolumeBJ(100)
 
             print(">>>")

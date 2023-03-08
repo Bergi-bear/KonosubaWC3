@@ -91,7 +91,7 @@ function LearnTalonByName(name, talon)
     elseif name == "Теневая тентакля" then
         UnitAddAbility(HeroDarkness,FourCC("A003"))
         data.DarkTentacles=true
-        FindTentacled()
+        FindTentacled(data)
     elseif name == "Золотая корона" then
         data.QAndDash=true
     end
